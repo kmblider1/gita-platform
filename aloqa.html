@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aloqa · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="Muassasalar, hamkorlar va tashabbuskor talabalar uchun aloqa. Universitetlar, maktablar va kutubxonalar qanday qo'shilishi mumkin." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ ALOQA PAGE ============ */
+
+  /* ---------- Hero ---------- */
+  .contact-hero {
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 85% 30%, rgba(232,149,10,0.08), transparent 45%),
+      radial-gradient(circle at 10% 80%, rgba(13,158,120,0.06), transparent 40%);
+    pointer-events: none;
+  }
+  .contact-hero .container { position: relative; }
+  .contact-hero h1 {
+    font-size: clamp(44px, 6vw, 76px);
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin-top: 22px;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .contact-hero h1 em {
+    font-style: italic; color: var(--teal-deep);
+    position: relative; white-space: nowrap;
+  }
+  .contact-hero h1 em::after {
+    content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 12px;
+    background: var(--amber-soft); opacity: 0.5; z-index: -1;
+    border-radius: 4px; transform: skew(-8deg);
+  }
+  .contact-hero .lead {
+    font-size: 19px; line-height: 1.65;
+    color: var(--muted);
+    max-width: 680px;
+  }
+  .contact-hero .lead strong { color: var(--navy-ink); font-weight: 600; }
+
+  /* ---------- Quick contact tiles ---------- */
+  .contact-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 48px;
+  }
+  .contact-tile {
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-tile::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 0%, var(--glow, rgba(13,158,120,0.12)), transparent 55%);
+    opacity: 0; transition: opacity .4s;
+    pointer-events: none;
+  }
+  .contact-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
+  .contact-tile:hover::before { opacity: 1; }
+  .contact-tile:nth-child(1) { --glow: rgba(13,158,120,0.15); }
+  .contact-tile:nth-child(2) { --glow: rgba(232,149,10,0.15); }
+  .contact-tile:nth-child(3) { --glow: rgba(123,75,148,0.15); }
+
+  .tile-ico {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: grid; place-items: center;
+    font-size: 22px;
+    background: var(--ico-bg, rgba(13,158,120,0.1));
+    color: var(--ico-fg, var(--teal-deep));
+    border: 1px solid var(--ico-bd, rgba(13,158,120,0.22));
+    margin-bottom: 16px;
+  }
+  .contact-tile:nth-child(2) .tile-ico { --ico-bg: rgba(232,149,10,0.12); --ico-fg: #B26E00; --ico-bd: rgba(232,149,10,0.28); }
+  .contact-tile:nth-child(3) .tile-ico { --ico-bg: rgba(123,75,148,0.1); --ico-fg: #623874; --ico-bd: rgba(123,75,148,0.22); }
+
+  .contact-tile h3 {
+    font-size: 20px; letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .contact-tile p {
+    font-size: 14px; color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .tile-value {
+    font-family: var(--mono); font-size: 14px;
+    color: var(--navy);
+    padding: 8px 12px;
+    background: var(--cream-2);
+    border-radius: 10px;
+    display: inline-block;
+    word-break: break-all;
+  }
+  .tile-value a { color: var(--teal-deep); }
+
+  /* ---------- For institutions banner ---------- */
+  .for-institutions {
+    padding: 100px 0;
+    background: var(--cream-2);
+  }
+  .fi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .fi-text h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 22px;
+  }
+  .fi-text h2 em { font-style: italic; color: var(--teal-deep); }
+  .fi-text p {
+    font-size: 17px; line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .fi-benefits {
+    list-style: none; padding: 0;
+    margin: 26px 0 28px;
+    display: grid; gap: 10px;
+  }
+  .fi-benefits li {
+    display: flex; gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--navy-ink);
+  }
+  .fi-benefits .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(13,158,120,0.14);
+    color: var(--teal-deep);
+    display: grid; place-items: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* Institution cards */
+  .institution-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .inst-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 22px;
+    transition: all .25s;
+    cursor: pointer;
+  }
+  .inst-card:hover {
+    transform: translateY(-3px);
+    border-color: transparent;
+    box-shadow: var(--shadow-md);
+  }
+  .inst-card .inst-num {
+    font-family: var(--serif); font-style: italic;
+    color: var(--muted); font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .inst-card .inst-ico {
+    font-size: 28px; margin-bottom: 12px;
+    display: block;
+  }
+  .inst-card h4 {
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .inst-card h4 em { font-style: italic; color: var(--teal-deep); }
+  .inst-card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ---------- Contact form section ---------- */
+  .form-section {
+    padding: 120px 0;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .form-header h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .form-header h2 em { font-style: italic; color: var(--teal-deep); }
+  .form-header p {
+    font-size: 16px; line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .form-meta-item {
+    display: flex; gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .form-meta-item:last-child { border-bottom: 1px solid var(--line); }
+  .form-meta-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--navy);
+  }
+  .form-meta-body h5 {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 14px;
+    color: var(--navy-ink);
+    margin-bottom: 3px;
+    letter-spacing: 0;
+  }
+  .form-meta-body p {
+    font-size: 13px; color: var(--muted);
+    margin: 0;
+    font-family: var(--serif); font-style: italic;
+  }
+
+  /* ---------- Form card ---------- */
+  .contact-form {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+  }
+  .cf-tabs {
+    display: inline-flex;
+    background: var(--cream-2);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 32px;
+  }
+  .cf-tab {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    color: var(--muted);
+    transition: all .25s;
+  }
+  .cf-tab.active {
+    background: var(--navy); color: var(--cream);
+    box-shadow: 0 4px 12px -6px rgba(10,37,64,0.4);
+  }
+
+  .cf-field {
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .cf-field label {
+    display: block;
+    font-size: 13px; font-weight: 500;
+    color: var(--navy-ink);
+    margin-bottom: 8px;
+  }
+  .cf-field label .opt {
+    color: var(--muted); font-weight: 400; font-size: 12px;
+  }
+  .cf-input, .cf-textarea, .cf-select {
+    width: 100%;
+    padding: 13px 16px;
+    font: inherit; font-size: 14.5px;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--navy-ink);
+    transition: all .2s;
+    outline: none;
+    font-family: var(--sans);
+  }
+  .cf-input::placeholder, .cf-textarea::placeholder { color: rgba(10,37,64,0.35); }
+  .cf-input:focus, .cf-textarea:focus, .cf-select:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(13,158,120,0.12);
+  }
+  .cf-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+  }
+  .cf-select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%230A2540' stroke-width='1.5' fill='none'/></svg>");
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .cf-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+
+  .cf-radio-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .cf-radio {
+    padding: 12px 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s;
+    font-size: 12.5px;
+    user-select: none;
+  }
+  .cf-radio:hover { border-color: var(--navy); }
+  .cf-radio input { display: none; }
+  .cf-radio:has(input:checked) {
+    border-color: var(--teal);
+    background: rgba(13,158,120,0.06);
+    color: var(--teal-deep);
+    font-weight: 500;
+  }
+  .cf-radio .ico { display: block; font-size: 16px; margin-bottom: 3px; }
+
+  .cf-check-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin: 20px 0;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .cf-check-row input { accent-color: var(--teal); width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; }
+  .cf-check-row a { color: var(--teal-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+  .cf-submit {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 12px;
+    background: var(--navy);
+    color: var(--cream);
+    font-size: 15px; font-weight: 500;
+    transition: all .2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+    margin-top: 10px;
+  }
+  .cf-submit:hover {
+    background: var(--teal);
+    box-shadow: 0 12px 26px -12px rgba(13,158,120,0.5);
+  }
+  .cf-submit .arrow { transition: transform .2s; }
+  .cf-submit:hover .arrow { transform: translateX(4px); }
+
+  /* Success state */
+  .cf-success {
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+  }
+  .cf-success.show { display: block; }
+  .cf-success-ico {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(13,158,120,0.12);
+    border: 2px solid var(--teal);
+    display: grid; place-items: center;
+    margin: 0 auto 18px;
+    font-size: 28px;
+    color: var(--teal-deep);
+    animation: popIn .5s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  .cf-success h3 {
+    font-size: 24px; margin-bottom: 8px;
+  }
+  .cf-success p { color: var(--muted); }
+
+  /* Panel switching */
+  .cf-panel { display: none; }
+  .cf-panel.active { display: block; }
+
+  /* ---------- FAQ ---------- */
+  .faq-section { padding: 100px 0; background: var(--cream-2); }
+  .faq-wrapper { max-width: 800px; margin: 0 auto; }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .faq-item.open { border-color: var(--teal); }
+  .faq-q {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    text-align: left;
+    font-family: var(--serif); font-size: 17px; font-weight: 600;
+    color: var(--navy);
+    transition: color .2s;
+    background: transparent;
+  }
+  .faq-q:hover { color: var(--teal-deep); }
+  .faq-q .icon {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    flex-shrink: 0;
+    transition: all .3s;
+  }
+  .faq-item.open .faq-q .icon {
+    background: var(--teal); color: #fff; transform: rotate(45deg);
+  }
+  .faq-a {
+    padding: 0 24px;
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s ease, padding .3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
+  .faq-a p { font-size: 15px; line-height: 1.65; color: var(--muted); }
+
+  /* ---------- Office map ---------- */
+  .office-section {
+    padding: 100px 0;
+  }
+  .office-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .office-map {
+    aspect-ratio: 4/3;
+    background:
+      linear-gradient(135deg, #1D4E6F 0%, #0A2540 100%);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .office-map::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(251,248,243,0.04) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, rgba(251,248,243,0.04) 0 1px, transparent 1px 40px);
+  }
+  .office-map::after {
+    content: '';
+    position: absolute;
+    left: 30%; top: 45%;
+    width: 30%; height: 20%;
+    border: 2px dashed rgba(232,149,10,0.5);
+    border-radius: 8px;
+  }
+  .map-pin {
+    position: absolute;
+    left: 45%; top: 55%;
+    width: 40px; height: 40px;
+    background: var(--coral);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 10px 20px -5px rgba(201,79,63,0.5);
+    animation: pinBounce 2s ease-in-out infinite;
+  }
+  .map-pin::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    background: var(--cream);
+    border-radius: 50%;
+  }
+  @keyframes pinBounce {
+    0%, 100% { transform: rotate(-45deg) translateY(0); }
+    50% { transform: rotate(-45deg) translateY(-6px); }
+  }
+  .map-pin-shadow {
+    position: absolute;
+    left: 47%; top: 62%;
+    width: 30px; height: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    filter: blur(4px);
+    animation: shadowPulse 2s ease-in-out infinite;
+  }
+  @keyframes shadowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(0.7); opacity: 0.6; }
+  }
+  .map-label {
+    position: absolute;
+    left: 50%; top: 40%;
+    transform: translateX(-50%);
+    padding: 8px 14px;
+    background: var(--cream);
+    border-radius: 12px;
+    font-size: 13px; font-weight: 500;
+    color: var(--navy);
+    box-shadow: var(--shadow-md);
+    font-family: var(--sans);
+  }
+  .map-label::after {
+    content: '';
+    position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+    width: 12px; height: 12px; background: var(--cream);
+    border-radius: 2px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .office-info h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .office-info h2 em { font-style: italic; color: var(--teal-deep); }
+  .office-info p {
+    font-size: 16px; line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .office-details {
+    display: grid; gap: 14px;
+    margin-bottom: 28px;
+  }
+  .office-detail {
+    display: flex; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .office-detail:last-child { border-bottom: none; }
+  .office-detail-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-size: 14px; color: var(--navy);
+    flex-shrink: 0;
+  }
+  .office-detail-body strong {
+    display: block;
+    font-size: 14px; font-weight: 500;
+    color: var(--navy-ink);
+    margin-bottom: 2px;
+  }
+  .office-detail-body .sub {
+    font-size: 13px; color: var(--muted);
+    font-family: var(--serif); font-style: italic;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .contact-tiles { grid-template-columns: 1fr; }
+    .fi-grid, .form-grid, .office-grid { grid-template-columns: 1fr; gap: 48px; }
+    .institution-cards { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .cf-row { grid-template-columns: 1fr; }
+    .cf-radio-group { grid-template-columns: 1fr 1fr; }
+    .institution-cards { grid-template-columns: 1fr; }
+    .contact-form { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="GITA_Landing.html" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small>Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <a href="kurslar.html">Kurslar</a>
+        <a href="GITA_Landing.html#mentorlar">Mentorlar</a>
+        <a href="kognitiv.html">Kognitiv AI</a>
+        <a href="haqimizda.html">Haqimizda</a>
+        <a href="aloqa.html" class="active">Aloqa</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="auth.html" class="btn-primary"><span class="lbl">Ro'yxatdan o'tish</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="contact-hero">
+    <div class="container">
+      <div class="breadcrumb reveal">
+        <a href="GITA_Landing.html">Bosh sahifa</a>
+        <span class="sep">/</span>
+        <span class="current">Aloqa</span>
+      </div>
+
+      <span class="sec-eyebrow reveal" data-delay="1" style="margin-top:20px;display:inline-flex">Biz bilan bog'laning</span>
+
+      <h1 class="reveal" data-delay="2">
+        Savol bormi?<br>
+        <em>Gaplashamiz.</em>
+      </h1>
+
+      <p class="lead reveal" data-delay="3">
+        <strong>Universitet, maktab, kutubxona</strong> yoki boshqa muassasa rahbariyidan — <strong>talaba, ota-ona, mentor</strong> yoki oddiy qiziquvchigachalik.
+        Har bir xabarga 24 soat ichida javob beramiz. O'zbek, ingliz yoki rus tilida.
+      </p>
+
+      <!-- Quick tiles -->
+      <div class="contact-tiles">
+        <div class="contact-tile reveal">
+          <div class="tile-ico" aria-hidden="true">✉</div>
+          <h3>Elektron pochta</h3>
+          <p>Umumiy savollar, hamkorlik takliflari va texnik yordam uchun.</p>
+          <span class="tile-value"><a href="mailto:salom@gita.edu">salom@gita.edu</a></span>
+        </div>
+
+        <div class="contact-tile reveal" data-delay="1">
+          <div class="tile-ico" aria-hidden="true">◎</div>
+          <h3>Telegram yordam</h3>
+          <p>Tezkor savollar uchun. Jonli yordamchi 09:00—21:00.</p>
+          <span class="tile-value"><a href="#">@gita_yordam</a></span>
+        </div>
+
+        <div class="contact-tile reveal" data-delay="2">
+          <div class="tile-ico" aria-hidden="true">☎</div>
+          <h3>Muassasalar uchun</h3>
+          <p>Universitet va maktablarga xizmatlarimiz haqida to'liq brifing.</p>
+          <span class="tile-value"><a href="tel:+998711234567">+998 71 123-45-67</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOR INSTITUTIONS ============ -->
+  <section class="for-institutions">
+    <div class="container">
+      <div class="fi-grid">
+        <div class="fi-text reveal">
+          <span class="sec-eyebrow" style="margin-bottom:20px;display:inline-flex">Muassasalar uchun</span>
+          <h2>Ta'lim muassasangiz uchun <em>maxsus paket.</em></h2>
+          <p>
+            Universitet, maktab yoki kutubxona talabalariga GITA platformasini keng miqyosda ochishni istaysizmi? 
+            Biz alohida hamkorlik paketini tayyorladik.
+          </p>
+
+          <ul class="fi-benefits">
+            <li><span class="check">✓</span><span><strong>Brand integratsiya</strong> — o'z logotipingiz va rangingiz bilan oq-label platforma</span></li>
+            <li><span class="check">✓</span><span><strong>SSO va Moodle/Canvas plugini</strong> — mavjud tizimingizga bog'lash</span></li>
+            <li><span class="check">✓</span><span><strong>O'qituvchilar uchun o'quv kursi</strong> — UOD metodikasi bo'yicha 4 haftalik bepul sertifikat</span></li>
+            <li><span class="check">✓</span><span><strong>A11y auditi</strong> — mavjud resurslaringiz uchun bepul WCAG 2.1 tekshiruvi</span></li>
+            <li><span class="check">✓</span><span><strong>24/7 texnik yordam</strong> va atayin muassasa menejeri</span></li>
+          </ul>
+
+          <a href="#form" class="btn-teal"><span>Taklif so'rash</span><span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="institution-cards">
+          <article class="inst-card reveal" data-delay="1">
+            <div class="inst-num">01</div>
+            <span class="inst-ico" aria-hidden="true">🎓</span>
+            <h4><em>Universitet</em></h4>
+            <p>Barcha talabalar uchun ochiq kirish. Jinsiy fanlarni Braille va audio formatda berish.</p>
+          </article>
+
+          <article class="inst-card reveal" data-delay="2">
+            <div class="inst-num">02</div>
+            <span class="inst-ico" aria-hidden="true">📘</span>
+            <h4><em>Maktab</em></h4>
+            <p>6-11 sinflar uchun kognitiv yordam va autizm spektri uchun maxsus resurslar.</p>
+          </article>
+
+          <article class="inst-card reveal" data-delay="1">
+            <div class="inst-num">03</div>
+            <span class="inst-ico" aria-hidden="true">📚</span>
+            <h4><em>Kutubxona</em></h4>
+            <p>Braille eksport, skrining o'qish va audiokitob yaratish vositalari.</p>
+          </article>
+
+          <article class="inst-card reveal" data-delay="2">
+            <div class="inst-num">04</div>
+            <span class="inst-ico" aria-hidden="true">🏢</span>
+            <h4><em>Markaz</em></h4>
+            <p>Reabilitatsiya va ta'lim markazlari uchun mutaxassislashgan modullar.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORM SECTION ============ -->
+  <section class="form-section" id="form">
+    <div class="container">
+      <div class="form-grid">
+
+        <div class="form-header reveal">
+          <span class="sec-eyebrow" style="margin-bottom:20px;display:inline-flex">Xabar yuborish</span>
+          <h2>Bizga <em>yozing.</em></h2>
+          <p>
+            Quyidagi shaklni to'ldiring yoki to'g'ridan-to'g'ri elektron pochta orqali murojaat qiling. 
+            Har bir xabarni diqqat bilan o'qib chiqamiz va 24 soat ichida javob beramiz.
+          </p>
+
+          <div class="form-meta">
+            <div class="form-meta-item">
+              <div class="form-meta-ico" aria-hidden="true">⏱</div>
+              <div class="form-meta-body">
+                <h5>Javob tezligi</h5>
+                <p>O'rtacha 4-6 soat ish vaqtida</p>
+              </div>
+            </div>
+            <div class="form-meta-item">
+              <div class="form-meta-ico" aria-hidden="true">🌐</div>
+              <div class="form-meta-body">
+                <h5>Tillar</h5>
+                <p>O'zbek, English, Русский</p>
+              </div>
+            </div>
+            <div class="form-meta-item">
+              <div class="form-meta-ico" aria-hidden="true">🔒</div>
+              <div class="form-meta-body">
+                <h5>Maxfiylik</h5>
+                <p>Ma'lumotlaringiz hech qachon uchinchi shaxslarga berilmaydi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form reveal" data-delay="1">
+          <!-- Tabs -->
+          <div class="cf-tabs" role="tablist">
+            <button class="cf-tab active" data-panel="general" onclick="switchPanel(this)">Umumiy</button>
+            <button class="cf-tab" data-panel="institution" onclick="switchPanel(this)">Muassasa</button>
+            <button class="cf-tab" data-panel="mentor" onclick="switchPanel(this)">Mentor bo'lish</button>
+          </div>
+
+          <!-- General panel -->
+          <div class="cf-panel active" id="panel-general">
+            <form onsubmit="handleSubmit(event)" novalidate>
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label>Ismingiz</label>
+                  <input type="text" class="cf-input" placeholder="To'liq ism" required>
+                </div>
+                <div class="cf-field">
+                  <label>Email</label>
+                  <input type="email" class="cf-input" placeholder="siz@email.com" required>
+                </div>
+              </div>
+
+              <div class="cf-field">
+                <label>Savolingiz mavzusi</label>
+                <select class="cf-select" required>
+                  <option value="">Tanlang…</option>
+                  <option>Platforma haqida umumiy savol</option>
+                  <option>Kurs yoki modul haqida</option>
+                  <option>Texnik muammo</option>
+                  <option>Hamkorlik taklifi</option>
+                  <option>Maxfiylik va ma'lumotlar</option>
+                  <option>Boshqa</option>
+                </select>
+              </div>
+
+              <div class="cf-field">
+                <label>Xabaringiz</label>
+                <textarea class="cf-textarea" placeholder="Batafsil yozing — iltimos, kontekst ham kiriting. Buning katta yordami bo'ladi." required></textarea>
+              </div>
+
+              <div class="cf-check-row">
+                <input type="checkbox" required>
+                <span><a href="#">Maxfiylik siyosati</a> va <a href="#">shartlar</a> bilan roziman</span>
+              </div>
+
+              <button type="submit" class="cf-submit">
+                <span>Xabar yuborish</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Institution panel -->
+          <div class="cf-panel" id="panel-institution">
+            <form onsubmit="handleSubmit(event)" novalidate>
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label>F.I.Sh. va lavozim</label>
+                  <input type="text" class="cf-input" placeholder="Ism, familiya va lavozim" required>
+                </div>
+                <div class="cf-field">
+                  <label>Email</label>
+                  <input type="email" class="cf-input" placeholder="rahbar@institut.uz" required>
+                </div>
+              </div>
+
+              <div class="cf-field">
+                <label>Muassasa nomi</label>
+                <input type="text" class="cf-input" placeholder="Masalan: Toshkent DPU" required>
+              </div>
+
+              <div class="cf-field">
+                <label>Muassasa turi</label>
+                <div class="cf-radio-group">
+                  <label class="cf-radio">
+                    <input type="radio" name="itype" value="uni" checked>
+                    <span class="ico" aria-hidden="true">🎓</span>
+                    <span>Universitet</span>
+                  </label>
+                  <label class="cf-radio">
+                    <input type="radio" name="itype" value="school">
+                    <span class="ico" aria-hidden="true">📘</span>
+                    <span>Maktab</span>
+                  </label>
+                  <label class="cf-radio">
+                    <input type="radio" name="itype" value="lib">
+                    <span class="ico" aria-hidden="true">📚</span>
+                    <span>Kutubxona</span>
+                  </label>
+                  <label class="cf-radio">
+                    <input type="radio" name="itype" value="other">
+                    <span class="ico" aria-hidden="true">🏢</span>
+                    <span>Boshqa</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label>Taxminiy talabalar soni</label>
+                  <select class="cf-select">
+                    <option>&lt; 100</option>
+                    <option>100 — 500</option>
+                    <option>500 — 2000</option>
+                    <option>2000 — 10 000</option>
+                    <option>&gt; 10 000</option>
+                  </select>
+                </div>
+                <div class="cf-field">
+                  <label>Shahar</label>
+                  <input type="text" class="cf-input" placeholder="Toshkent" required>
+                </div>
+              </div>
+
+              <div class="cf-field">
+                <label>Qaysi modullar qiziqtiradi? <span class="opt">· ixtiyoriy</span></label>
+                <textarea class="cf-textarea" placeholder="Masalan: Aqlli Ma'ruza barcha fakultetlar uchun, Kognitiv AI faqat sinov rejimida..."></textarea>
+              </div>
+
+              <div class="cf-check-row">
+                <input type="checkbox" required>
+                <span><a href="#">Maxfiylik siyosati</a> bilan roziman. Bizning menejerimiz 48 soat ichida siz bilan bog'lanadi.</span>
+              </div>
+
+              <button type="submit" class="cf-submit">
+                <span>Taklif olish</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Mentor panel -->
+          <div class="cf-panel" id="panel-mentor">
+            <form onsubmit="handleSubmit(event)" novalidate>
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label>Ism va familiya</label>
+                  <input type="text" class="cf-input" required>
+                </div>
+                <div class="cf-field">
+                  <label>Email</label>
+                  <input type="email" class="cf-input" required>
+                </div>
+              </div>
+
+              <div class="cf-field">
+                <label>Mutaxassislik sohangiz</label>
+                <input type="text" class="cf-input" placeholder="Masalan: Ingliz tili, Fizika, Programming" required>
+              </div>
+
+              <div class="cf-field">
+                <label>Tajriba (yil)</label>
+                <div class="cf-radio-group">
+                  <label class="cf-radio">
+                    <input type="radio" name="exp" value="0-2" checked>
+                    <span>0–2 yil</span>
+                  </label>
+                  <label class="cf-radio">
+                    <input type="radio" name="exp" value="3-5">
+                    <span>3–5 yil</span>
+                  </label>
+                  <label class="cf-radio">
+                    <input type="radio" name="exp" value="6-10">
+                    <span>6–10 yil</span>
+                  </label>
+                  <label class="cf-radio">
+                    <input type="radio" name="exp" value="10+">
+                    <span>10+ yil</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="cf-field">
+                <label>Inklyuziv ta'lim tajribangiz bormi? <span class="opt">· agar bor bo'lsa batafsil</span></label>
+                <textarea class="cf-textarea" placeholder="Qanday talabalar bilan ishlaganingiz, qaysi moslashuvlarni o'zlashtirganingiz..."></textarea>
+              </div>
+
+              <div class="cf-field">
+                <label>CV / portfolio havola</label>
+                <input type="url" class="cf-input" placeholder="https://… LinkedIn yoki shaxsiy sayt">
+              </div>
+
+              <div class="cf-check-row">
+                <input type="checkbox" required>
+                <span>Ma'lumotlarim GITA jamoasi tomonidan ko'rib chiqilishiga roziman</span>
+              </div>
+
+              <button type="submit" class="cf-submit">
+                <span>Ariza yuborish</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Success -->
+          <div class="cf-success" id="cfSuccess">
+            <div class="cf-success-ico" aria-hidden="true">✓</div>
+            <h3>Xabar qabul qilindi!</h3>
+            <p>Biz 24 soat ichida javob beramiz — <strong id="successEmail">email'ingiz</strong> ga.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="sec-head reveal" style="grid-template-columns:1fr;margin-bottom:48px">
+        <div>
+          <span class="sec-eyebrow">Tez-tez so'raladigan</span>
+          <h2>Savol <em>bormi?</em></h2>
+        </div>
+      </div>
+
+      <div class="faq-wrapper">
+        <div class="faq-item reveal open">
+          <button class="faq-q" onclick="toggleFaq(this.parentElement)">
+            Muassasa uchun platforma pullikmi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Yo'q. Platforma barcha foydalanuvchilar uchun — talaba, o'qituvchi, muassasa — to'liq bepul. Agar sizda maxsus integratsiya talablari bo'lsa (brand, SSO, Moodle plugin), ularni ham bepul yoki mutlaqo arzon qilamiz — chunki bu bizning missiyamiz.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="1">
+          <button class="faq-q" onclick="toggleFaq(this.parentElement)">
+            Qancha vaqtda platformani ishga tushirsam bo'ladi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Oddiy foydalanish uchun 5 daqiqa — ro'yxatdan o'tasiz va boshlaysiz. Muassasa uchun brand'li platforma uchun 1-2 hafta. SSO va LMS integratsiyasi bilan — 3-4 hafta.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="2">
+          <button class="faq-q" onclick="toggleFaq(this.parentElement)">
+            Talabalarim uchun Braille displeylar GITA tomonidan beriladimi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Biz qurilma ishlab chiqarmaymiz, lekin hamkorlarimiz orqali subsidiyalangan narxlarda yetkazib berish mumkin. Shuningdek, O'zbekiston Ko'r-ko'zli Ittifoqi bilan hamkorlikda ba'zi hududlarda bepul dasturlar ham bor.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="3">
+          <button class="faq-q" onclick="toggleFaq(this.parentElement)">
+            Platformaga o'z kursimni qo'shishim mumkinmi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Ha — agar mentor bo'lsangiz. Yuqoridagi "Mentor bo'lish" shaklini to'ldiring. Biz sizning tajribangizni ko'rib chiqamiz va 2 haftalik oriyentatsiya kursidan keyin kursingizni publish qilishingiz mumkin bo'ladi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="4">
+          <button class="faq-q" onclick="toggleFaq(this.parentElement)">
+            GITA manbasi qanday moliyalashtiriladi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a">
+            <p>UNICEF, AloqaBank Fondi va Inha Universiteti grantlari asosiy manba. Qo'shimcha — oq-label muassasalar (ixtiyoriy), ochiq API premium ish rejimi (kompaniyalar uchun). Talaba, mentor va muassasa foydalanishi har doim bepul qoladi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OFFICE ============ -->
+  <section class="office-section">
+    <div class="container">
+      <div class="office-grid">
+        <div class="office-map reveal" aria-label="GITA ofis xaritasi">
+          <div class="map-label">GITA HQ</div>
+          <div class="map-pin-shadow" aria-hidden="true"></div>
+          <div class="map-pin" aria-hidden="true"></div>
+        </div>
+
+        <div class="office-info reveal" data-delay="1">
+          <span class="sec-eyebrow" style="margin-bottom:20px;display:inline-flex">Bizni toping</span>
+          <h2>Toshkent, <em>Mustaqillik</em> shoh.</h2>
+          <p>
+            Ofisimiz Toshkent shahridagi IT Park Uzbekistan hududida joylashgan. Oldindan kelish aloqasi qilgan holda 
+            bizga tashrif buyurishingiz mumkin — har doim xush kelibsiz.
+          </p>
+
+          <div class="office-details">
+            <div class="office-detail">
+              <div class="office-detail-ico" aria-hidden="true">📍</div>
+              <div class="office-detail-body">
+                <strong>Manzil</strong>
+                <div class="sub">Buyuk Ipak Yo'li ko'chasi, 45 · IT Park, 3-qavat · Toshkent 100084</div>
+              </div>
+            </div>
+            <div class="office-detail">
+              <div class="office-detail-ico" aria-hidden="true">⏰</div>
+              <div class="office-detail-body">
+                <strong>Ish vaqti</strong>
+                <div class="sub">Dushanba—Juma · 09:00—18:00 · Shanba—Yakshanba yopiq</div>
+              </div>
+            </div>
+            <div class="office-detail">
+              <div class="office-detail-ico" aria-hidden="true">🚇</div>
+              <div class="office-detail-body">
+                <strong>Transport</strong>
+                <div class="sub">Minor metrosi · 5 daqiqa piyoda · 70 va 82 avtobuslar</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="btn-teal"><span>Google Maps'da ochish</span><span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="GITA_Landing.html" class="brand">
+          <span class="brand-mark">G</span>
+          <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+        </a>
+        <p>Ta'limdagi to'siqlarni olib tashlash — bu imkoniyatni ko'paytirishdir.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="GitHub">GH</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Platforma</h5>
+        <ul>
+          <li><a href="GITA_Landing.html#modullar">Modullar</a></li>
+          <li><a href="kurslar.html">Kurslar</a></li>
+          <li><a href="GITA_Landing.html#mentorlar">Mentorlar</a></li>
+          <li><a href="kognitiv.html">Kognitiv AI</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Biz</h5>
+        <ul>
+          <li><a href="haqimizda.html">Haqimizda</a></li>
+          <li><a href="#">Karyera</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="aloqa.html">Aloqa</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Hamkorlik</h5>
+        <ul>
+          <li><a href="aloqa.html">Muassasalar</a></li>
+          <li><a href="#">Ochiq API</a></li>
+          <li><a href="#">Matbuot</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Yordam</h5>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Maxfiylik</a></li>
+          <li><a href="#">Shartlar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 GITA — Global Inklyuziv Ta'lim Kampusi</span>
+      <span class="wcag">Muvofiqlik: <span class="badge-w">WCAG 2.1 AA</span> <span class="badge-w">GDPR</span> <span class="badge-w">ISO 27001</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== SHARED INTERACTIONS ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+<script>
+function switchPanel(tab){
+  document.querySelectorAll('.cf-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.cf-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  document.getElementById('cfSuccess').classList.remove('show');
+}
+
+function handleSubmit(e){
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.cf-submit');
+  const email = form.querySelector('input[type="email"]')?.value || 'sizning email';
+  btn.innerHTML = '<span>Yuborilmoqda…</span>';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    document.querySelectorAll('.cf-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('successEmail').textContent = email;
+    document.getElementById('cfSuccess').classList.add('show');
+  }, 900);
+}
+
+function toggleFaq(item){
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

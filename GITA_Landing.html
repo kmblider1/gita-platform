@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GITA — Global Inklyuziv Ta'lim Kampusi</title>
+<meta name="description" content="Barcha talabalar uchun teng imkoniyat yaratuvchi inklyuziv ta'lim platformasi. Universal O'rganish Dizayni asosida." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --navy: #0A2540;
+    --navy-2: #12335A;
+    --navy-ink: #081B31;
+    --cream: #FBF8F3;
+    --cream-2: #F3EDE1;
+    --cream-3: #EDE4D2;
+    --teal: #0D9E78;
+    --teal-deep: #0A7C5E;
+    --amber: #E8950A;
+    --amber-soft: #F5C56A;
+    --line: rgba(10,37,64,0.12);
+    --line-strong: rgba(10,37,64,0.22);
+    --muted: rgba(10,37,64,0.64);
+    --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+    --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+    --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+    --radius-sm: 10px;
+    --radius: 18px;
+    --radius-lg: 28px;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --container: 1240px;
+  }
+
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--navy-ink);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+  p { margin: 0; text-wrap: pretty; }
+
+  :focus-visible {
+    outline: 2.5px solid var(--teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0;
+    margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Skip link ---------- */
+  .skip {
+    position: absolute; left: 16px; top: -60px;
+    background: var(--navy); color: var(--cream);
+    padding: 10px 16px; border-radius: 8px; z-index: 200;
+    transition: top .2s;
+  }
+  .skip:focus { top: 12px; }
+
+  /* ---------- Navbar ---------- */
+  .nav-wrap {
+    position: sticky; top: 0; z-index: 100;
+    transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+    padding: 18px 0;
+  }
+  .nav-wrap.scrolled {
+    background: rgba(251,248,243,0.82);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+    padding: 12px 0;
+  }
+  .nav {
+    display: flex; align-items: center; gap: 36px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--navy); color: var(--cream);
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+    position: relative;
+  }
+  .brand-mark::after{
+    content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+    background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+  }
+  .brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+  .nav-links { display: flex; gap: 28px; margin-left: 12px; }
+  .nav-links a {
+    position: relative; font-size: 14.5px; color: var(--navy-ink);
+    padding: 6px 2px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+    background: var(--teal); transform: scaleX(0); transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .lang-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border: 1px solid var(--line-strong);
+    border-radius: 999px; font-size: 13.5px; font-weight: 500;
+    background: transparent; color: var(--navy-ink);
+    transition: background .2s, border-color .2s, transform .15s;
+  }
+  .lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+  .lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--navy); color: var(--cream);
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+    transition: transform .15s ease, box-shadow .2s ease, background .2s;
+  }
+  .btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary .arrow { transition: transform .2s; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+
+  .burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+  .burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+  .burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+  .burger span::before { top: -6px; }
+  .burger span::after { top: 6px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 40px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+    background: rgba(13,158,120,0.08); border-radius: 999px;
+  }
+  .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+  @keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+
+  .hero h1 {
+    font-size: clamp(40px, 5.5vw, 72px);
+    margin-top: 24px;
+    letter-spacing: -0.025em;
+    line-height: 1.18;
+    padding-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal-deep);
+    position: relative;
+    white-space: nowrap;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+    background: var(--amber-soft); opacity: 0.55; z-index: -1;
+    border-radius: 4px;
+    transform: skew(-8deg);
+  }
+  .hero-lead {
+    margin-top: 52px;
+    max-width: 560px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .hero-cta { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn-teal {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--teal); color: #fff;
+    padding: 14px 26px; border-radius: 999px;
+    font-size: 15px; font-weight: 500;
+    box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+    transition: transform .15s, background .2s, box-shadow .2s;
+  }
+  .btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+  .btn-teal:active { transform: translateY(0); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 22px; border-radius: 999px;
+    border: 1px solid var(--line-strong); color: var(--navy-ink);
+    font-size: 15px; font-weight: 500;
+    transition: background .2s, border-color .2s;
+  }
+  .btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+  .btn-ghost .play {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: var(--cream);
+    display: grid; place-items: center; font-size: 10px;
+  }
+
+  .social-proof {
+    margin-top: 48px;
+    display: flex; align-items: center; gap: 18px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    max-width: 560px;
+  }
+  .avatars { display: flex; }
+  .avatars .av {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 2.5px solid var(--cream);
+    margin-left: -10px;
+    background-size: cover; background-position: center;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 600; color: var(--cream); font-size: 14px;
+  }
+  .avatars .av:first-child { margin-left: 0; }
+  .avatars .av:nth-child(1) { background: #2D6E8C; }
+  .avatars .av:nth-child(2) { background: #C96E42; }
+  .avatars .av:nth-child(3) { background: var(--teal); }
+  .avatars .av:nth-child(4) { background: #7B4B94; }
+  .avatars .av:nth-child(5) { background: var(--amber); color: var(--navy); }
+  .sp-text { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .sp-text strong { color: var(--navy-ink); font-weight: 600; }
+  .stars { color: var(--amber); letter-spacing: 1px; }
+
+  /* ---------- Hero visual ---------- */
+  .hero-visual { position: relative; }
+  .course-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    transform: rotate(-1.2deg);
+    transition: transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .course-card:hover { transform: rotate(0) translateY(-4px); }
+  .cc-cover {
+    position: relative;
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1C3D66 0%, #0A2540 100%);
+  }
+  .cc-cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(232,149,10,0.35), transparent 55%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 14px);
+  }
+  .cc-cover-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 20px; color: var(--cream);
+  }
+  .cc-tag {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(255,255,255,0.14); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .cc-title-in {
+    font-family: var(--serif); font-size: 28px; line-height: 1.1; font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .cc-a11y {
+    display: flex; gap: 6px;
+    position: absolute; right: 16px; top: 16px;
+  }
+  .cc-a11y span {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(255,255,255,0.14); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.18);
+    display: grid; place-items: center; font-size: 13px; color: var(--cream);
+  }
+  .cc-meta {
+    padding: 18px 4px 4px;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 12px;
+  }
+  .cc-meta h3 {
+    font-size: 20px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .cc-meta-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .cc-price { font-family: var(--serif); font-size: 22px; color: var(--navy); font-weight: 600; white-space: nowrap; }
+  .cc-progress { margin-top: 14px; height: 6px; background: var(--cream-3); border-radius: 4px; overflow: hidden; }
+  .cc-progress span { display: block; height: 100%; width: 64%; background: linear-gradient(90deg, var(--teal), var(--teal-deep)); border-radius: 4px; }
+  .cc-prog-text { font-size: 12px; color: var(--muted); margin-top: 8px; display: flex; justify-content: space-between; }
+
+  .hero-visual { padding-bottom: 40px; }
+  .stat-cards {
+    margin-top: 28px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    width: 100%;
+  }
+  .stat {
+    background: #fff; border-radius: var(--radius);
+    padding: 16px; box-shadow: var(--shadow-md);
+    transition: transform .3s ease;
+  }
+  .stat:hover { transform: translateY(-3px); }
+  .stat:nth-child(1) { transform: rotate(-1.5deg); }
+  .stat:nth-child(2) { transform: rotate(1.5deg); background: var(--navy); color: var(--cream); }
+  .stat:nth-child(3) { transform: rotate(-1deg); background: var(--amber); color: var(--navy); }
+  .stat:nth-child(2):hover, .stat:hover { transform: translateY(-4px) rotate(0); }
+  .stat .big { font-family: var(--serif); font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  .stat .lbl { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; margin-top: 8px; }
+  .stat.dark .lbl { opacity: 0.75; }
+
+  .hero-ornament {
+    position: absolute; left: 8px; top: -36px;
+    font-family: var(--serif); font-style: italic; font-size: 14px;
+    color: var(--muted); transform: rotate(-6deg);
+    display: flex; align-items: center; gap: 10px;
+    z-index: 2;
+    white-space: nowrap;
+  }
+  .hero-ornament svg { color: var(--amber); }
+
+  /* decorative quote mark */
+  .hero-quote-mark {
+    position: absolute; right: -40px; top: 30%;
+    font-family: var(--serif); font-size: 240px;
+    color: rgba(232,149,10,0.08);
+    line-height: 1; font-style: italic;
+    pointer-events: none; user-select: none;
+  }
+
+  /* ---------- Accessibility strip ---------- */
+  .a11y-strip {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 22px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .a11y-track {
+    display: flex; gap: 56px; align-items: center;
+    animation: marquee 45s linear infinite;
+    width: max-content;
+  }
+  .a11y-track:hover { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .a11y-item {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--serif); font-size: 22px; font-style: italic; letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: var(--cream);
+  }
+  .a11y-item .ico {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+    display: grid; place-items: center; font-size: 14px;
+  }
+  .a11y-item.accent { color: var(--amber-soft); }
+
+  /* ---------- Section shared ---------- */
+  section.pad { padding: 120px 0; }
+  .sec-head {
+    display: grid; grid-template-columns: 1fr auto; gap: 40px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+  .sec-head-left { max-width: 680px; }
+  .sec-eyebrow {
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .sec-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--navy);
+  }
+  .sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+  .sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+  .sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+  .sec-head-right {
+    font-family: var(--serif); font-style: italic; color: var(--muted);
+    font-size: 15px; max-width: 280px; text-align: right;
+    padding-bottom: 6px;
+  }
+
+  /* ---------- Modules ---------- */
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .module {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .3s;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .module::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(circle at 100% 0%, var(--glow, rgba(13,158,120,0.12)), transparent 55%);
+    opacity: 0; transition: opacity .4s;
+    pointer-events: none;
+  }
+  .module:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+  .module:hover::before { opacity: 1; }
+  .module-num {
+    position: absolute; right: 28px; top: 24px;
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: 14px; color: var(--muted);
+  }
+  .module-ico {
+    width: 64px; height: 64px; border-radius: 18px;
+    display: grid; place-items: center; font-size: 28px;
+    background: var(--ico-bg, rgba(13,158,120,0.1));
+    color: var(--ico-fg, var(--teal-deep));
+    border: 1px solid var(--ico-border, rgba(13,158,120,0.22));
+  }
+  .module h3 {
+    font-size: 28px; letter-spacing: -0.01em;
+    margin-top: 6px;
+  }
+  .module h3 em { font-style: italic; color: var(--muted); font-family: var(--serif); font-weight: 400; font-size: 18px; display: block; margin-top: 4px; }
+  .module p { color: var(--muted); font-size: 15.5px; line-height: 1.55; }
+  .module-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 18px; border-top: 1px dashed var(--line); }
+  .tag {
+    font-size: 12px; padding: 6px 12px; border-radius: 999px;
+    background: var(--cream-2); color: var(--navy-ink);
+    font-weight: 500;
+  }
+  .module.m1 { --glow: rgba(13,158,120,0.14); --ico-bg: rgba(13,158,120,0.1); --ico-fg: var(--teal-deep); --ico-border: rgba(13,158,120,0.22); }
+  .module.m2 { --glow: rgba(232,149,10,0.16); --ico-bg: rgba(232,149,10,0.12); --ico-fg: #B26E00; --ico-border: rgba(232,149,10,0.28); }
+  .module.m3 { --glow: rgba(45,110,140,0.14); --ico-bg: rgba(45,110,140,0.1); --ico-fg: #1D4E6F; --ico-border: rgba(45,110,140,0.22); }
+  .module.m4 { --glow: rgba(123,75,148,0.16); --ico-bg: rgba(123,75,148,0.1); --ico-fg: #623874; --ico-border: rgba(123,75,148,0.22); }
+
+  /* ---------- Bento grid ---------- */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 18px;
+  }
+  .cell {
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    border: 1px solid var(--line);
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .cell:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .cell .cell-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .cell .cell-num { font-family: var(--serif); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-top: auto; }
+
+  .cell-1 { grid-column: span 5; grid-row: span 2; background: var(--navy); color: var(--cream); border-color: transparent; }
+  .cell-1 .cell-label { color: rgba(251,248,243,0.6); }
+  .cell-1 .cell-num { font-size: 96px; }
+  .cell-1 .cell-sub { margin-top: 12px; color: rgba(251,248,243,0.75); font-size: 15px; max-width: 320px; }
+  .cell-1 .orbit {
+    position: absolute; right: -60px; top: -60px;
+    width: 260px; height: 260px; border-radius: 50%;
+    border: 1px dashed rgba(251,248,243,0.2);
+  }
+  .cell-1 .orbit::before {
+    content: ''; position: absolute; inset: 40px; border-radius: 50%; border: 1px dashed rgba(251,248,243,0.16);
+  }
+  .cell-1 .dot-a { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); right: 60px; top: 6px; box-shadow: 0 0 0 4px rgba(232,149,10,0.25); }
+
+  .cell-2 { grid-column: span 4; background: var(--cream-2); }
+  .cell-2 .progress {
+    margin-top: 12px; height: 10px; background: rgba(10,37,64,0.08); border-radius: 6px; overflow: hidden;
+  }
+  .cell-2 .progress span { display: block; height: 100%; width: 87%; background: var(--navy); border-radius: 6px; }
+  .cell-2 .pct { font-family: var(--serif); font-size: 44px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; margin-top: 10px; }
+
+  .cell-3 { grid-column: span 3; background: var(--teal); color: #fff; border-color: transparent; }
+  .cell-3 .cell-label { color: rgba(255,255,255,0.8); }
+  .cell-3 .big-api { font-family: var(--mono); font-size: 16px; margin-top: 12px; }
+  .cell-3 .api-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; background: rgba(255,255,255,0.14); border-radius: 6px; font-family: var(--mono); font-size: 12px; margin-top: auto; border: 1px solid rgba(255,255,255,0.2); align-self: flex-start; }
+
+  .cell-4 { grid-column: span 7; background: #fff; }
+  .cell-4 h4 { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+  .tech-grid {
+    margin-top: 14px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tech-chip {
+    padding: 8px 14px; border-radius: 999px;
+    border: 1px solid var(--line); font-size: 13px; color: var(--navy-ink);
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--cream);
+  }
+  .tech-chip .d { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  .tech-chip.amber .d { background: var(--amber); }
+  .tech-chip.purple .d { background: #7B4B94; }
+  .tech-chip.navy .d { background: var(--navy); }
+
+  .cell-5 { grid-column: span 3; background: #fff; }
+  .cell-5 .lang-flags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+  .cell-5 .flag {
+    aspect-ratio: 3/2; border-radius: 4px; background: var(--cream-2);
+    display: grid; place-items: center; font-size: 10px; font-weight: 600; color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .cell-6 { grid-column: span 5; background: var(--amber); color: var(--navy); border-color: transparent; }
+  .cell-6 .badges { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(10,37,64,0.1); border: 1px solid rgba(10,37,64,0.2);
+    font-size: 12.5px; font-weight: 500;
+  }
+  .cell-6 h4 { font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-top: 6px; }
+  .cell-6 .lock-ico { position: absolute; right: 24px; bottom: 24px; opacity: 0.25; font-size: 80px; line-height: 1; }
+
+  /* ---------- Cognitive demo ---------- */
+  .cognitive {
+    background: var(--navy-ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .cognitive::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(13,158,120,0.12), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(232,149,10,0.08), transparent 40%);
+  }
+  .cognitive .container { position: relative; }
+  .cog-grid {
+    display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px; align-items: center;
+  }
+  .cog-grid .sec-eyebrow { color: rgba(251,248,243,0.6); }
+  .cog-grid .sec-eyebrow::before { background: rgba(251,248,243,0.4); }
+  .cog-grid h2 { color: var(--cream); font-size: clamp(32px, 4vw, 50px); margin-top: 18px; letter-spacing: -0.02em; }
+  .cog-grid h2 em { color: var(--amber-soft); font-style: italic; }
+  .cog-grid .lead { color: rgba(251,248,243,0.72); margin-top: 18px; max-width: 520px; font-size: 17px; }
+  .cog-features { margin-top: 30px; display: grid; gap: 14px; }
+  .cog-feature {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0; border-top: 1px solid rgba(251,248,243,0.1);
+  }
+  .cog-feature:first-child { border-top: none; padding-top: 0; }
+  .cog-feature .n { font-family: var(--serif); font-style: italic; color: var(--amber-soft); font-size: 15px; min-width: 32px; padding-top: 2px; }
+  .cog-feature .t { font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.25; color: var(--cream); }
+  .cog-feature .d { color: rgba(251,248,243,0.6); font-size: 14px; margin-top: 4px; }
+
+  .cog-demo {
+    background: linear-gradient(180deg, #0D2A4D 0%, #0A2540 100%);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    border: 1px solid rgba(251,248,243,0.1);
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .cog-demo::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 50%);
+    pointer-events: none;
+  }
+  .cog-demo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .cog-demo-head .live { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); opacity: 0.7; }
+  .cog-demo-head .live .d { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: blink 1.5s infinite; }
+  @keyframes blink { 50% { opacity: 0.3; } }
+  .cog-demo-head .time { font-family: var(--mono); font-size: 12px; color: rgba(251,248,243,0.5); }
+
+  .avatar-stage {
+    aspect-ratio: 1/1; max-width: 220px; margin: 0 auto;
+    position: relative;
+  }
+  .avatar-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(251,248,243,0.25);
+    animation: spin 30s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .avatar-svg {
+    position: absolute; inset: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, rgba(13,158,120,0.2), transparent 70%);
+    display: grid; place-items: center;
+    transition: background .5s;
+  }
+  .avatar-svg.tired { background: radial-gradient(circle at 50% 30%, rgba(232,149,10,0.25), transparent 70%); }
+  .avatar-svg.critical { background: radial-gradient(circle at 50% 30%, rgba(220,80,60,0.3), transparent 70%); }
+  .avatar-svg svg { width: 70%; height: 70%; }
+
+  .bars {
+    margin-top: 28px; display: grid; gap: 12px;
+  }
+  .bar-row { display: grid; grid-template-columns: 110px 1fr 48px; gap: 14px; align-items: center; }
+  .bar-row .lbl { font-size: 12px; color: rgba(251,248,243,0.7); letter-spacing: 0.05em; }
+  .bar-track { height: 8px; background: rgba(251,248,243,0.1); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width .6s cubic-bezier(.2,.8,.2,1), background .3s; }
+  .bar-val { font-family: var(--mono); font-size: 12px; color: var(--cream); text-align: right; }
+
+  .state-btns {
+    margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .state-btn {
+    padding: 14px 12px; border-radius: var(--radius-sm);
+    background: rgba(251,248,243,0.06); color: rgba(251,248,243,0.7);
+    border: 1px solid rgba(251,248,243,0.12);
+    font-size: 13px; font-weight: 500;
+    transition: all .25s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .state-btn .emo { font-size: 20px; }
+  .state-btn:hover { background: rgba(251,248,243,0.1); color: var(--cream); }
+  .state-btn.active {
+    background: var(--teal); color: #fff; border-color: transparent;
+  }
+  .state-btn.active.tired { background: var(--amber); color: var(--navy); }
+  .state-btn.active.critical { background: #C94F3F; color: #fff; }
+
+  /* ---------- Courses ---------- */
+  .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .course {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .course:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .course-img {
+    aspect-ratio: 16/10; position: relative; overflow: hidden;
+  }
+  .course-img-inner {
+    position: absolute; inset: 0;
+  }
+  .course-a { background: linear-gradient(135deg, #0D9E78 0%, #0A7C5E 100%); }
+  .course-b { background: linear-gradient(135deg, #E8950A 0%, #C96E42 100%); }
+  .course-c { background: linear-gradient(135deg, #2D6E8C 0%, #0A2540 100%); }
+  .course-img-inner::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+  }
+  .course-img-label {
+    position: absolute; left: 20px; bottom: 20px;
+    font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.85);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    display: inline-flex; gap: 10px; align-items: center;
+  }
+  .course-img-label::before { content: ''; width: 24px; height: 1px; background: rgba(255,255,255,0.6); }
+  .course-tag {
+    position: absolute; left: 16px; top: 16px;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
+  }
+  .course-a11y-icons {
+    position: absolute; right: 16px; top: 16px;
+    display: flex; gap: 6px;
+  }
+  .course-a11y-icons span {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(255,255,255,0.16); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: grid; place-items: center; color: #fff; font-size: 13px;
+  }
+  .course-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .course-meta { display: flex; gap: 10px; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .course-meta .dot-sep { opacity: 0.4; }
+  .course h3 { font-size: 22px; letter-spacing: -0.01em; }
+  .course p { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+  .course-foot { margin-top: auto; padding-top: 16px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .mentor-mini { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .mentor-mini .av-sm { width: 28px; height: 28px; border-radius: 50%; background: var(--cream-3); display: grid; place-items: center; font-family: var(--serif); font-weight: 600; color: var(--navy); font-size: 12px; }
+  .btn-course {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 999px;
+    background: var(--navy); color: var(--cream); font-size: 13px; font-weight: 500;
+    transition: background .2s, transform .15s;
+  }
+  .btn-course:hover { background: var(--teal); transform: translateY(-1px); }
+
+  /* ---------- Mentors ---------- */
+  .mentors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .mentor {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: transform .3s, box-shadow .3s, background .3s;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .mentor:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .mentor-av {
+    width: 96px; height: 96px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 600; color: #fff; font-size: 32px;
+    margin-bottom: 18px; position: relative;
+    box-shadow: inset 0 0 0 4px rgba(255,255,255,0.8), 0 8px 20px -8px rgba(10,37,64,0.3);
+  }
+  .mentor-av::after {
+    content: ''; position: absolute; right: 2px; bottom: 4px;
+    width: 16px; height: 16px; border-radius: 50%; background: var(--teal);
+    border: 3px solid var(--cream);
+  }
+  .mentor:nth-child(1) .mentor-av { background: #2D6E8C; }
+  .mentor:nth-child(2) .mentor-av { background: var(--amber); color: var(--navy); }
+  .mentor:nth-child(3) .mentor-av { background: var(--teal); }
+  .mentor:nth-child(4) .mentor-av { background: #7B4B94; }
+  .mentor h4 { font-size: 20px; letter-spacing: -0.01em; }
+  .mentor .role { font-size: 13px; color: var(--muted); margin-top: 4px; font-family: var(--serif); font-style: italic; }
+  .mentor .rating { margin-top: 12px; display: flex; align-items: center; gap: 6px; color: var(--amber); font-size: 13px; }
+  .mentor .rating .count { color: var(--muted); font-family: var(--sans); font-style: normal; }
+  .mentor-tags { margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .mentor-tags span { font-size: 11px; padding: 4px 10px; background: var(--cream-2); border-radius: 999px; color: var(--navy-ink); }
+  .mentor-cta {
+    margin-top: 18px; width: 100%;
+    padding: 10px 14px; border-radius: 999px;
+    background: var(--cream-2); color: var(--navy-ink); font-size: 13px; font-weight: 500;
+    transition: background .2s;
+    border: 1px solid transparent;
+  }
+  .mentor:hover .mentor-cta { background: var(--navy); color: var(--cream); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 100px 0 40px;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+      radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+  }
+  footer .container { position: relative; }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(251,248,243,0.1);
+  }
+  .foot-brand .brand { color: var(--cream); }
+  .foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+  .foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+  .foot-social { display: flex; gap: 10px; margin-top: 22px; }
+  .foot-social a {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+    display: grid; place-items: center; font-size: 14px;
+    color: var(--cream);
+    transition: background .2s, transform .2s;
+  }
+  .foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+  .foot-col h5 {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(251,248,243,0.6); font-weight: 500;
+    margin: 0 0 18px 0;
+  }
+  .foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .foot-col a {
+    color: rgba(251,248,243,0.85); font-size: 14.5px;
+    transition: color .2s, padding-left .2s;
+    display: inline-block;
+  }
+  .foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+  .foot-bot {
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+  }
+  .foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+  .foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+  /* ---------- Fade-in animation ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal[data-delay="1"] { transition-delay: .08s; }
+  .reveal[data-delay="2"] { transition-delay: .16s; }
+  .reveal[data-delay="3"] { transition-delay: .24s; }
+  .reveal[data-delay="4"] { transition-delay: .32s; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 80px; }
+    .stat-cards { position: relative; right: auto; bottom: auto; margin-top: 24px; width: 100%; }
+    .cog-grid { grid-template-columns: 1fr; gap: 48px; }
+    .mentors-grid { grid-template-columns: repeat(2, 1fr); }
+    .courses-grid { grid-template-columns: repeat(2, 1fr); }
+    .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+    .bento { grid-auto-rows: auto; }
+    .cell-1 { grid-column: span 12; grid-row: auto; }
+    .cell-2, .cell-4, .cell-6 { grid-column: span 12; }
+    .cell-3, .cell-5 { grid-column: span 6; }
+    .modules { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .burger { display: inline-flex; }
+    .sec-head { grid-template-columns: 1fr; }
+    .sec-head-right { text-align: left; }
+    .hero-quote-mark { display: none; }
+  }
+  @media (max-width: 768px) {
+    section.pad { padding: 80px 0; }
+    .hero { padding: 24px 0 60px; }
+    .hero-grid { gap: 48px; }
+    .courses-grid, .mentors-grid { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .nav-actions .btn-primary span { display: none; }
+    .sec-head { margin-bottom: 40px; }
+    .state-btns { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 20px; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .module { padding: 28px 22px 22px; }
+    .cog-demo { padding: 24px; }
+    .lang-btn span.lbl { display: none; }
+    .brand small { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="#" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small>Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#modullar">Modullar</a>
+        <a href="#kurslar">Kurslar</a>
+        <a href="#mentorlar">Mentorlar</a>
+        <a href="#kognitiv">Kognitiv AI</a>
+        <a href="#texnologiya">Texnologiya</a>
+        <a href="#yordam">Yordam</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="#" class="btn-primary"><span>Ro'yxatdan o'tish</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow reveal">
+            <span class="pulse" aria-hidden="true"></span>
+            100% bepul · Universal O'rganish Dizayni · 2026
+          </div>
+
+          <h1 class="reveal" data-delay="1">
+            Hamma uchun <em>ta'lim</em>,<br>
+            hech kim <em>chetda</em> qolmasin.
+          </h1>
+
+          <p class="hero-lead reveal" data-delay="2">
+            GITA — sun'iy intellekt, Braille, imo-ishora tili va ovozli texnologiyalarni
+            bir joyga jamlagan inklyuziv kampus. Har bir talaba o'z sur'atida, o'z
+            usulida o'qiydi — hurmat va mustaqillik bilan. <strong style="color: var(--navy-ink);">Barcha kurs va modullar butunlay bepul.</strong>
+          </p>
+
+          <div class="hero-cta reveal" data-delay="3">
+            <a href="#" class="btn-teal"><span>Bepul boshlash</span><span aria-hidden="true">→</span></a>
+            <a href="#" class="btn-ghost"><span class="play" aria-hidden="true">▶</span><span>Demoni ko'rish · 2:14</span></a>
+            <span style="font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="color: var(--teal-deep);">✓</span>Karta kerak emas · Obuna yo'q</span>
+          </div>
+
+          <div class="social-proof reveal" data-delay="4">
+            <div class="avatars" aria-hidden="true">
+              <div class="av">A</div>
+              <div class="av">M</div>
+              <div class="av">S</div>
+              <div class="av">D</div>
+              <div class="av">+</div>
+            </div>
+            <div class="sp-text">
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              <div><strong id="studentCount" data-target="1250">1250</strong>+ talaba 42 shahardan · <strong>4.9/5</strong> o'rtacha baho</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" data-delay="2">
+          <div class="hero-ornament" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M5 20 C 15 5, 25 35, 35 15" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+            <span>haftaning kursi</span>
+          </div>
+          <div class="hero-quote-mark" aria-hidden="true">&ldquo;</div>
+
+          <div class="course-card">
+            <div class="cc-cover">
+              <div class="cc-cover-content">
+                <span class="cc-tag">· jonli seminar</span>
+                <h3 class="cc-title-in">Aqlli Ma'ruza<br>bilan birinchi qadam</h3>
+              </div>
+              <div class="cc-a11y" aria-hidden="true">
+                <span title="Braille">⠃</span>
+                <span title="Imo-ishora">✋</span>
+                <span title="Ovoz">🎧</span>
+              </div>
+            </div>
+            <div class="cc-meta">
+              <div>
+                <h3>Inklyuziv ta'lim asoslari</h3>
+                <div class="cc-meta-sub">Dr. Malika Karimova · 6 hafta · O'zbek tilida</div>
+              </div>
+              <div class="cc-price">Bepul</div>
+            </div>
+            <div class="cc-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="Kurs jadvali to'ldirilganligi"><span></span></div>
+            <div class="cc-prog-text"><span>128 talaba ro'yxatda</span><span>64% to'ldirilgan</span></div>
+          </div>
+
+          <div class="stat-cards">
+            <div class="stat">
+              <div class="big" data-counter="42">0</div>
+              <div class="lbl">Faol kurslar</div>
+            </div>
+            <div class="stat dark">
+              <div class="big" data-counter="87">0</div>
+              <div class="lbl">% inklyuzivlik indeksi</div>
+            </div>
+            <div class="stat">
+              <div class="big"><span data-counter="10">0</span>+</div>
+              <div class="lbl">Til · Braille · Imo-ishora</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACCESSIBILITY STRIP ============ -->
+  <section class="a11y-strip" aria-label="Qo'llab-quvvatlanadigan texnologiyalar">
+    <div class="a11y-track">
+      <span class="a11y-item"><span class="ico" aria-hidden="true">⠃</span> Braille displey</span>
+      <span class="a11y-item accent">✋ Imo-ishora tili</span>
+      <span class="a11y-item"><span class="ico" aria-hidden="true">🎧</span> Ovozli boshqaruv</span>
+      <span class="a11y-item">👁 Ko'z-tracking</span>
+      <span class="a11y-item accent"><span class="ico" aria-hidden="true">◉</span> 10+ til tarjimasi</span>
+      <span class="a11y-item"><span class="ico" aria-hidden="true">◎</span> Sun'iy intellekt</span>
+      <span class="a11y-item accent">🧩 Autizm moslash</span>
+      <span class="a11y-item"><span class="ico" aria-hidden="true">◬</span> 3D vizuallashtirish</span>
+      <!-- dupe for seamless marquee -->
+      <span class="a11y-item"><span class="ico" aria-hidden="true">⠃</span> Braille displey</span>
+      <span class="a11y-item accent">✋ Imo-ishora tili</span>
+      <span class="a11y-item"><span class="ico" aria-hidden="true">🎧</span> Ovozli boshqaruv</span>
+      <span class="a11y-item">👁 Ko'z-tracking</span>
+      <span class="a11y-item accent"><span class="ico" aria-hidden="true">◉</span> 10+ til tarjimasi</span>
+      <span class="a11y-item"><span class="ico" aria-hidden="true">◎</span> Sun'iy intellekt</span>
+      <span class="a11y-item accent">🧩 Autizm moslash</span>
+      <span class="a11y-item"><span class="ico" aria-hidden="true">◬</span> 3D vizuallashtirish</span>
+    </div>
+  </section>
+
+  <!-- ============ MODULES ============ -->
+  <section class="pad" id="modullar">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">To'rtta modul · bitta ekotizim</span>
+          <h2>O'rganishning<br>har bir <em>qirrasi</em> uchun.</h2>
+          <p>Har bir modul mustaqil ishlaydi, lekin birga jamoaviy aql hosil qiladi. Qo'shing, sozlang, o'z talabalaringizga moslashtiring.</p>
+        </div>
+        <div class="sec-head-right">
+          "Ta'limdagi to'siqni olib tashlash — bu imkoniyatni ko'paytirishdir."
+        </div>
+      </div>
+
+      <div class="modules">
+        <article class="module m1 reveal" data-delay="1">
+          <span class="module-num">01 / 04</span>
+          <div class="module-ico" aria-hidden="true">🎙</div>
+          <h3>Aqlli Ma'ruza<em>Smart Lecture</em></h3>
+          <p>Real vaqt transkripsiya, avtomatik Braille eksport va imo-ishora tarjimasi — bir tugma bosishda. Ma'ruzachilar hech narsa o'zgartirmasdan ishlayveradi.</p>
+          <div class="module-tags">
+            <span class="tag">Real-time STT</span>
+            <span class="tag">Braille eksport</span>
+            <span class="tag">Signer avatar</span>
+          </div>
+        </article>
+
+        <article class="module m2 reveal" data-delay="2">
+          <span class="module-num">02 / 04</span>
+          <div class="module-ico" aria-hidden="true">🤖</div>
+          <h3>Virtual Mentor<em>Personal AI tutor</em></h3>
+          <p>AI chat, grammatik tahlil, shaxsiy lug'at va uzoq muddatli xotira. Talaba so'ragan usulda tushuntiradi — matn, audio, yoki vizual metafora bilan.</p>
+          <div class="module-tags">
+            <span class="tag">Grammatik tahlil</span>
+            <span class="tag">Shaxsiy lug'at</span>
+            <span class="tag">Multimodal javob</span>
+          </div>
+        </article>
+
+        <article class="module m3 reveal" data-delay="3">
+          <span class="module-num">03 / 04</span>
+          <div class="module-ico" aria-hidden="true">🤝</div>
+          <h3>Hamkorlik Laboratoriyasi<em>Collab Lab</em></h3>
+          <p>Guruh loyihalar, 50+ tilga jonli tarjima va autizm spektridagi talabalar uchun tuzilgan ijtimoiy senariylar. Ishonchli muhit, aniq qadamlar.</p>
+          <div class="module-tags">
+            <span class="tag">50+ til</span>
+            <span class="tag">Senariy rejimi</span>
+            <span class="tag">Jamoaviy doska</span>
+          </div>
+        </article>
+
+        <article class="module m4 reveal" data-delay="4">
+          <span class="module-num">04 / 04</span>
+          <div class="module-ico" aria-hidden="true">🧠</div>
+          <h3>Kognitiv Yordamchi<em>Cognitive Assist</em></h3>
+          <p>Webcam orqali charchoq va stress belgilarini aniqlaydi — nozik, mahfiy va qurilmada. Kerak paytda tanaffus taklif qiladi, keraksiz holatda jim turadi.</p>
+          <div class="module-tags">
+            <span class="tag">On-device</span>
+            <span class="tag">Privacy-first</span>
+            <span class="tag">Adaptive pacing</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BENTO GRID ============ -->
+  <section class="pad" id="texnologiya" style="padding-top: 0;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Platforma · raqamlar · infratuzilma</span>
+          <h2>Ochiq, xavfsiz,<br><em>o'lchovli</em> platforma.</h2>
+        </div>
+        <div class="sec-head-right">
+          Ta'lim muassasalari uchun ochiq API, universitet, maktab va kutubxonalar.
+        </div>
+      </div>
+
+      <div class="bento">
+        <div class="cell cell-1 reveal">
+          <div class="orbit" aria-hidden="true"><div class="dot-a"></div></div>
+          <span class="cell-label">Faol talabalar</span>
+          <div class="cell-num" data-counter="1250">1250</div>
+          <div class="cell-sub">42 shahardan, 10 tilda, 4 ta qit'ada — har kuni qo'shilmoqda.</div>
+        </div>
+
+        <div class="cell cell-2 reveal" data-delay="1">
+          <span class="cell-label">Inklyuzivlik indeksi</span>
+          <div class="pct"><span data-counter="87">87</span>%</div>
+          <div class="progress" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100"><span></span></div>
+          <p style="font-size:13px; color: var(--muted); margin-top: 14px;">WCAG 2.1 AA + qo'shimcha UOD auditi natijasi.</p>
+        </div>
+
+        <div class="cell cell-3 reveal" data-delay="2">
+          <span class="cell-label" style="color: rgba(255,255,255,0.8);">Ochiq API</span>
+          <div class="big-api">GET /v1/lessons</div>
+          <div class="api-chip">docs.gita.edu</div>
+        </div>
+
+        <div class="cell cell-4 reveal" data-delay="1">
+          <span class="cell-label">Texnologiya to'plami</span>
+          <h4 style="margin-top: 6px;">Zamonaviy, modulli, bulutga tayyor</h4>
+          <div class="tech-grid">
+            <span class="tech-chip"><span class="d"></span>WebRTC</span>
+            <span class="tech-chip amber"><span class="d"></span>Whisper v3</span>
+            <span class="tech-chip"><span class="d"></span>WebGL / Three.js</span>
+            <span class="tech-chip purple"><span class="d"></span>TensorFlow.js</span>
+            <span class="tech-chip navy"><span class="d"></span>Braille API</span>
+            <span class="tech-chip"><span class="d"></span>MediaPipe</span>
+            <span class="tech-chip amber"><span class="d"></span>i18n · 50+</span>
+          </div>
+        </div>
+
+        <div class="cell cell-5 reveal" data-delay="2">
+          <span class="cell-label">10+ til</span>
+          <h4 style="font-family: var(--serif); font-size: 20px; margin-top: 6px; font-weight:600;">Ko'p tilli interfeys</h4>
+          <div class="lang-flags" aria-hidden="true">
+            <div class="flag">UZ</div><div class="flag">EN</div><div class="flag">RU</div><div class="flag">KZ</div>
+            <div class="flag">AR</div><div class="flag">TR</div><div class="flag">KG</div><div class="flag">+5</div>
+          </div>
+        </div>
+
+        <div class="cell cell-6 reveal" data-delay="3">
+          <span class="cell-label">Xavfsizlik</span>
+          <h4>Ma'lumotlaringiz — sizniki.</h4>
+          <p style="font-size: 14px; max-width: 420px; margin-top: 8px;">GDPR va ISO 27001 ga muvofiq. Kognitiv tahlil faqat qurilmada; hech narsa serverga yuborilmaydi.</p>
+          <div class="badges">
+            <span class="badge">GDPR</span>
+            <span class="badge">ISO 27001</span>
+            <span class="badge">FERPA</span>
+            <span class="badge">WCAG 2.1 AA</span>
+          </div>
+          <div class="lock-ico" aria-hidden="true">🔒</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COGNITIVE DEMO ============ -->
+  <section class="cognitive pad" id="kognitiv">
+    <div class="container">
+      <div class="cog-grid">
+        <div class="reveal">
+          <span class="sec-eyebrow">Kognitiv Yordamchi · jonli demo</span>
+          <h2>Charchoqni <em>sezadi</em>,<br>tanaffusni <em>taklif qiladi</em>.</h2>
+          <p class="lead">Webcam orqali mimika, ko'z harakati va boshqaruv holatini kuzatadi. Barcha tahlil qurilmada, real-vaqtda — hech qanday video serverga chiqmaydi.</p>
+
+          <div class="cog-features">
+            <div class="cog-feature">
+              <span class="n">01</span>
+              <div><div class="t">Qurilmada ishlash</div><div class="d">TensorFlow.js + MediaPipe brauzerda. Kamera oqimini hech qanday server ko'rmaydi.</div></div>
+            </div>
+            <div class="cog-feature">
+              <span class="n">02</span>
+              <div><div class="t">Yumshoq signallar</div><div class="d">Qattiq ogohlantirishlar yo'q. Sekin rangli siljish, yumshoq taklif.</div></div>
+            </div>
+            <div class="cog-feature">
+              <span class="n">03</span>
+              <div><div class="t">Talaba boshqaradi</div><div class="d">Istalgan vaqtda o'chirib qo'yish mumkin. Hech qachon majburiy emas.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cog-demo reveal" data-delay="1">
+          <div class="cog-demo-head">
+            <span class="live"><span class="d" aria-hidden="true"></span>Jonli seans</span>
+            <span class="time" id="cogTime">14:32:08</span>
+          </div>
+
+          <div class="avatar-stage">
+            <div class="avatar-ring" aria-hidden="true"></div>
+            <div class="avatar-svg" id="avatarSvg">
+              <!-- Simple abstract figure -->
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <!-- head -->
+                <circle id="avHead" cx="50" cy="38" r="18" fill="#0D9E78"/>
+                <!-- eyes -->
+                <circle id="avEyeL" cx="44" cy="36" r="2" fill="#0A2540"/>
+                <circle id="avEyeR" cx="56" cy="36" r="2" fill="#0A2540"/>
+                <!-- mouth -->
+                <path id="avMouth" d="M 44 46 Q 50 50 56 46" stroke="#0A2540" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <!-- shoulders -->
+                <path d="M 22 92 Q 50 66 78 92 Z" fill="#0D9E78" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="bars" aria-live="polite">
+            <div class="bar-row">
+              <span class="lbl">Fokus</span>
+              <div class="bar-track"><div class="bar-fill" id="bar1" style="width:82%; background:var(--teal);"></div></div>
+              <span class="bar-val" id="val1">82%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">Charchoq</span>
+              <div class="bar-track"><div class="bar-fill" id="bar2" style="width:18%; background:var(--amber);"></div></div>
+              <span class="bar-val" id="val2">18%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">Stress</span>
+              <div class="bar-track"><div class="bar-fill" id="bar3" style="width:12%; background:#C94F3F;"></div></div>
+              <span class="bar-val" id="val3">12%</span>
+            </div>
+          </div>
+
+          <div class="state-btns" role="group" aria-label="Holat simulyatsiyasi">
+            <button class="state-btn active" data-state="active"><span class="emo" aria-hidden="true">◉</span>Faol</button>
+            <button class="state-btn" data-state="tired"><span class="emo" aria-hidden="true">◐</span>Charchagan</button>
+            <button class="state-btn" data-state="critical"><span class="emo" aria-hidden="true">◎</span>Kritik</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COURSES ============ -->
+  <section class="pad" id="kurslar">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Mashhur kurslar</span>
+          <h2>Bu hafta <em>eng</em><br>ko'p o'rganilgan.</h2>
+          <p>Hamma kurs Braille va imo-ishora bilan birga chiqadi — qo'shimcha to'lovsiz, qo'shimcha so'rovsiz.</p>
+        </div>
+        <div class="sec-head-right">
+          <a href="#" style="color: var(--teal-deep); font-style: normal; font-family: var(--sans); font-size: 14px; border-bottom: 1px solid currentColor; padding-bottom: 2px;">Barcha kurslar →</a>
+        </div>
+      </div>
+
+      <div class="courses-grid">
+        <article class="course reveal" data-delay="1">
+          <div class="course-img">
+            <div class="course-img-inner course-a"></div>
+            <span class="course-tag">Til · A2</span>
+            <div class="course-a11y-icons" aria-label="Qo'llab-quvvatlash: Braille, imo-ishora"><span title="Braille">⠃</span><span title="Imo-ishora">✋</span></div>
+            <span class="course-img-label">modul 01 / 12</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta"><span>6 hafta</span><span class="dot-sep">·</span><span>24 dars</span><span class="dot-sep">·</span><span>O'zbek</span></div>
+            <h3>Ingliz tilini inklyuziv o'rganish</h3>
+            <p>Matn, audio, imo-ishora va Braille — har kim o'z sevimli usulida. Shaxsiy lug'at sizga moslashadi.</p>
+            <div class="course-foot">
+              <div class="mentor-mini"><span class="av-sm">MK</span><span>Dr. Malika K.</span></div>
+              <a href="#" class="btn-course">Boshlash <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course reveal" data-delay="2">
+          <div class="course-img">
+            <div class="course-img-inner course-b"></div>
+            <span class="course-tag">STEM · intro</span>
+            <div class="course-a11y-icons" aria-label="Qo'llab-quvvatlash: Braille, ovoz, 3D"><span title="Braille">⠃</span><span title="Ovoz">🎧</span><span title="3D">◬</span></div>
+            <span class="course-img-label">modul 03 / 08</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta"><span>4 hafta</span><span class="dot-sep">·</span><span>18 dars</span><span class="dot-sep">·</span><span>O'zbek</span></div>
+            <h3>Fizika formulalari taktil shaklda</h3>
+            <p>3D pechat va audio-tavsif bilan. Formula qo'l ostida — rasm emas, tuyg'u bo'lib his qilinadi.</p>
+            <div class="course-foot">
+              <div class="mentor-mini"><span class="av-sm">JA</span><span>Jasur A.</span></div>
+              <a href="#" class="btn-course">Boshlash <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course reveal" data-delay="3">
+          <div class="course-img">
+            <div class="course-img-inner course-c"></div>
+            <span class="course-tag">Ijtimoiy · B1</span>
+            <div class="course-a11y-icons" aria-label="Qo'llab-quvvatlash: imo-ishora, ovoz"><span title="Imo-ishora">✋</span><span title="Ovoz">🎧</span></div>
+            <span class="course-img-label">modul 05 / 10</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta"><span>5 hafta</span><span class="dot-sep">·</span><span>20 dars</span><span class="dot-sep">·</span><span>O'zbek</span></div>
+            <h3>Jamoada muloqot: senariylar bo'yicha</h3>
+            <p>Autizm spektridagi talabalar uchun tuzilgan, oldindan ma'lum qadamlar bilan — xavfsiz va aniq.</p>
+            <div class="course-foot">
+              <div class="mentor-mini"><span class="av-sm">SR</span><span>Shoira R.</span></div>
+              <a href="#" class="btn-course">Boshlash <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENTORS ============ -->
+  <section class="pad" id="mentorlar" style="padding-top: 0;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Mentorlar</span>
+          <h2>Odamlar ortda —<br><em>haqiqiy</em> mutaxassislar.</h2>
+          <p>Har bir mentor inklyuziv pedagogika bo'yicha sertifikatlangan. Tezkor maslahat yoki uzoq muddatli hamkorlik — o'zingiz tanlang.</p>
+        </div>
+      </div>
+
+      <div class="mentors-grid">
+        <article class="mentor reveal" data-delay="1">
+          <div class="mentor-av">MK</div>
+          <h4>Dr. Malika Karimova</h4>
+          <div class="role">Lingvist · UOD mutaxassisi</div>
+          <div class="rating" aria-label="4.9 yulduz, 214 baho"><span aria-hidden="true">★★★★★</span><span class="count">4.9 · 214</span></div>
+          <div class="mentor-tags"><span>Til</span><span>Braille</span><span>CEFR</span></div>
+          <button class="mentor-cta">Murojaat qilish</button>
+        </article>
+
+        <article class="mentor reveal" data-delay="2">
+          <div class="mentor-av">JA</div>
+          <h4>Jasur Abdullayev</h4>
+          <div class="role">Fizik · 3D-taktil dizayner</div>
+          <div class="rating" aria-label="4.8 yulduz, 167 baho"><span aria-hidden="true">★★★★★</span><span class="count">4.8 · 167</span></div>
+          <div class="mentor-tags"><span>STEM</span><span>3D pechat</span><span>Audio-tavsif</span></div>
+          <button class="mentor-cta">Murojaat qilish</button>
+        </article>
+
+        <article class="mentor reveal" data-delay="3">
+          <div class="mentor-av">SR</div>
+          <h4>Shoira Rahimova</h4>
+          <div class="role">Psixolog · autizm spektri</div>
+          <div class="rating" aria-label="5.0 yulduz, 98 baho"><span aria-hidden="true">★★★★★</span><span class="count">5.0 · 98</span></div>
+          <div class="mentor-tags"><span>Senariylar</span><span>ABA</span><span>Muloqot</span></div>
+          <button class="mentor-cta">Murojaat qilish</button>
+        </article>
+
+        <article class="mentor reveal" data-delay="4">
+          <div class="mentor-av">BN</div>
+          <h4>Bakhtiyor Nazarov</h4>
+          <div class="role">AI muhandis · imo-ishora</div>
+          <div class="rating" aria-label="4.9 yulduz, 132 baho"><span aria-hidden="true">★★★★★</span><span class="count">4.9 · 132</span></div>
+          <div class="mentor-tags"><span>Sign AI</span><span>Whisper</span><span>WebRTC</span></div>
+          <button class="mentor-cta">Murojaat qilish</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="yordam">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand" aria-label="GITA">
+          <span class="brand-mark" aria-hidden="true">G</span>
+          <span>GITA<small>Inklyuziv Kampus</small></span>
+        </a>
+        <p>Global Inklyuziv Ta'lim Kampusi — Universal O'rganish Dizayni asosidagi ochiq platforma. Toshkentda tug'ilgan, dunyoga ochiq.</p>
+        <div class="foot-social" aria-label="Ijtimoiy tarmoqlar">
+          <a href="#" aria-label="Telegram">✉</a>
+          <a href="#" aria-label="YouTube">▶</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="GitHub">◉</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Sahifalar</h5>
+        <ul>
+          <li><a href="#">Biz haqimizda</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Tadqiqot</a></li>
+          <li><a href="#">Karyera</a></li>
+          <li><a href="#">Matbuot</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Modullar</h5>
+        <ul>
+          <li><a href="#modullar">Aqlli Ma'ruza</a></li>
+          <li><a href="#modullar">Virtual Mentor</a></li>
+          <li><a href="#modullar">Hamkorlik Lab.</a></li>
+          <li><a href="#modullar">Kognitiv Yordam</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Platforma</h5>
+        <ul>
+          <li><a href="#kurslar">Kurslar</a></li>
+          <li><a href="#mentorlar">Mentorlar</a></li>
+          <li><a href="#">Talabalar</a></li>
+          <li><a href="#">Muassasalar</a></li>
+          <li><a href="#">Narxlar</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Texnologiyalar</h5>
+        <ul>
+          <li><a href="#">Ochiq API</a></li>
+          <li><a href="#">Hujjatlar</a></li>
+          <li><a href="#">WCAG 2.1 sertifikat</a></li>
+          <li><a href="#">GDPR bayonot</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 GITA Kampus · Barcha huquqlar himoyalangan</div>
+      <div class="wcag"><span>Muvofiqlik:</span><span class="badge-w">WCAG 2.1 AA</span><span class="badge-w">GDPR</span><span class="badge-w">ISO 27001</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------- Sticky nav ---------------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  const onScroll = () => {
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------------- Fade-in on scroll ---------------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(e => e.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------------- Count-up animation ---------------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+
+  // Social proof count
+  const sp = document.getElementById('studentCount');
+  if (sp) {
+    sp.dataset.counter = sp.dataset.target;
+    io.observe(sp);
+  }
+})();
+
+/* ---------------- Language cycler ---------------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------------- Cognitive demo ---------------- */
+(function(){
+  const states = {
+    active:   { fokus: 82, charchoq: 18, stress: 12, mood: 'active',  eye: 2,   mouth: 'M 44 46 Q 50 50 56 46', head: '#0D9E78' },
+    tired:    { fokus: 48, charchoq: 72, stress: 34, mood: 'tired',   eye: 1.2, mouth: 'M 44 48 Q 50 46 56 48', head: '#E8950A' },
+    critical: { fokus: 22, charchoq: 88, stress: 78, mood: 'critical',eye: 0.8, mouth: 'M 44 50 Q 50 44 56 50', head: '#C94F3F' }
+  };
+  const bars = [
+    { id: 'bar1', valId: 'val1', key: 'fokus', color: 'var(--teal)' },
+    { id: 'bar2', valId: 'val2', key: 'charchoq', color: 'var(--amber)' },
+    { id: 'bar3', valId: 'val3', key: 'stress', color: '#C94F3F' }
+  ];
+  const avatar = document.getElementById('avatarSvg');
+  const head = document.getElementById('avHead');
+  const eyeL = document.getElementById('avEyeL');
+  const eyeR = document.getElementById('avEyeR');
+  const mouth = document.getElementById('avMouth');
+
+  function apply(state){
+    const s = states[state];
+    bars.forEach(b => {
+      document.getElementById(b.id).style.width = s[b.key] + '%';
+      document.getElementById(b.valId).textContent = s[b.key] + '%';
+    });
+    avatar.classList.remove('tired','critical');
+    if (state !== 'active') avatar.classList.add(state);
+    head.setAttribute('fill', s.head);
+    eyeL.setAttribute('r', s.eye);
+    eyeR.setAttribute('r', s.eye);
+    mouth.setAttribute('d', s.mouth);
+    // button states
+    document.querySelectorAll('.state-btn').forEach(b => {
+      b.classList.remove('active','tired','critical');
+      if (b.dataset.state === state) {
+        b.classList.add('active');
+        if (state !== 'active') b.classList.add(state);
+      }
+    });
+  }
+  document.querySelectorAll('.state-btn').forEach(b => {
+    b.addEventListener('click', () => apply(b.dataset.state));
+  });
+
+  // auto-cycle through states subtly every 6s, pauses on user interaction
+  let auto = true;
+  let idx = 0;
+  const order = ['active','tired','critical'];
+  document.querySelectorAll('.state-btn').forEach(b => b.addEventListener('click', () => auto = false));
+  setInterval(() => {
+    if (!auto) return;
+    idx = (idx + 1) % order.length;
+    apply(order[idx]);
+  }, 5200);
+
+  // live clock
+  const time = document.getElementById('cogTime');
+  const tick = () => {
+    const d = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    time.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  };
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------------- Active feedback on buttons ---------------- */
+document.querySelectorAll('.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    if (btn.getAttribute('href') === '#' || !btn.getAttribute('href')) e.preventDefault();
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.97)' },
+      { transform: 'scale(1)' }
+    ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+});
+</script>
+
+</body>
+</html>

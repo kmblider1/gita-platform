@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Profilim · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="Shaxsiy kabinet — kurslaringiz, progressingiz, sertifikatlaringiz va sozlamalar." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME (from gita-shared.css) ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ PROFILE DASHBOARD ============ */
+
+  /* ---------- Profile layout ---------- */
+  .profile-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    padding: 40px 0 100px;
+  }
+
+  /* ---------- Left sidebar nav ---------- */
+  .profile-nav {
+    position: sticky; top: 100px;
+    align-self: start;
+  }
+  .profile-user {
+    padding: 24px;
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .profile-user::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(232,149,10,0.18), transparent 60%);
+  }
+  .profile-user .inner { position: relative; }
+  .profile-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--teal);
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; color: #fff; font-size: 24px;
+    margin-bottom: 14px;
+    position: relative;
+    box-shadow: inset 0 0 0 3px rgba(255,255,255,0.2);
+  }
+  .profile-avatar::after {
+    content: ''; position: absolute; right: 2px; bottom: 4px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--amber); border: 3px solid var(--navy);
+  }
+  .profile-user h3 {
+    font-family: var(--serif); font-size: 18px;
+    color: var(--cream); margin-bottom: 2px; font-weight: 600;
+  }
+  .profile-user .role {
+    font-size: 12.5px; color: rgba(251,248,243,0.6);
+    font-family: var(--serif); font-style: italic;
+  }
+  .profile-user .xp-wrap {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid rgba(251,248,243,0.1);
+  }
+  .profile-user .xp-label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11.5px; color: rgba(251,248,243,0.55);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .profile-user .xp-level { color: var(--amber-soft); font-weight: 600; }
+  .profile-user .xp-bar {
+    height: 5px; background: rgba(251,248,243,0.1); border-radius: 3px; overflow: hidden;
+  }
+  .profile-user .xp-fill { height: 100%; background: var(--teal); border-radius: 3px; width: 64%; transition: width 1.5s cubic-bezier(.2,.8,.2,1); }
+
+  .profile-menu {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+  .profile-menu-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    color: var(--navy-ink);
+    transition: all .15s;
+    cursor: pointer;
+    margin-bottom: 2px;
+    position: relative;
+  }
+  .profile-menu-item:hover { background: var(--cream-2); }
+  .profile-menu-item.active {
+    background: rgba(13,158,120,0.08);
+    color: var(--teal-deep);
+    font-weight: 500;
+  }
+  .profile-menu-item.active::before {
+    content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px;
+    background: var(--teal); border-radius: 0 3px 3px 0;
+  }
+  .profile-menu-item .ico {
+    width: 22px; font-size: 14px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .profile-menu-item.active .ico { color: var(--teal-deep); }
+  .profile-menu-item .badge-count {
+    margin-left: auto;
+    padding: 2px 8px; border-radius: 999px;
+    background: var(--navy); color: var(--cream);
+    font-size: 11px; font-weight: 600;
+  }
+  .profile-menu-item .badge-count.new { background: var(--coral); }
+
+  .profile-tip {
+    background: linear-gradient(135deg, var(--cream-2) 0%, var(--cream-3) 100%);
+    border-radius: var(--radius);
+    padding: 18px;
+    font-size: 13px;
+  }
+  .profile-tip .tip-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .profile-tip .tip-text {
+    font-family: var(--serif); font-size: 14px; font-style: italic;
+    color: var(--navy-ink); margin-bottom: 10px; line-height: 1.5;
+  }
+  .profile-tip a { font-size: 13px; color: var(--teal-deep); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- Right main content ---------- */
+  .profile-main { min-width: 0; }
+
+  /* Welcome banner */
+  .welcome-banner {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 32px; gap: 24px; flex-wrap: wrap;
+  }
+  .welcome-banner h1 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .welcome-banner h1 em {
+    font-style: italic; color: var(--teal-deep);
+  }
+  .welcome-banner .date {
+    font-family: var(--serif); font-style: italic;
+    color: var(--muted); font-size: 15px;
+  }
+  .streak-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    background: rgba(232,149,10,0.1);
+    border: 1px solid rgba(232,149,10,0.25);
+    border-radius: 999px;
+    font-size: 13px; font-weight: 500; color: #B26E00;
+  }
+  .streak-badge .streak-fire { font-size: 16px; }
+  .streak-badge .streak-n { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--amber); }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s, border-color .25s;
+  }
+  .stat-card:hover { transform: translateY(-3px); border-color: transparent; box-shadow: var(--shadow-md); }
+  .stat-card .label {
+    font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); display: flex; align-items: center; gap: 8px;
+  }
+  .stat-card .label::before { content: ''; width: 24px; height: 1px; background: currentColor; opacity: 0.4; }
+  .stat-card .n {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 44px; line-height: 1;
+    margin: 14px 0 6px;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .stat-card .sub { font-size: 13px; color: var(--muted); }
+  .stat-card .delta {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11.5px; font-weight: 500; font-family: var(--sans);
+    color: var(--teal-deep);
+    margin-top: 8px;
+  }
+  .stat-card.accent { background: var(--navy); color: var(--cream); border-color: transparent; }
+  .stat-card.accent .label { color: rgba(251,248,243,0.6); }
+  .stat-card.accent .n { color: var(--cream); }
+  .stat-card.accent .sub { color: rgba(251,248,243,0.7); }
+  .stat-card.accent .delta { color: var(--amber-soft); }
+
+  /* Section heading */
+  .section-head-row {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
+  }
+  .section-head-row h2 {
+    font-size: 24px; letter-spacing: -0.015em;
+  }
+  .section-head-row h2 em { font-style: italic; color: var(--teal-deep); }
+  .section-head-row .view-all {
+    font-size: 14px; color: var(--teal-deep); font-weight: 500;
+    border-bottom: 1px solid currentColor; padding-bottom: 2px;
+  }
+
+  /* ---------- Current courses ---------- */
+  .current-courses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 48px;
+  }
+  .current-course {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex; gap: 16px;
+    transition: transform .25s, border-color .25s;
+  }
+  .current-course:hover { transform: translateY(-2px); border-color: transparent; box-shadow: var(--shadow-md); }
+  .current-course .cover {
+    width: 80px; height: 100px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--c1, #1D4E6F), var(--c2, #0A2540));
+    display: grid; place-items: center;
+    color: var(--cream);
+    font-size: 28px;
+    position: relative; overflow: hidden;
+  }
+  .current-course .cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, var(--glow, rgba(232,149,10,0.3)), transparent 60%);
+  }
+  .current-course .cover .icon { position: relative; z-index: 1; }
+  .current-course .info { flex: 1; min-width: 0; }
+  .current-course h4 {
+    font-size: 16px; letter-spacing: -0.01em;
+    margin-bottom: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .current-course .meta {
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 10px;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .current-course .meta .dot { opacity: 0.4; }
+  .current-course .progress-wrap {
+    margin-bottom: 10px;
+  }
+  .current-course .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 12px; margin-bottom: 5px;
+  }
+  .current-course .progress-label .pct { color: var(--teal-deep); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .current-course .progress-bar {
+    height: 5px; background: var(--cream-2); border-radius: 3px; overflow: hidden;
+  }
+  .current-course .progress-fill {
+    height: 100%; background: var(--teal); border-radius: 3px;
+    transition: width 1.5s cubic-bezier(.2,.8,.2,1);
+  }
+  .current-course .actions {
+    display: flex; gap: 8px; margin-top: 4px;
+  }
+  .current-course .btn-sm {
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 500;
+    background: var(--navy); color: var(--cream);
+    transition: background .15s;
+  }
+  .current-course .btn-sm:hover { background: var(--teal); }
+  .current-course .btn-sm.ghost {
+    background: var(--cream-2); color: var(--navy-ink);
+  }
+  .current-course .btn-sm.ghost:hover { background: var(--cream-3); }
+
+  /* ---------- Activity feed ---------- */
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  .activity-feed, .schedule-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .activity-feed h3, .schedule-card h3 {
+    font-size: 17px; margin-bottom: 18px; letter-spacing: -0.01em;
+  }
+  .activity-list {
+    display: flex; flex-direction: column;
+    gap: 4px;
+  }
+  .activity-item {
+    display: flex; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .activity-item:first-child { padding-top: 0; }
+  .activity-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-size: 14px; flex-shrink: 0;
+    color: var(--navy);
+  }
+  .activity-dot.complete { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+  .activity-dot.enroll { background: rgba(232,149,10,0.1); color: #B26E00; }
+  .activity-dot.achieve { background: rgba(123,75,148,0.1); color: #623874; }
+  .activity-body { flex: 1; min-width: 0; }
+  .activity-body .text { font-size: 14px; color: var(--navy-ink); margin-bottom: 2px; }
+  .activity-body .text strong { font-weight: 500; }
+  .activity-body .text em {
+    font-family: var(--serif); font-style: italic; color: var(--teal-deep);
+    font-weight: 400;
+  }
+  .activity-body .time {
+    font-size: 12px; color: var(--muted);
+    font-family: var(--serif); font-style: italic;
+  }
+
+  /* ---------- Schedule card ---------- */
+  .schedule-item {
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .schedule-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .schedule-item:first-child { padding-top: 0; }
+  .schedule-time {
+    font-family: var(--mono);
+    font-size: 12.5px; font-weight: 500;
+    color: var(--teal-deep);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .schedule-title {
+    font-family: var(--serif); font-size: 16px; font-weight: 500;
+    letter-spacing: -0.01em; margin-bottom: 4px;
+  }
+  .schedule-meta {
+    font-size: 12.5px; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .schedule-meta .dot { opacity: 0.4; }
+  .schedule-live {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px; border-radius: 999px;
+    background: rgba(201,79,63,0.1);
+    color: var(--coral);
+    font-size: 11px; font-weight: 600;
+    border: 1px solid rgba(201,79,63,0.25);
+  }
+  .schedule-live::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--coral); animation: pulse 2s ease-out infinite;
+  }
+
+  /* ---------- Achievements ---------- */
+  .achievements-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .achievement {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+    transition: transform .25s, border-color .25s;
+  }
+  .achievement:hover {
+    transform: translateY(-3px);
+    border-color: var(--amber);
+  }
+  .achievement .emblem {
+    width: 56px; height: 56px; border-radius: 14px;
+    margin: 0 auto 12px;
+    display: grid; place-items: center;
+    font-size: 26px;
+    background: var(--bg, var(--cream-2));
+    border: 1px solid var(--bd, var(--line));
+  }
+  .achievement.earned .emblem {
+    --bg: rgba(232,149,10,0.12); --bd: rgba(232,149,10,0.35);
+  }
+  .achievement.locked .emblem {
+    filter: grayscale(1);
+    opacity: 0.35;
+  }
+  .achievement h5 {
+    font-family: var(--serif);
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 3px;
+    letter-spacing: -0.005em;
+  }
+  .achievement .desc {
+    font-size: 11px; color: var(--muted);
+    line-height: 1.4;
+  }
+  .achievement.locked h5, .achievement.locked .desc { opacity: 0.55; }
+
+  /* ---------- Weekly chart ---------- */
+  .weekly-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 48px;
+  }
+  .weekly-card-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 20px; gap: 16px;
+  }
+  .weekly-card-head h3 { font-size: 17px; letter-spacing: -0.01em; }
+  .weekly-card-head .subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .weekly-total {
+    font-family: var(--serif);
+    font-weight: 700; font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .weekly-total .unit { font-size: 14px; color: var(--muted); font-weight: 400; }
+  .weekly-bars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    align-items: end;
+    height: 140px;
+    padding: 8px 0;
+  }
+  .bar-col {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px; height: 100%;
+  }
+  .bar-col .bar {
+    width: 100%; max-width: 32px;
+    background: var(--teal);
+    border-radius: 6px 6px 0 0;
+    transition: height 1.2s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+  }
+  .bar-col.today .bar {
+    background: var(--navy);
+  }
+  .bar-col.today .bar::after {
+    content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 6px; border-radius: 50%; background: var(--amber);
+  }
+  .bar-col.empty .bar { background: var(--cream-2); min-height: 4px; }
+  .bar-col .day {
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .bar-col.today .day { color: var(--navy-ink); font-weight: 600; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .profile-layout { grid-template-columns: 1fr; }
+    .profile-nav { position: static; }
+    .profile-user, .profile-menu { max-width: 400px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .current-courses { grid-template-columns: 1fr; }
+    .two-col-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .welcome-banner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="GITA_Landing.html" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small>Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <a href="kurslar.html">Kurslar</a>
+        <a href="GITA_Landing.html#mentorlar">Mentorlar</a>
+        <a href="kognitiv.html">Kognitiv AI</a>
+        <a href="GITA_Landing.html#texnologiya">Texnologiya</a>
+        <a href="#yordam">Yordam</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="#" class="btn-primary"><span class="lbl">Yangi kurs</span><span class="arrow" aria-hidden="true">+</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+  <div class="container">
+    <div class="profile-layout">
+
+      <!-- ============ SIDEBAR ============ -->
+      <aside class="profile-nav reveal">
+        <!-- User card -->
+        <div class="profile-user">
+          <div class="inner">
+            <div class="profile-avatar" aria-hidden="true">M</div>
+            <h3>Mahliyo Saidova</h3>
+            <div class="role">Inklyuziv ta'lim talabasi</div>
+            <div class="xp-wrap">
+              <div class="xp-label">
+                <span>XP daraja</span>
+                <span class="xp-level">Lvl 4 · Tadqiqotchi</span>
+              </div>
+              <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+              <div style="font-size:11.5px;color:rgba(251,248,243,0.55);margin-top:8px">1 280 / 2 000 XP keyingi darajagacha</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu -->
+        <nav class="profile-menu" aria-label="Profil navigatsiyasi">
+          <a class="profile-menu-item active">
+            <span class="ico" aria-hidden="true">◈</span>
+            <span>Umumiy ko'rinish</span>
+          </a>
+          <a class="profile-menu-item">
+            <span class="ico" aria-hidden="true">◉</span>
+            <span>Kurslarim</span>
+            <span class="badge-count">4</span>
+          </a>
+          <a class="profile-menu-item">
+            <span class="ico" aria-hidden="true">◬</span>
+            <span>Yutuqlar</span>
+          </a>
+          <a class="profile-menu-item">
+            <span class="ico" aria-hidden="true">◎</span>
+            <span>Sertifikatlar</span>
+            <span class="badge-count">2</span>
+          </a>
+          <a class="profile-menu-item">
+            <span class="ico" aria-hidden="true">✉</span>
+            <span>Xabarlar</span>
+            <span class="badge-count new">3</span>
+          </a>
+          <a class="profile-menu-item">
+            <span class="ico" aria-hidden="true">⚙</span>
+            <span>Sozlamalar</span>
+          </a>
+          <a class="profile-menu-item">
+            <span class="ico" aria-hidden="true">↗</span>
+            <span>Chiqish</span>
+          </a>
+        </nav>
+
+        <!-- Tip -->
+        <div class="profile-tip">
+          <div class="tip-label">Kun maslahati</div>
+          <div class="tip-text">"Har kuni 20 daqiqa — 1 soatdan ko'proq haftasiga bir marta tikilishdan foydali."</div>
+          <a href="kognitiv.html">Kognitiv AI sozlash →</a>
+        </div>
+      </aside>
+
+      <!-- ============ MAIN CONTENT ============ -->
+      <div class="profile-main">
+        <!-- Welcome -->
+        <header class="welcome-banner reveal">
+          <div>
+            <h1>Salom, <em>Mahliyo</em></h1>
+            <div class="date">Chorshanba · 16 aprel · bugun mashq qilish uchun yaxshi kun</div>
+          </div>
+          <div class="streak-badge">
+            <span class="streak-fire" aria-hidden="true">🔥</span>
+            <span class="streak-n">12</span>
+            <span>kunlik seriya</span>
+          </div>
+        </header>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-card reveal" data-delay="1">
+            <div class="label">Kurslar</div>
+            <div class="n" data-counter="4">0</div>
+            <div class="sub">2 tugatildi · 2 faol</div>
+            <div class="delta">↗ 1 bu hafta</div>
+          </div>
+          <div class="stat-card accent reveal" data-delay="2">
+            <div class="label">O'qish vaqti</div>
+            <div class="n"><span data-counter="48">0</span><span class="unit" style="font-size:20px;font-weight:400">soat</span></div>
+            <div class="sub">Bu oy · 14 soatga ko'paydi</div>
+            <div class="delta">↗ +29%</div>
+          </div>
+          <div class="stat-card reveal" data-delay="3">
+            <div class="label">Yutuqlar</div>
+            <div class="n" data-counter="8">0</div>
+            <div class="sub">24 dan · yangi 2 ta qulflangan</div>
+            <div class="delta">↗ 2 yangi</div>
+          </div>
+          <div class="stat-card reveal" data-delay="4">
+            <div class="label">Inklyuzivlik skori</div>
+            <div class="n"><span data-counter="92">0</span>%</div>
+            <div class="sub">Siz UOD tavsiyalariga amal qilasiz</div>
+            <div class="delta">✓ A+ daraja</div>
+          </div>
+        </div>
+
+        <!-- Current courses -->
+        <div class="section-head-row reveal">
+          <div>
+            <h2>Joriy <em>kurslar</em></h2>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">Siz bajarayotgan kurslar</p>
+          </div>
+          <a href="kurslar.html" class="view-all">Barchasini ko'rish →</a>
+        </div>
+
+        <div class="current-courses">
+          <article class="current-course reveal" style="--c1:#1D4E6F;--c2:#0A2540;--glow:rgba(13,158,120,0.35)">
+            <div class="cover"><span class="icon" aria-hidden="true">📖</span></div>
+            <div class="info">
+              <h4>Inklyuziv ingliz tili — noldan</h4>
+              <div class="meta">
+                <span>Dr. Malika K.</span>
+                <span class="dot">·</span>
+                <span>6 hafta</span>
+                <span class="dot">·</span>
+                <span>32/48 dars</span>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label"><span>Progress</span><span class="pct">67%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+              </div>
+              <div class="actions">
+                <a href="#" class="btn-sm">Davom etish →</a>
+                <a href="#" class="btn-sm ghost">Reja</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="current-course reveal" data-delay="1" style="--c1:#2B3A5B;--c2:#0A2540;--glow:rgba(123,75,148,0.35)">
+            <div class="cover"><span class="icon" aria-hidden="true">⚛</span></div>
+            <div class="info">
+              <h4>Fizika — Newton qonunlari</h4>
+              <div class="meta">
+                <span>Jasur M.</span>
+                <span class="dot">·</span>
+                <span>13 hafta</span>
+                <span class="dot">·</span>
+                <span>18/54 dars</span>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label"><span>Progress</span><span class="pct">33%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+              </div>
+              <div class="actions">
+                <a href="#" class="btn-sm">Davom etish →</a>
+                <a href="#" class="btn-sm ghost">Konspekt</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="current-course reveal" data-delay="2" style="--c1:#3E2D44;--c2:#0A2540;--glow:rgba(232,149,10,0.4)">
+            <div class="cover"><span class="icon" aria-hidden="true">&lt;/&gt;</span></div>
+            <div class="info">
+              <h4>Python — screen reader bilan</h4>
+              <div class="meta">
+                <span>Bobur X.</span>
+                <span class="dot">·</span>
+                <span>18 hafta</span>
+                <span class="dot">·</span>
+                <span>4/72 dars</span>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label"><span>Progress</span><span class="pct">6%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:6%"></div></div>
+              </div>
+              <div class="actions">
+                <a href="#" class="btn-sm">Davom etish →</a>
+                <a href="#" class="btn-sm ghost">Setup</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="current-course reveal" data-delay="3" style="--c1:#1C4238;--c2:#0A2540;--glow:rgba(13,158,120,0.4)">
+            <div class="cover"><span class="icon" aria-hidden="true">✋</span></div>
+            <div class="info">
+              <h4>Autizm · muloqot ko'nikmalari</h4>
+              <div class="meta">
+                <span>Alisher N.</span>
+                <span class="dot">·</span>
+                <span>4 hafta</span>
+                <span class="dot">·</span>
+                <span>15/18 dars</span>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label"><span>Progress</span><span class="pct">83%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:83%"></div></div>
+              </div>
+              <div class="actions">
+                <a href="#" class="btn-sm">Davom etish →</a>
+                <a href="#" class="btn-sm ghost">Sertifikat</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Activity + Schedule -->
+        <div class="two-col-grid">
+
+          <!-- Activity -->
+          <div class="activity-feed reveal">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+              <h3>So'nggi faoliyat</h3>
+              <a href="#" style="font-size:12.5px;color:var(--muted)">Hammasi →</a>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-dot complete" aria-hidden="true">✓</div>
+                <div class="activity-body">
+                  <div class="text"><strong>15-dars tugatildi</strong> — <em>"Past tenses in context"</em></div>
+                  <div class="time">Bugun, 14:12</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot achieve" aria-hidden="true">♦</div>
+                <div class="activity-body">
+                  <div class="text"><strong>Yutuq qo'lga kiritildi</strong> — <em>"7 kunlik seriya"</em></div>
+                  <div class="time">Bugun, 09:00</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot enroll" aria-hidden="true">+</div>
+                <div class="activity-body">
+                  <div class="text"><strong>Yangi kursga yozildingiz</strong> — <em>"Python screen reader bilan"</em></div>
+                  <div class="time">Kecha, 19:45</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot complete" aria-hidden="true">✓</div>
+                <div class="activity-body">
+                  <div class="text"><strong>14-dars tugatildi</strong> — <em>"Future tenses"</em></div>
+                  <div class="time">Kecha, 17:20</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot achieve" aria-hidden="true">◐</div>
+                <div class="activity-body">
+                  <div class="text"><strong>Mentor javob berdi</strong> — <em>Dr. Malika K.</em> "Grammar question"</div>
+                  <div class="time">2 kun oldin</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schedule -->
+          <div class="schedule-card reveal" data-delay="1">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+              <h3>Bugungi reja</h3>
+              <span style="font-size:12px;color:var(--muted);font-family:var(--serif);font-style:italic">3 ta element</span>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-time">15:00 — 16:00</div>
+              <div class="schedule-title">Ingliz tili · jonli ma'ruza</div>
+              <div class="schedule-meta">
+                <span class="schedule-live">Jonli</span>
+                <span class="dot">·</span>
+                <span>Dr. Malika K.</span>
+              </div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-time">16:30 — 17:00</div>
+              <div class="schedule-title">Mentor bilan 1-1 uchrashuv</div>
+              <div class="schedule-meta">
+                <span>Jasur M.</span>
+                <span class="dot">·</span>
+                <span>Fizika savollari</span>
+              </div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-time">19:00 — 19:45</div>
+              <div class="schedule-title">Autizm muloqot · jamoaviy mashq</div>
+              <div class="schedule-meta">
+                <span>4 talaba</span>
+                <span class="dot">·</span>
+                <span>Senariy #3</span>
+              </div>
+            </div>
+
+            <a href="#" class="btn-primary" style="margin-top:18px;width:100%;justify-content:center"><span>To'liq jadval</span><span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <!-- Weekly activity chart -->
+        <div class="weekly-card reveal">
+          <div class="weekly-card-head">
+            <div>
+              <h3>Haftalik faollik</h3>
+              <div class="subtitle">Har kuni o'rganilgan vaqt</div>
+            </div>
+            <div class="weekly-total"><span data-counter="14">0</span>.<span>2</span><span class="unit"> soat</span></div>
+          </div>
+          <div class="weekly-bars" role="img" aria-label="Haftalik o'qish vaqti grafigi">
+            <div class="bar-col"><div class="bar" style="height:45%"></div><div class="day">Du</div></div>
+            <div class="bar-col"><div class="bar" style="height:72%"></div><div class="day">Se</div></div>
+            <div class="bar-col"><div class="bar" style="height:38%"></div><div class="day">Ch</div></div>
+            <div class="bar-col today"><div class="bar" style="height:88%"></div><div class="day">Bugun</div></div>
+            <div class="bar-col empty"><div class="bar" style="height:0%"></div><div class="day">Ju</div></div>
+            <div class="bar-col empty"><div class="bar" style="height:0%"></div><div class="day">Sh</div></div>
+            <div class="bar-col empty"><div class="bar" style="height:0%"></div><div class="day">Ya</div></div>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="section-head-row reveal">
+          <div>
+            <h2>Yutuqlar <em>galereyasi</em></h2>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">24 dan 8 ta qo'lga kiritildi</p>
+          </div>
+          <a href="#" class="view-all">Barchasini ko'rish →</a>
+        </div>
+
+        <div class="achievements-row">
+          <div class="achievement earned reveal" data-delay="1">
+            <div class="emblem" aria-hidden="true">🔥</div>
+            <h5>Olovli boshlovchi</h5>
+            <div class="desc">7 kun ketma-ket</div>
+          </div>
+          <div class="achievement earned reveal" data-delay="1">
+            <div class="emblem" aria-hidden="true">📘</div>
+            <h5>Birinchi kurs</h5>
+            <div class="desc">1-ni tugatdingiz</div>
+          </div>
+          <div class="achievement earned reveal" data-delay="2">
+            <div class="emblem" aria-hidden="true">🌟</div>
+            <h5>5 yulduz baho</h5>
+            <div class="desc">Kursga baho berdingiz</div>
+          </div>
+          <div class="achievement earned reveal" data-delay="2">
+            <div class="emblem" aria-hidden="true">✋</div>
+            <h5>Imo-ishora do'sti</h5>
+            <div class="desc">50+ imo o'rgandingiz</div>
+          </div>
+          <div class="achievement earned reveal" data-delay="3">
+            <div class="emblem" aria-hidden="true">🌐</div>
+            <h5>Global do'st</h5>
+            <div class="desc">3 tilda muloqot</div>
+          </div>
+          <div class="achievement locked reveal" data-delay="3">
+            <div class="emblem" aria-hidden="true">🏆</div>
+            <h5>Marafonchi</h5>
+            <div class="desc">30 kun ketma-ket</div>
+          </div>
+          <div class="achievement locked reveal" data-delay="4">
+            <div class="emblem" aria-hidden="true">🎓</div>
+            <h5>Magistr</h5>
+            <div class="desc">5 kurs tugating</div>
+          </div>
+          <div class="achievement locked reveal" data-delay="4">
+            <div class="emblem" aria-hidden="true">💎</div>
+            <h5>Enciklopediya</h5>
+            <div class="desc">100 soat o'qish</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="GITA_Landing.html" class="brand">
+          <span class="brand-mark">G</span>
+          <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+        </a>
+        <p>Ta'limdagi to'siqlarni olib tashlash — bu imkoniyatni ko'paytirishdir.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="GitHub">GH</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Platforma</h5>
+        <ul>
+          <li><a href="GITA_Landing.html#modullar">Modullar</a></li>
+          <li><a href="kurslar.html">Kurslar</a></li>
+          <li><a href="kognitiv.html">Kognitiv AI</a></li>
+          <li><a href="profil.html">Profilim</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Resurslar</h5>
+        <ul><li><a href="#">Hujjatlar</a></li><li><a href="#">Blog</a></li><li><a href="#">API</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Kompaniya</h5>
+        <ul><li><a href="#">Biz haqimizda</a></li><li><a href="#">Hamkorlar</a></li><li><a href="#">Aloqa</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Yordam</h5>
+        <ul><li><a href="#">FAQ</a></li><li><a href="#">Maxfiylik</a></li><li><a href="#">Shartlar</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 GITA — Global Inklyuziv Ta'lim Kampusi</span>
+      <span class="wcag">Muvofiqlik: <span class="badge-w">WCAG 2.1 AA</span> <span class="badge-w">GDPR</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== SHARED INTERACTIONS (from gita-shared.js) ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kirish · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="GITA platformasiga kirish yoki ro'yxatdan o'tish — bepul, xavfsiz, inklyuziv." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME (from gita-shared.css) ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ AUTH PAGE ============ */
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+
+  .auth-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    min-height: 100vh;
+  }
+
+  /* ---------- Left editorial pane ---------- */
+  .auth-left {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 48px 72px;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .auth-left::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 10%, rgba(232,149,10,0.15), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(13,158,120,0.15), transparent 40%);
+    pointer-events: none;
+  }
+  .auth-left-inner {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .auth-brand {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--cream); text-decoration: none;
+  }
+  .auth-brand .brand-mark {
+    background: var(--cream); color: var(--navy);
+    width: 36px; height: 36px; border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+    position: relative;
+  }
+  .auth-brand .brand-mark::after {
+    content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+    background: var(--amber); border-radius: 50%; border: 2px solid var(--navy);
+  }
+  .auth-brand span.txt { font-family: var(--serif); font-size: 22px; font-weight: 700; }
+  .auth-brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(251,248,243,0.55); display: block; line-height: 1; margin-top: 4px; }
+
+  .auth-hero {
+    margin: auto 0;
+  }
+  .auth-quote-mark {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 140px; line-height: 0.5;
+    color: var(--amber-soft); opacity: 0.5;
+    margin-bottom: 8px;
+  }
+  .auth-left h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 460px;
+  }
+  .auth-left h2 em {
+    font-style: italic; color: var(--amber-soft);
+    position: relative;
+  }
+  .auth-left p {
+    font-size: 17px;
+    color: rgba(251,248,243,0.72);
+    line-height: 1.65;
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+
+  /* Testimonial card */
+  .testimonial {
+    background: rgba(251,248,243,0.06);
+    border: 1px solid rgba(251,248,243,0.12);
+    border-radius: var(--radius);
+    padding: 24px;
+    backdrop-filter: blur(4px);
+    max-width: 440px;
+  }
+  .testimonial-stars {
+    color: var(--amber);
+    letter-spacing: 2px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .testimonial-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--cream);
+    margin-bottom: 18px;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(251,248,243,0.1);
+  }
+  .testimonial-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--teal);
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 600; color: #fff; font-size: 15px;
+  }
+  .testimonial-name {
+    font-size: 14px; font-weight: 500; color: var(--cream);
+  }
+  .testimonial-role {
+    font-size: 12px; color: rgba(251,248,243,0.5);
+    font-family: var(--serif); font-style: italic;
+  }
+
+  /* Decorative sidebar dots */
+  .auth-dots {
+    margin-top: 36px;
+    display: flex; gap: 16px; align-items: center;
+  }
+  .auth-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(251,248,243,0.25);
+  }
+  .auth-dot.active { background: var(--amber); box-shadow: 0 0 0 4px rgba(232,149,10,0.2); }
+
+  /* ---------- Right form pane ---------- */
+  .auth-right {
+    padding: 48px;
+    display: flex; flex-direction: column;
+    background: var(--cream);
+    position: relative;
+  }
+  .auth-top {
+    display: flex; justify-content: flex-end; align-items: center; gap: 12px;
+  }
+  .auth-top a {
+    font-size: 14px; color: var(--muted);
+  }
+  .auth-top a:hover { color: var(--navy); }
+
+  .auth-form-wrap {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 0;
+  }
+  .auth-form {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .auth-tabs {
+    display: inline-flex;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px;
+    margin-bottom: 36px;
+  }
+  .auth-tab {
+    padding: 9px 22px;
+    border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    color: var(--muted);
+    transition: all .25s;
+  }
+  .auth-tab.active {
+    background: var(--navy); color: var(--cream);
+    box-shadow: 0 4px 12px -6px rgba(10,37,64,0.4);
+  }
+
+  .auth-form h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .auth-form h1 em { font-style: italic; color: var(--teal-deep); }
+  .auth-form .subtitle {
+    font-size: 15px; color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .form-field {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .form-field label {
+    display: block;
+    font-size: 13px; font-weight: 500;
+    color: var(--navy-ink);
+    margin-bottom: 8px;
+  }
+  .form-field label .opt {
+    color: var(--muted); font-weight: 400; font-size: 12px;
+  }
+  .form-input {
+    width: 100%;
+    padding: 13px 16px;
+    font: inherit; font-size: 15px;
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--navy-ink);
+    transition: all .2s;
+    outline: none;
+  }
+  .form-input::placeholder { color: rgba(10,37,64,0.35); }
+  .form-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(13,158,120,0.12);
+  }
+  .form-input.with-icon { padding-left: 46px; }
+  .form-field .field-icon {
+    position: absolute;
+    left: 16px; top: 43px;
+    color: var(--muted);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  .form-password-toggle {
+    position: absolute;
+    right: 14px; top: 36px;
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px; font-weight: 500;
+    transition: background .2s;
+  }
+  .form-password-toggle:hover { background: var(--cream-2); color: var(--navy); }
+
+  /* Accessibility selector */
+  .a11y-select {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .a11y-option {
+    padding: 14px 10px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s;
+  }
+  .a11y-option:hover { border-color: var(--navy); }
+  .a11y-option input { display: none; }
+  .a11y-option input:checked + .a11y-option-inner {
+    color: var(--teal-deep);
+  }
+  .a11y-option:has(input:checked) {
+    border-color: var(--teal);
+    background: rgba(13,158,120,0.06);
+    box-shadow: 0 0 0 4px rgba(13,158,120,0.08);
+  }
+  .a11y-ico { font-size: 20px; display: block; margin-bottom: 4px; }
+  .a11y-label { font-size: 11.5px; font-weight: 500; color: var(--navy-ink); }
+
+  /* Checkbox row */
+  .form-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+    font-size: 13.5px;
+  }
+  .form-check {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--muted); cursor: pointer;
+    user-select: none;
+  }
+  .form-check input { accent-color: var(--teal); width: 16px; height: 16px; }
+  .form-row a {
+    color: var(--teal-deep); font-weight: 500;
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: var(--cream);
+    font-size: 15px; font-weight: 500;
+    transition: all .2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  }
+  .btn-submit:hover { background: var(--teal); box-shadow: 0 12px 26px -12px rgba(13,158,120,0.5); }
+  .btn-submit .arrow { transition: transform .2s; }
+  .btn-submit:hover .arrow { transform: translateX(4px); }
+
+  /* Divider */
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 24px 0;
+    color: var(--muted); font-size: 12.5px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--line);
+  }
+
+  /* Social buttons */
+  .social-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .social-btn {
+    padding: 12px; border-radius: 12px;
+    background: #fff; border: 1px solid var(--line-strong);
+    font-size: 14px; font-weight: 500;
+    color: var(--navy-ink);
+    transition: all .2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .social-btn:hover { background: var(--cream-2); border-color: var(--navy); }
+  .social-btn .ico {
+    width: 18px; height: 18px;
+    display: grid; place-items: center;
+    font-size: 14px;
+  }
+
+  /* Switch link */
+  .switch-link {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .switch-link a {
+    color: var(--teal-deep);
+    font-weight: 500;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+
+  /* ---------- Panel views ---------- */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ---------- Password strength ---------- */
+  .password-strength {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .strength-bars {
+    display: flex; gap: 4px; margin-bottom: 6px;
+  }
+  .strength-bar {
+    height: 4px; flex: 1; border-radius: 2px; background: var(--cream-2);
+    transition: background .3s;
+  }
+  .strength-bar.active-1 { background: var(--coral); }
+  .strength-bar.active-2 { background: var(--amber); }
+  .strength-bar.active-3 { background: var(--teal); }
+  .strength-label { color: var(--muted); font-size: 11.5px; }
+
+  /* ---------- Success message ---------- */
+  .auth-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .auth-success.show { display: block; }
+  .success-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(13,158,120,0.12);
+    border: 2px solid var(--teal);
+    display: grid; place-items: center;
+    margin: 0 auto 24px;
+    font-size: 36px;
+    color: var(--teal-deep);
+    animation: popIn .5s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  .auth-success h2 {
+    font-size: 32px; margin-bottom: 12px;
+    font-family: var(--serif);
+  }
+  .auth-success p {
+    color: var(--muted); font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .auth-layout { grid-template-columns: 1fr; min-height: auto; }
+    .auth-left { padding: 40px 32px; min-height: 360px; }
+    .auth-right { padding: 40px 32px; }
+    .auth-left h2 { font-size: 32px; }
+    .auth-quote-mark { font-size: 100px; }
+  }
+  @media (max-width: 480px) {
+    .auth-left { padding: 32px 24px; }
+    .auth-right { padding: 32px 24px; }
+    .a11y-select { grid-template-columns: repeat(2, 1fr); }
+    .social-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<div class="auth-layout" id="main">
+
+  <!-- ============ LEFT: Editorial ============ -->
+  <aside class="auth-left">
+    <div class="auth-left-inner">
+      <a href="GITA_Landing.html" class="auth-brand">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>
+          <span class="txt">GITA</span><br>
+          <small>Inklyuziv Kampus</small>
+        </span>
+      </a>
+
+      <div class="auth-hero">
+        <div class="auth-quote-mark" aria-hidden="true">"</div>
+        <h2>Bu yerda<br>birinchi darsim — <em>o'zim</em><br>uchunmi yoki ular<br>uchunmi, deb<br>so'ramadim.</h2>
+        <p>
+          GITA'ga qo'shilgan birinchi kundan boshlab siz o'z sur'atingizda, o'z usulingizda o'qiysiz. Braille, imo-ishora, ovoz — yoki hammasi birga.
+        </p>
+
+        <div class="testimonial">
+          <div class="testimonial-stars" aria-label="5 dan 5">★★★★★</div>
+          <blockquote class="testimonial-text">
+            "Birinchi marta ma'ruza davomida hech kimdan orqada qolmadim. Transkripsiya tugmasi bosilganda — olam ochildi."
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">D</div>
+            <div>
+              <div class="testimonial-name">Doniyor Abdullaev</div>
+              <div class="testimonial-role">Tibbiyot talabasi · Samarqand</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-dots" aria-hidden="true">
+          <span class="auth-dot active"></span>
+          <span class="auth-dot"></span>
+          <span class="auth-dot"></span>
+        </div>
+      </div>
+
+      <div style="color: rgba(251,248,243,0.4); font-size: 12.5px;">
+        © 2026 GITA · <a href="#" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Maxfiylik siyosati</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ RIGHT: Form ============ -->
+  <section class="auth-right">
+    <div class="auth-top">
+      <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl" id="langLabel">O'zbek</span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <a href="GITA_Landing.html">← Bosh sahifa</a>
+    </div>
+
+    <div class="auth-form-wrap">
+      <div class="auth-form" id="authForm">
+
+        <!-- Tabs -->
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" role="tab" aria-selected="true" data-panel="login" onclick="switchTab(this)">Kirish</button>
+          <button class="auth-tab" role="tab" aria-selected="false" data-panel="register" onclick="switchTab(this)">Ro'yxatdan o'tish</button>
+        </div>
+
+        <!-- LOGIN PANEL -->
+        <div class="panel active" id="panel-login">
+          <h1>Xush <em>kelibsiz</em><br>ortga.</h1>
+          <p class="subtitle">Hisobingizga kiring — darsingiz qoldirgan joydan davom eting.</p>
+
+          <form onsubmit="handleLogin(event)" novalidate>
+            <div class="form-field">
+              <label for="login-email">Email</label>
+              <span class="field-icon" aria-hidden="true">✉</span>
+              <input type="email" id="login-email" class="form-input with-icon" placeholder="siz@gita.edu" required autocomplete="email">
+            </div>
+
+            <div class="form-field">
+              <label for="login-password">Parol</label>
+              <span class="field-icon" aria-hidden="true">🔒</span>
+              <input type="password" id="login-password" class="form-input with-icon" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="form-password-toggle" onclick="togglePassword('login-password', this)">Ko'rsatish</button>
+            </div>
+
+            <div class="form-row">
+              <label class="form-check">
+                <input type="checkbox" checked>
+                <span>Meni eslab qol</span>
+              </label>
+              <a href="#">Parolni unutdimmi?</a>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span>Kirish</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div class="divider">yoki</div>
+
+          <div class="social-grid">
+            <button class="social-btn" type="button"><span class="ico">G</span> Google</button>
+            <button class="social-btn" type="button"><span class="ico">📧</span> Email kod</button>
+          </div>
+
+          <div class="switch-link">
+            Hisob yo'qmi? <a href="#" onclick="switchTab(document.querySelector('[data-panel=register]'));return false;">Ro'yxatdan o'tish</a>
+          </div>
+        </div>
+
+        <!-- REGISTER PANEL -->
+        <div class="panel" id="panel-register">
+          <h1>Bizga <em>qo'shiling</em><br>— bepul.</h1>
+          <p class="subtitle">Bir daqiqada hisob yarating. Karta kerak emas, obuna yo'q.</p>
+
+          <form onsubmit="handleRegister(event)" novalidate>
+            <div class="form-field">
+              <label for="reg-name">To'liq ism</label>
+              <span class="field-icon" aria-hidden="true">👤</span>
+              <input type="text" id="reg-name" class="form-input with-icon" placeholder="Ismingiz va familiyangiz" required autocomplete="name">
+            </div>
+
+            <div class="form-field">
+              <label for="reg-email">Email</label>
+              <span class="field-icon" aria-hidden="true">✉</span>
+              <input type="email" id="reg-email" class="form-input with-icon" placeholder="siz@gita.edu" required autocomplete="email">
+            </div>
+
+            <div class="form-field">
+              <label for="reg-password">Parol <span class="opt">· kamida 8 belgi</span></label>
+              <span class="field-icon" aria-hidden="true">🔒</span>
+              <input type="password" id="reg-password" class="form-input with-icon" placeholder="••••••••" required autocomplete="new-password" oninput="updateStrength(this.value)">
+              <button type="button" class="form-password-toggle" onclick="togglePassword('reg-password', this)">Ko'rsatish</button>
+              <div class="password-strength" id="strength" style="display:none">
+                <div class="strength-bars">
+                  <span class="strength-bar" id="sb1"></span>
+                  <span class="strength-bar" id="sb2"></span>
+                  <span class="strength-bar" id="sb3"></span>
+                </div>
+                <div class="strength-label" id="strengthLabel">Parol mustahkamligi</div>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Qaysi yordamga ehtiyoj bor? <span class="opt">· ixtiyoriy, istalgan vaqt o'zgartirsa bo'ladi</span></label>
+              <div class="a11y-select" role="group">
+                <label class="a11y-option">
+                  <input type="radio" name="a11y" value="none" checked>
+                  <span class="a11y-option-inner">
+                    <span class="a11y-ico" aria-hidden="true">—</span>
+                    <span class="a11y-label">Yo'q</span>
+                  </span>
+                </label>
+                <label class="a11y-option">
+                  <input type="radio" name="a11y" value="visual">
+                  <span class="a11y-option-inner">
+                    <span class="a11y-ico" aria-hidden="true">⠃</span>
+                    <span class="a11y-label">Ko'rish</span>
+                  </span>
+                </label>
+                <label class="a11y-option">
+                  <input type="radio" name="a11y" value="hearing">
+                  <span class="a11y-option-inner">
+                    <span class="a11y-ico" aria-hidden="true">✋</span>
+                    <span class="a11y-label">Eshitish</span>
+                  </span>
+                </label>
+                <label class="a11y-option">
+                  <input type="radio" name="a11y" value="motor">
+                  <span class="a11y-option-inner">
+                    <span class="a11y-ico" aria-hidden="true">🎙</span>
+                    <span class="a11y-label">Harakat</span>
+                  </span>
+                </label>
+                <label class="a11y-option">
+                  <input type="radio" name="a11y" value="cognitive">
+                  <span class="a11y-option-inner">
+                    <span class="a11y-ico" aria-hidden="true">🧠</span>
+                    <span class="a11y-label">Kognitiv</span>
+                  </span>
+                </label>
+                <label class="a11y-option">
+                  <input type="radio" name="a11y" value="autism">
+                  <span class="a11y-option-inner">
+                    <span class="a11y-ico" aria-hidden="true">🧩</span>
+                    <span class="a11y-label">Autizm</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-check">
+                <input type="checkbox" required>
+                <span>
+                  <a href="#">Foydalanish shartlari</a> va <a href="#">maxfiylik</a> bilan roziman
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span>Hisob yaratish</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div class="divider">yoki</div>
+
+          <div class="social-grid">
+            <button class="social-btn" type="button"><span class="ico">G</span> Google bilan</button>
+            <button class="social-btn" type="button"><span class="ico">📧</span> Email kod bilan</button>
+          </div>
+
+          <div class="switch-link">
+            Hisob bormi? <a href="#" onclick="switchTab(document.querySelector('[data-panel=login]'));return false;">Kirish</a>
+          </div>
+        </div>
+
+        <!-- SUCCESS PANEL -->
+        <div class="auth-success" id="panel-success">
+          <div class="success-icon" aria-hidden="true">✓</div>
+          <h2 id="successTitle">Xush kelibsiz!</h2>
+          <p id="successText">Hisobingiz tayyor. Endi birinchi darsga o'ting.</p>
+          <a href="profil.html" class="btn-submit" style="display:inline-flex;width:auto;padding:14px 32px;text-decoration:none">
+            <span>Profilga o'tish</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ========== SHARED INTERACTIONS (from gita-shared.js) ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+<script>
+/* ---------- Tab switching ---------- */
+function switchTab(tab){
+  document.querySelectorAll('.auth-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  tab.classList.add('active');
+  tab.setAttribute('aria-selected', 'true');
+
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+}
+
+/* ---------- Password toggle ---------- */
+function togglePassword(id, btn){
+  const input = document.getElementById(id);
+  if (input.type === 'password') {
+    input.type = 'text'; btn.textContent = 'Yashirish';
+  } else {
+    input.type = 'password'; btn.textContent = "Ko'rsatish";
+  }
+}
+
+/* ---------- Password strength ---------- */
+function updateStrength(value){
+  const strength = document.getElementById('strength');
+  const label = document.getElementById('strengthLabel');
+  const bars = [document.getElementById('sb1'), document.getElementById('sb2'), document.getElementById('sb3')];
+  bars.forEach(b => b.className = 'strength-bar');
+
+  if (!value) { strength.style.display = 'none'; return; }
+  strength.style.display = '';
+
+  let score = 0;
+  if (value.length >= 8) score++;
+  if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score++;
+  if (/[0-9]/.test(value) || /[^a-zA-Z0-9]/.test(value)) score++;
+
+  const labels = ['Zaif — mustahkamroq qiling', 'O\'rta — yana qo\'shing', 'Mustahkam ✓'];
+  const cls = ['active-1', 'active-2', 'active-3'];
+
+  if (score === 0) { label.textContent = 'Kamida 8 belgi kerak'; return; }
+
+  for (let i = 0; i < score; i++) bars[i].classList.add(cls[score-1]);
+  label.textContent = labels[score-1];
+  label.style.color = score === 3 ? 'var(--teal-deep)' : score === 2 ? '#B26E00' : 'var(--coral)';
+}
+
+/* ---------- Form submit ---------- */
+function handleLogin(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  btn.innerHTML = '<span>Kirilmoqda…</span>';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.querySelectorAll('.panel, .auth-success').forEach(p => p.classList.remove('active','show'));
+    document.getElementById('panel-success').classList.add('show');
+    document.getElementById('successTitle').textContent = 'Xush kelibsiz ortga!';
+    document.getElementById('successText').textContent = 'Darslaringiz kutmoqda.';
+    document.querySelector('.auth-tabs').style.display = 'none';
+  }, 1000);
+}
+
+function handleRegister(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  btn.innerHTML = '<span>Yaratilmoqda…</span>';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.querySelectorAll('.panel, .auth-success').forEach(p => p.classList.remove('active','show'));
+    document.getElementById('panel-success').classList.add('show');
+    document.getElementById('successTitle').textContent = 'Xush kelibsiz!';
+    document.getElementById('successText').textContent = 'Hisobingiz tayyor. Birinchi darsga o\'ting.';
+    document.querySelector('.auth-tabs').style.display = 'none';
+  }, 1000);
+}
+</script>
+</body>
+</html>

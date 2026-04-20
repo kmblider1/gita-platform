@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aqlli Ma'ruza · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="Aqlli Ma'ruza moduli — real vaqt transkripsiya, Braille, imo-ishora tarjima va dinamik vizualizatsiya." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME (from gita-shared.css) ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ MODULE DETAIL PAGE ============ */
+
+  /* ---------- Module hero ---------- */
+  .module-hero {
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .module-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 85% 30%, rgba(13,158,120,0.08), transparent 50%);
+    pointer-events: none;
+  }
+  .module-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+  .module-meta-row {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 22px;
+  }
+  .module-num-badge {
+    font-family: var(--serif); font-weight: 600; font-style: italic;
+    color: var(--muted); font-size: 14px;
+  }
+  .module-tag-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(13,158,120,0.1);
+    border: 1px solid rgba(13,158,120,0.25);
+    font-size: 12px; font-weight: 500;
+    color: var(--teal-deep);
+    letter-spacing: 0.04em;
+  }
+  .module-hero h1 {
+    font-size: clamp(44px, 6vw, 78px);
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin-bottom: 10px;
+  }
+  .module-hero h1 em {
+    font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap;
+  }
+  .module-hero h1 em::after {
+    content: ''; position: absolute; left: 2%; right: 2%; bottom: 6px; height: 12px;
+    background: var(--amber-soft); opacity: 0.5; z-index: -1;
+    border-radius: 4px; transform: skew(-8deg);
+  }
+  .module-hero-subtitle {
+    font-family: var(--serif); font-style: italic;
+    font-size: 20px; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .module-hero .lead {
+    font-size: 17.5px; line-height: 1.7; color: var(--navy-ink);
+    max-width: 560px;
+    margin-bottom: 36px;
+  }
+  .module-hero .lead strong { font-weight: 600; color: var(--navy); }
+
+  .module-hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+  /* Hero preview visual */
+  .module-preview {
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    color: var(--cream);
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(251,248,243,0.1);
+  }
+  .module-preview::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 70% 20%, rgba(13,158,120,0.2), transparent 55%),
+      radial-gradient(circle at 10% 100%, rgba(232,149,10,0.15), transparent 55%);
+    pointer-events: none;
+  }
+  .mp-inner { position: relative; }
+
+  .mp-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 18px; margin-bottom: 20px;
+    border-bottom: 1px solid rgba(251,248,243,0.12);
+  }
+  .mp-live {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 12px; border-radius: 999px;
+    background: rgba(201,79,63,0.18);
+    border: 1px solid rgba(201,79,63,0.35);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #E9927F;
+  }
+  .mp-live .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--coral); animation: pulse 2s ease-out infinite;
+  }
+  .mp-time {
+    font-family: var(--mono); font-size: 13px;
+    color: rgba(251,248,243,0.5);
+  }
+
+  .mp-lecture-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 600;
+    margin-bottom: 4px; letter-spacing: -0.01em;
+  }
+  .mp-lecturer {
+    font-size: 13px; color: rgba(251,248,243,0.55);
+    font-family: var(--serif); font-style: italic;
+    margin-bottom: 22px;
+  }
+
+  /* Transcript lines */
+  .mp-transcript {
+    background: rgba(251,248,243,0.06);
+    border: 1px solid rgba(251,248,243,0.1);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    min-height: 120px;
+  }
+  .transcript-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(251,248,243,0.5);
+    margin-bottom: 10px;
+    display: flex; justify-content: space-between;
+  }
+  .transcript-label .mode-switch {
+    display: inline-flex; background: rgba(251,248,243,0.08); border-radius: 999px; padding: 2px; font-weight: 500;
+  }
+  .transcript-label .mode-switch button {
+    padding: 3px 10px; border-radius: 999px;
+    color: rgba(251,248,243,0.6); font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: none;
+    transition: all .2s;
+  }
+  .transcript-label .mode-switch button.active {
+    background: var(--teal); color: #fff;
+  }
+  .transcript-text {
+    font-size: 15px; line-height: 1.6; color: var(--cream);
+  }
+  .transcript-text .recent {
+    background: rgba(232,149,10,0.2); padding: 0 3px; border-radius: 3px;
+    animation: highlight 1.5s ease-out;
+  }
+  @keyframes highlight { 0% { background: rgba(232,149,10,0.5); } 100% { background: rgba(232,149,10,0.2); } }
+  .transcript-braille {
+    font-family: var(--mono);
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    color: var(--amber-soft);
+    line-height: 1.7;
+  }
+
+  /* A11y row */
+  .mp-a11y-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .mp-a11y-btn {
+    padding: 10px 8px; border-radius: 12px;
+    background: rgba(251,248,243,0.06);
+    border: 1px solid rgba(251,248,243,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .mp-a11y-btn.active {
+    background: rgba(13,158,120,0.18);
+    border-color: rgba(13,158,120,0.4);
+  }
+  .mp-a11y-btn .ico {
+    font-size: 16px; display: block; margin-bottom: 4px;
+  }
+  .mp-a11y-btn .lbl {
+    font-size: 11px; color: rgba(251,248,243,0.7);
+    letter-spacing: 0.04em;
+  }
+  .mp-a11y-btn.active .lbl { color: var(--cream); }
+
+  /* ---------- Stats bar ---------- */
+  .module-stats {
+    background: var(--cream-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 32px 0;
+  }
+  .module-stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .module-stats-item {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .module-stats-item .label {
+    font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .module-stats-item .label::before { content:''; width: 24px; height: 1px; background: var(--navy); opacity: 0.5; }
+  .module-stats-item .n {
+    font-family: var(--serif); font-size: 36px; font-weight: 700;
+    line-height: 1; letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .module-stats-item .n .unit {
+    font-size: 14px; color: var(--muted); font-weight: 400;
+  }
+
+  /* ---------- Features list ---------- */
+  .features-section {
+    padding: 100px 0;
+  }
+  .feature-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-bottom: 120px;
+  }
+  .feature-split:last-child { margin-bottom: 0; }
+  .feature-split.reverse { grid-template-columns: 1fr 1fr; }
+  .feature-split.reverse .feature-visual { order: -1; }
+  .feature-num {
+    font-family: var(--serif); font-style: italic;
+    color: var(--teal); font-size: 15px;
+    margin-bottom: 14px;
+  }
+  .feature-content h3 {
+    font-size: clamp(28px, 3vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .feature-content h3 em { font-style: italic; color: var(--teal-deep); }
+  .feature-content p {
+    font-size: 16px; line-height: 1.7; color: var(--muted);
+    margin-bottom: 20px;
+    max-width: 480px;
+  }
+  .feature-check-list {
+    list-style: none; padding: 0; margin: 0 0 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .feature-check-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 8px 0;
+    font-size: 15px;
+    color: var(--navy-ink);
+  }
+  .feature-check-list .check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(13,158,120,0.12); color: var(--teal-deep);
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .feature-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14.5px; color: var(--teal-deep); font-weight: 500;
+    border-bottom: 1px solid var(--teal-deep); padding-bottom: 2px;
+    transition: gap .2s;
+  }
+  .feature-link:hover { gap: 12px; }
+
+  /* Feature visual - varied */
+  .feature-visual {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Transcript card */
+  .feat-transcript-preview {
+    background: var(--navy-ink);
+    color: var(--cream);
+    border-radius: var(--radius);
+    padding: 20px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    min-height: 240px;
+    position: relative;
+    font-family: var(--sans);
+  }
+  .feat-transcript-preview::before {
+    content: '';
+    position: absolute; top: 16px; right: 16px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--coral); animation: pulse 2s ease-out infinite;
+  }
+  .feat-transcript-line {
+    margin-bottom: 10px;
+    opacity: 0.85;
+  }
+  .feat-transcript-line .speaker {
+    font-family: var(--serif); font-style: italic;
+    color: var(--amber-soft);
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  .feat-transcript-line.current {
+    background: rgba(232,149,10,0.15);
+    padding: 4px 8px;
+    border-radius: 6px;
+    opacity: 1;
+    margin-left: -8px;
+  }
+
+  /* Braille card */
+  .feat-braille-preview {
+    background: linear-gradient(135deg, var(--cream-2), var(--cream-3));
+    border-radius: var(--radius);
+    padding: 24px;
+    min-height: 240px;
+  }
+  .feat-braille-line {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .feat-braille-line:last-child { border-bottom: none; }
+  .feat-braille-latin {
+    font-size: 13px; color: var(--muted); margin-bottom: 6px;
+    font-family: var(--sans);
+  }
+  .feat-braille-dots {
+    font-family: var(--mono);
+    font-size: 22px;
+    letter-spacing: 0.15em;
+    color: var(--navy);
+  }
+
+  /* Signer avatar card */
+  .feat-signer-preview {
+    background: linear-gradient(135deg, #1D4E6F, #0A2540);
+    border-radius: var(--radius);
+    padding: 24px;
+    min-height: 240px;
+    position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+    overflow: hidden;
+  }
+  .feat-signer-preview::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(13,158,120,0.2), transparent 70%);
+  }
+  .feat-signer-svg {
+    position: relative; z-index: 1;
+    margin: auto;
+    width: 140px; height: 140px;
+    animation: signerSway 3s ease-in-out infinite;
+  }
+  @keyframes signerSway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+  .feat-signer-caption {
+    position: relative; z-index: 1;
+    text-align: center;
+    color: var(--cream);
+    font-size: 13px;
+  }
+  .feat-signer-caption em {
+    font-family: var(--serif); font-style: italic; color: var(--amber-soft);
+  }
+
+  /* 3D viz card */
+  .feat-viz-preview {
+    background: linear-gradient(135deg, #3E2D44, #0A2540);
+    border-radius: var(--radius);
+    padding: 30px;
+    min-height: 240px;
+    position: relative;
+    overflow: hidden;
+  }
+  .feat-viz-preview::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(232,149,10,0.3), transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(13,158,120,0.3), transparent 50%);
+  }
+  .viz-formula {
+    position: relative; z-index: 1;
+    color: var(--cream);
+    text-align: center;
+    padding-top: 30px;
+  }
+  .viz-formula-text {
+    font-family: var(--serif); font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--amber-soft);
+  }
+  .viz-formula-label {
+    font-family: var(--serif); font-style: italic;
+    font-size: 15px;
+    color: rgba(251,248,243,0.8);
+  }
+  .viz-orbit {
+    position: absolute; top: 50%; left: 50%;
+    width: 200px; height: 200px;
+    transform: translate(-50%, -50%);
+    border: 1px dashed rgba(251,248,243,0.15);
+    border-radius: 50%;
+    animation: orbit 20s linear infinite;
+  }
+  .viz-orbit::before {
+    content: '';
+    position: absolute; top: -5px; left: 50%;
+    width: 10px; height: 10px;
+    background: var(--teal); border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(13,158,120,0.3);
+  }
+  @keyframes orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  /* ---------- How it works ---------- */
+  .how-section {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .how-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(13,158,120,0.12), transparent 40%),
+      radial-gradient(circle at 10% 80%, rgba(232,149,10,0.1), transparent 40%);
+  }
+  .how-section .container { position: relative; }
+  .how-section h2 {
+    font-size: clamp(36px, 4.5vw, 58px);
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .how-section h2 em { font-style: italic; color: var(--amber-soft); }
+  .how-section .lead {
+    color: rgba(251,248,243,0.65);
+    font-size: 17px;
+    max-width: 620px;
+    margin-bottom: 56px;
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 12.5%; right: 12.5%;
+    height: 1px; background: rgba(251,248,243,0.15);
+    border-top: 1px dashed rgba(251,248,243,0.25);
+  }
+  .how-step {
+    position: relative;
+  }
+  .how-step-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--teal);
+    color: var(--cream);
+    display: grid; place-items: center;
+    font-family: var(--serif);
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .how-step:nth-child(1) .how-step-num { border-color: var(--teal); }
+  .how-step:nth-child(2) .how-step-num { border-color: var(--amber); }
+  .how-step:nth-child(3) .how-step-num { border-color: #7B4B94; }
+  .how-step:nth-child(4) .how-step-num { border-color: var(--coral); }
+
+  .how-step h4 {
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .how-step p {
+    color: rgba(251,248,243,0.6);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  /* ---------- Integration / compatibility ---------- */
+  .compat-section {
+    padding: 100px 0;
+  }
+  .compat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .compat-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    display: flex; align-items: center; gap: 14px;
+    transition: all .25s;
+  }
+  .compat-item:hover { transform: translateY(-3px); border-color: transparent; box-shadow: var(--shadow-md); }
+  .compat-item .logo {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700;
+    font-size: 16px; color: var(--navy);
+    flex-shrink: 0;
+  }
+  .compat-item h5 {
+    font-size: 14px; font-family: var(--sans); font-weight: 600;
+    margin-bottom: 2px; letter-spacing: -0.005em;
+  }
+  .compat-item .type {
+    font-size: 11.5px; color: var(--muted);
+    font-family: var(--serif); font-style: italic;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-section { padding: 100px 0; background: var(--cream-2); }
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .faq-item.open { border-color: var(--teal); }
+  .faq-question {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    text-align: left;
+    font-family: var(--serif); font-size: 17px; font-weight: 600;
+    color: var(--navy);
+    transition: color .2s;
+  }
+  .faq-question:hover { color: var(--teal-deep); }
+  .faq-question .icon {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    flex-shrink: 0;
+    transition: all .3s;
+  }
+  .faq-item.open .faq-question .icon {
+    background: var(--teal); color: #fff; transform: rotate(45deg);
+  }
+  .faq-answer {
+    padding: 0 24px;
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s ease, padding .3s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 400px; padding-bottom: 22px;
+  }
+  .faq-answer p {
+    font-size: 15px; line-height: 1.65; color: var(--muted);
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta-band {
+    background: var(--navy);
+    padding: 80px 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(13,158,120,0.15), transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(232,149,10,0.12), transparent 50%);
+  }
+  .cta-band .container { position: relative; text-align: center; }
+  .cta-band h2 {
+    color: var(--cream);
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .cta-band h2 em { font-style: italic; color: var(--amber-soft); }
+  .cta-band p {
+    color: rgba(251,248,243,0.7);
+    font-size: 17px;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .cta-band .cta-row {
+    display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .module-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .feature-split, .feature-split.reverse { grid-template-columns: 1fr; gap: 36px; }
+    .feature-split.reverse .feature-visual { order: 0; }
+    .how-steps { grid-template-columns: 1fr 1fr; }
+    .how-steps::before { display: none; }
+    .module-stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  }
+  @media (max-width: 600px) {
+    .how-steps { grid-template-columns: 1fr; }
+    .module-stats-grid { grid-template-columns: 1fr; }
+    .mp-a11y-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="GITA_Landing.html" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small>Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="GITA_Landing.html#modullar" class="active">Modullar</a>
+        <a href="kurslar.html">Kurslar</a>
+        <a href="GITA_Landing.html#mentorlar">Mentorlar</a>
+        <a href="kognitiv.html">Kognitiv AI</a>
+        <a href="GITA_Landing.html#texnologiya">Texnologiya</a>
+        <a href="#yordam">Yordam</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="auth.html" class="btn-primary"><span class="lbl">Ro'yxatdan o'tish</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ MODULE HERO ============ -->
+  <section class="module-hero">
+    <div class="container">
+      <div class="breadcrumb reveal">
+        <a href="GITA_Landing.html">Bosh sahifa</a>
+        <span class="sep">/</span>
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <span class="sep">/</span>
+        <span class="current">Aqlli Ma'ruza</span>
+      </div>
+
+      <div class="module-hero-grid">
+        <div>
+          <div class="module-meta-row reveal">
+            <span class="module-num-badge">01 / 04</span>
+            <span class="module-tag-pill">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="4"/></svg>
+              Ma'ruza vositasi
+            </span>
+          </div>
+
+          <h1 class="reveal" data-delay="1">
+            Aqlli<br>
+            <em>Ma'ruza.</em>
+          </h1>
+
+          <div class="module-hero-subtitle reveal" data-delay="2">
+            Real vaqt transkripsiya · Braille · imo-ishora · vizual
+          </div>
+
+          <p class="lead reveal" data-delay="3">
+            <strong>Bir tugma bossangiz — barchasi tayyor.</strong> Ma'ruzachi hech narsa o'zgartirmaydi.
+            Talabalar esa har biri o'z usulida eshitadi: matn, Braille displey, imo-ishora avatar yoki audio bilan.
+          </p>
+
+          <div class="module-hero-cta reveal" data-delay="4">
+            <a href="#" class="btn-teal"><span>Demoni ko'rish</span><span aria-hidden="true">→</span></a>
+            <a href="#" class="btn-ghost"><span style="font-size:12px" aria-hidden="true">▶</span><span>Video · 2:14</span></a>
+          </div>
+        </div>
+
+        <!-- Preview mockup -->
+        <div class="module-preview reveal" data-delay="2">
+          <div class="mp-inner">
+            <div class="mp-head">
+              <span class="mp-live"><span class="dot"></span>Jonli</span>
+              <span class="mp-time" id="mpTime">14:32:08</span>
+            </div>
+
+            <div class="mp-lecture-title">Newton qonunlari — 3-ma'ruza</div>
+            <div class="mp-lecturer">Dr. Jasur Mirzaev · Fizika · FizMat</div>
+
+            <div class="mp-transcript">
+              <div class="transcript-label">
+                <span>Transkripsiya</span>
+                <div class="mode-switch" role="group">
+                  <button class="active" onclick="setTranscriptMode(this,'text')">Matn</button>
+                  <button onclick="setTranscriptMode(this,'braille')">Braille</button>
+                </div>
+              </div>
+              <div class="transcript-text" id="transcriptText">Kuch — bu jismni harakatga keltiruvchi yoki uning harakatini o'zgartiruvchi miqdor. <span class="recent">F = ma formulasi bunda kuch massaga tezlanishni ko'paytirishga teng ekanligini ko'rsatadi.</span></div>
+              <div class="transcript-braille" id="transcriptBraille" style="display:none">⠅⠥⠟ · ⠴⠥ ⠚⠊⠎⠍⠝⠊ ⠓⠁⠗⠁⠅⠁⠞⠛⠁ ⠅⠑⠇⠞⠊⠗⠥⠧⠟⠊ ⠍⠊⠟⠙⠕⠗⠲</div>
+            </div>
+
+            <div class="mp-a11y-row">
+              <button class="mp-a11y-btn active" onclick="toggleA11y(this)">
+                <span class="ico" aria-hidden="true">⠃</span>
+                <span class="lbl">Braille</span>
+              </button>
+              <button class="mp-a11y-btn active" onclick="toggleA11y(this)">
+                <span class="ico" aria-hidden="true">✋</span>
+                <span class="lbl">Imo-ishora</span>
+              </button>
+              <button class="mp-a11y-btn" onclick="toggleA11y(this)">
+                <span class="ico" aria-hidden="true">🎧</span>
+                <span class="lbl">Audio</span>
+              </button>
+              <button class="mp-a11y-btn" onclick="toggleA11y(this)">
+                <span class="ico" aria-hidden="true">◬</span>
+                <span class="lbl">3D model</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS BAR ============ -->
+  <section class="module-stats">
+    <div class="container">
+      <div class="module-stats-grid">
+        <div class="module-stats-item reveal">
+          <span class="label">Aniqlik</span>
+          <span class="n"><span data-counter="97">0</span>%<span class="unit" style="margin-left:4px">transkripsiya</span></span>
+        </div>
+        <div class="module-stats-item reveal" data-delay="1">
+          <span class="label">Kechikish</span>
+          <span class="n">&lt;<span data-counter="300">0</span><span class="unit" style="margin-left:4px">ms</span></span>
+        </div>
+        <div class="module-stats-item reveal" data-delay="2">
+          <span class="label">Tillar</span>
+          <span class="n"><span data-counter="50">0</span>+<span class="unit" style="margin-left:4px">til</span></span>
+        </div>
+        <div class="module-stats-item reveal" data-delay="3">
+          <span class="label">Ma'ruzalar</span>
+          <span class="n"><span data-counter="12400">0</span><span class="unit" style="margin-left:4px">oy/da</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features-section">
+    <div class="container">
+
+      <!-- Feature 1 -->
+      <div class="feature-split">
+        <div class="feature-content reveal">
+          <div class="feature-num">Xususiyat 01</div>
+          <h3>Real vaqtda<br><em>to'g'ri</em> transkripsiya.</h3>
+          <p>
+            Whisper v3 bazasida 50+ til uchun xarakatchan nutq tanish. Tibbiy, texnik va ilmiy lug'atlarga maxsus moslash — bitta so'z qochmaydi.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check">✓</span><span>So'zlarni 300ms dan tezroq aniqlaydi</span></li>
+            <li><span class="check">✓</span><span>Ilmiy termin lug'atini avtomatik o'rganadi</span></li>
+            <li><span class="check">✓</span><span>Ma'ruzachi ohangiga moslashadi</span></li>
+            <li><span class="check">✓</span><span>Tinchlik, so'zlash tezligini bildiradi</span></li>
+          </ul>
+          <a href="#" class="feature-link">Texnik hujjatlar →</a>
+        </div>
+        <div class="feature-visual reveal" data-delay="1">
+          <div class="feat-transcript-preview">
+            <div class="feat-transcript-line">
+              <span class="speaker">Prof.</span>
+              Bugungi mavzu — klassik mexanika asoslari.
+            </div>
+            <div class="feat-transcript-line">
+              <span class="speaker">Prof.</span>
+              Newton'ning birinchi qonunini eslab qoling…
+            </div>
+            <div class="feat-transcript-line current">
+              <span class="speaker">Prof.</span>
+              Har qanday jism unga tashqi kuch ta'sir qilmaguncha
+              tinch turadi yoki bir tekis harakatda bo'ladi.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-split reverse">
+        <div class="feature-content reveal">
+          <div class="feature-num">Xususiyat 02</div>
+          <h3>Braille <em>eksport</em> —<br>darhol, avtomatik.</h3>
+          <p>
+            Har bir gap bir vaqtning o'zida Braille displeyga yuboriladi. Ko'zi ojiz talabalar ma'ruza ritmida o'qiydi — kechikmay, sekinlashmay.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check">✓</span><span>Unicode Braille (UEB va ruscha)</span></li>
+            <li><span class="check">✓</span><span>Matematik formulalar Nemeth Braille</span></li>
+            <li><span class="check">✓</span><span>40/80 hujayralik displeylarga mos</span></li>
+            <li><span class="check">✓</span><span>Offline eksport: TXT, BRF, PDF</span></li>
+          </ul>
+          <a href="#" class="feature-link">Qo'llab-quvvatlangan qurilmalar →</a>
+        </div>
+        <div class="feature-visual reveal" data-delay="1">
+          <div class="feat-braille-preview">
+            <div class="feat-braille-line">
+              <div class="feat-braille-latin">Newton's second law</div>
+              <div class="feat-braille-dots">⠝⠑⠺⠞⠕⠝⠄⠎ ⠎⠑⠉⠕⠝⠙ ⠇⠁⠺</div>
+            </div>
+            <div class="feat-braille-line">
+              <div class="feat-braille-latin">F = m · a</div>
+              <div class="feat-braille-dots">⠋ ⠨⠅ ⠍ ⠐⠼ ⠁</div>
+            </div>
+            <div class="feat-braille-line">
+              <div class="feat-braille-latin">Where F is force, m is mass</div>
+              <div class="feat-braille-dots">⠺⠓⠑⠗⠑ ⠋ ⠊⠎ ⠋⠕⠗⠉⠑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-split">
+        <div class="feature-content reveal">
+          <div class="feature-num">Xususiyat 03</div>
+          <h3>Imo-ishora<br><em>avatar</em> — tabiiy.</h3>
+          <p>
+            O'zbek, Britton, Amerika va Xalqaro imo-ishora tillarida tajribali avatar. Yuz mimikasi, tana holati va qo'l harakatlari bir-birida jamlangan.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check">✓</span><span>4 ta xalqaro imo-ishora tili</span></li>
+            <li><span class="check">✓</span><span>Yuz mimikasi — grammatika uchun muhim</span></li>
+            <li><span class="check">✓</span><span>Real insonlardan o'rganilgan harakatlar</span></li>
+            <li><span class="check">✓</span><span>Sekinroq yoki tezroq qilsa bo'ladi</span></li>
+          </ul>
+          <a href="#" class="feature-link">Avatar galereyasi →</a>
+        </div>
+        <div class="feature-visual reveal" data-delay="1">
+          <div class="feat-signer-preview">
+            <div class="feat-signer-svg">
+              <svg viewBox="0 0 140 140" fill="none">
+                <!-- Head -->
+                <circle cx="70" cy="40" r="22" fill="var(--cream)"/>
+                <!-- Eyes -->
+                <circle cx="64" cy="38" r="2" fill="var(--navy-ink)"/>
+                <circle cx="76" cy="38" r="2" fill="var(--navy-ink)"/>
+                <!-- Mouth -->
+                <path d="M 64 48 Q 70 52 76 48" stroke="var(--navy-ink)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- Body -->
+                <path d="M 45 90 Q 70 68 95 90 L 95 130 L 45 130 Z" fill="var(--teal)"/>
+                <!-- Arm -->
+                <rect x="42" y="72" width="22" height="38" rx="10" fill="var(--cream)" transform="rotate(-20 53 91)"/>
+                <!-- Hand sign -->
+                <circle cx="28" cy="68" r="10" fill="var(--amber-soft)"/>
+                <rect x="24" y="58" width="3" height="10" rx="1.5" fill="var(--amber-soft)"/>
+                <rect x="28" y="56" width="3" height="12" rx="1.5" fill="var(--amber-soft)"/>
+              </svg>
+            </div>
+            <div class="feat-signer-caption">
+              Imo-ishora: <em>"qonun"</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-split reverse">
+        <div class="feature-content reveal">
+          <div class="feature-num">Xususiyat 04</div>
+          <h3>Dinamik<br><em>vizualizatsiya.</em></h3>
+          <p>
+            Formula va diagrammalar jonli rasm bo'ladi. Matn va audio deskripsiya bilan birga — ko'zi ojiz ham, kam ko'ruvchi ham bir xil tushunadi.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check">✓</span><span>Interaktiv 3D modellar (WebGL)</span></li>
+            <li><span class="check">✓</span><span>Audio deskripsiya har diagrammaga</span></li>
+            <li><span class="check">✓</span><span>Taktil chop etish uchun eksport</span></li>
+            <li><span class="check">✓</span><span>Kompyuter ovoziga moslashish</span></li>
+          </ul>
+          <a href="#" class="feature-link">Vizualizatsiya kutubxonasi →</a>
+        </div>
+        <div class="feature-visual reveal" data-delay="1">
+          <div class="feat-viz-preview">
+            <div class="viz-orbit" aria-hidden="true"></div>
+            <div class="viz-formula">
+              <div class="viz-formula-text">F = ma</div>
+              <div class="viz-formula-label">Newton'ning 2-qonuni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how-section">
+    <div class="container">
+      <div class="reveal">
+        <span class="sec-eyebrow" style="color:rgba(251,248,243,0.5)">Qanday ishlaydi</span>
+        <h2>Oddiy <em>to'rt qadam,</em><br>murakkab <em>texnologiya.</em></h2>
+        <p class="lead">
+          Ma'ruzachi uchun hech nima o'zgarmaydi. Talaba uchun — hammasi.
+        </p>
+      </div>
+
+      <div class="how-steps">
+        <div class="how-step reveal" data-delay="1">
+          <div class="how-step-num">1</div>
+          <h4>Ma'ruzachi gapiradi</h4>
+          <p>Hech qanday maxsus qurilma yo'q. Oddiy mikrofon yoki telefondan ovoz kiritiladi.</p>
+        </div>
+        <div class="how-step reveal" data-delay="2">
+          <div class="how-step-num">2</div>
+          <h4>AI tanib oladi</h4>
+          <p>Whisper v3 · 50+ til · 300ms kechikish bilan matnga aylantiradi.</p>
+        </div>
+        <div class="how-step reveal" data-delay="3">
+          <div class="how-step-num">3</div>
+          <h4>Har yo'nalishga tarqatadi</h4>
+          <p>Braille displey, imo-ishora avatar, audio va vizual — barchasi parallelda.</p>
+        </div>
+        <div class="how-step reveal" data-delay="4">
+          <div class="how-step-num">4</div>
+          <h4>Talaba o'z usulida oladi</h4>
+          <p>Har kim o'z interfeysini tanlaydi. Bitta ma'ruza — o'nlab ko'rinishda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTEGRATIONS ============ -->
+  <section class="compat-section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Integratsiyalar</span>
+          <h2>Eski <em>tizimlar</em> bilan<br>mos keladi.</h2>
+        </div>
+        <div class="sec-head-right">
+          Zoom, Teams, Moodle, Canvas va boshqa ko'p tizim bilan ishlaydi.
+        </div>
+      </div>
+
+      <div class="compat-grid">
+        <div class="compat-item reveal"><div class="logo">Z</div><div><h5>Zoom</h5><div class="type">Live transcript plugin</div></div></div>
+        <div class="compat-item reveal" data-delay="1"><div class="logo">M</div><div><h5>Teams</h5><div class="type">Meeting bot</div></div></div>
+        <div class="compat-item reveal" data-delay="2"><div class="logo">G</div><div><h5>Meet</h5><div class="type">Captions API</div></div></div>
+        <div class="compat-item reveal" data-delay="3"><div class="logo">M</div><div><h5>Moodle</h5><div class="type">LMS plugin</div></div></div>
+        <div class="compat-item reveal"><div class="logo">C</div><div><h5>Canvas</h5><div class="type">LTI 1.3</div></div></div>
+        <div class="compat-item reveal" data-delay="1"><div class="logo">O</div><div><h5>OBS</h5><div class="type">Stream plugin</div></div></div>
+        <div class="compat-item reveal" data-delay="2"><div class="logo">⚙</div><div><h5>Ochiq API</h5><div class="type">REST va WebSocket</div></div></div>
+        <div class="compat-item reveal" data-delay="3"><div class="logo">&lt;/&gt;</div><div><h5>Chrome kengaytma</h5><div class="type">Har qanday saytda</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="sec-head reveal" style="grid-template-columns:1fr">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Tez-tez so'raladigan</span>
+          <h2>Savol <em>bordir?</em></h2>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item reveal open">
+          <button class="faq-question" onclick="toggleFaq(this.parentElement)">
+            Transkripsiya aniqligi qanday o'lchanadi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Biz WER (Word Error Rate) metrikasidan foydalanamiz. O'zbek tilida 97%, ingliz tilida 98.5% aniqlik. Texnik terminlar uchun maxsus lug'at qo'shish mumkin — bu yanada yaxshiroq natija beradi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="1">
+          <button class="faq-question" onclick="toggleFaq(this.parentElement)">
+            Ma'lumotlarim qayerda saqlanadi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Barcha audio va transkripsiya ma'lumotlari GDPR va ISO 27001 standartlariga muvofiq shifrlangan holda saqlanadi. Siz istalgan vaqtda barcha ma'lumotlaringizni yuklab olishingiz yoki o'chirib tashlashingiz mumkin.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="2">
+          <button class="faq-question" onclick="toggleFaq(this.parentElement)">
+            Qaysi Braille displeylar qo'llab-quvvatlanadi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>HumanWare, Freedom Scientific, Handy Tech, Orbit Research va Optelec'ning 40/80 hujayralik barcha zamonaviy modellari. USB yoki Bluetooth orqali avtomatik tanib oladi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="3">
+          <button class="faq-question" onclick="toggleFaq(this.parentElement)">
+            Internet aloqasisiz ishlay oladimi?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Ha — oddiy oflayn rejim mavjud. Transkripsiya qurilmada ishlaydi (ozroq aniqlik bilan), imo-ishora avatar keshlangan holatda, Braille eksport esa har doim ishlaydi. Audio jonli uzatish uchun internet kerak.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" data-delay="4">
+          <button class="faq-question" onclick="toggleFaq(this.parentElement)">
+            Ma'ruzachi nima o'rganishi kerak?
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Hech nima! Aqlli Ma'ruza ma'ruzachi tomonidan sezilmaydi. Bitta tugma bosiladi va hammasi avtomatik boshlanadi. Barcha moslashuv — talaba tomonida bo'ladi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-band">
+    <div class="container">
+      <h2 class="reveal">Birinchi ma'ruzangizni<br><em>bugun</em> yozib boshlang.</h2>
+      <p class="reveal" data-delay="1">
+        Karta kerak emas. Obuna yo'q. Barcha funksiyalar bepul — har doim va hammaga.
+      </p>
+      <div class="cta-row reveal" data-delay="2">
+        <a href="auth.html" class="btn-teal"><span>Bepul ro'yxatdan o'tish</span><span aria-hidden="true">→</span></a>
+        <a href="#" class="btn-ghost" style="color:var(--cream);border-color:rgba(251,248,243,0.3)"><span>Demoni ko'rish</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="GITA_Landing.html" class="brand">
+          <span class="brand-mark">G</span>
+          <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+        </a>
+        <p>Ta'limdagi to'siqlarni olib tashlash — bu imkoniyatni ko'paytirishdir.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="GitHub">GH</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Modullar</h5>
+        <ul>
+          <li><a href="modul.html">Aqlli Ma'ruza</a></li>
+          <li><a href="mentor.html">Virtual Mentor</a></li>
+          <li><a href="#">Hamkorlik Lab</a></li>
+          <li><a href="kognitiv.html">Kognitiv AI</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Resurslar</h5>
+        <ul><li><a href="#">Hujjatlar</a></li><li><a href="#">Blog</a></li><li><a href="#">API</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Kompaniya</h5>
+        <ul><li><a href="#">Biz haqimizda</a></li><li><a href="#">Hamkorlar</a></li><li><a href="#">Aloqa</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Yordam</h5>
+        <ul><li><a href="#">FAQ</a></li><li><a href="#">Maxfiylik</a></li><li><a href="#">Shartlar</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 GITA — Global Inklyuziv Ta'lim Kampusi</span>
+      <span class="wcag">Muvofiqlik: <span class="badge-w">WCAG 2.1 AA</span> <span class="badge-w">GDPR</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== SHARED INTERACTIONS (from gita-shared.js) ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+<script>
+/* Transcript mode switch */
+function setTranscriptMode(btn, mode){
+  btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('transcriptText').style.display = mode === 'text' ? '' : 'none';
+  document.getElementById('transcriptBraille').style.display = mode === 'braille' ? '' : 'none';
+}
+
+/* A11y toggle */
+function toggleA11y(btn){ btn.classList.toggle('active'); }
+
+/* FAQ */
+function toggleFaq(item){
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+/* Live clock */
+(function(){
+  const el = document.getElementById('mpTime');
+  if (!el) return;
+  const tick = () => {
+    const d = new Date(); const pad = n => String(n).padStart(2,'0');
+    el.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  };
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>

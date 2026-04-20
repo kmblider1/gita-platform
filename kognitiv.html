@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kognitiv Yordamchi · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="Kognitiv Yordamchi — charchoq va stressni sezadigan AI modul. Qurilmada ishlaydi, maxfiy, yumshoq." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME (from gita-shared.css) ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ KOGNITIV YORDAMCHI DEMO ============ */
+
+  /* Dark mode base */
+  body { background: var(--navy-ink); color: var(--cream); }
+  .nav-wrap.scrolled {
+    background: rgba(8,27,49,0.85);
+    box-shadow: 0 1px 0 rgba(251,248,243,0.1), 0 12px 40px -24px rgba(0,0,0,0.5);
+  }
+  .nav-wrap .brand { color: var(--cream); }
+  .nav-wrap .brand-mark { background: var(--cream); color: var(--navy); }
+  .nav-wrap .nav-links a { color: var(--cream); }
+  .nav-wrap .lang-btn { color: var(--cream); border-color: rgba(251,248,243,0.2); }
+  .nav-wrap .lang-btn:hover { background: rgba(251,248,243,0.08); border-color: rgba(251,248,243,0.4); }
+  .nav-wrap .btn-primary { background: var(--teal); }
+  .nav-wrap .btn-primary:hover { background: var(--teal-deep); }
+  .nav-wrap .burger { border-color: rgba(251,248,243,0.2); }
+  .nav-wrap .burger span, .nav-wrap .burger span::before, .nav-wrap .burger span::after { background: var(--cream); }
+
+  .breadcrumb { color: rgba(251,248,243,0.5); }
+  .breadcrumb a { color: rgba(251,248,243,0.5); }
+  .breadcrumb a:hover { color: var(--cream); }
+  .breadcrumb .current { color: var(--cream); }
+  .breadcrumb .sep { color: rgba(251,248,243,0.3); }
+
+  /* ---------- Hero ---------- */
+  .kog-hero {
+    padding: 60px 0 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kog-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(13,158,120,0.15), transparent 50%),
+      radial-gradient(circle at 10% 90%, rgba(232,149,10,0.1), transparent 50%);
+    pointer-events: none;
+  }
+  .kog-hero .container { position: relative; }
+  .kog-hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #5DCAA5;
+    padding: 7px 14px;
+    border: 1px solid rgba(93,202,165,0.3);
+    background: rgba(13,158,120,0.12);
+    border-radius: 999px;
+  }
+  .kog-hero .eyebrow .pulse {
+    position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+  }
+  .kog-hero .eyebrow .pulse::after {
+    content: ''; position: absolute; inset: -4px; border-radius: 50%;
+    border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite;
+  }
+  .kog-hero h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(40px, 5.5vw, 68px);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+  .kog-hero h1 em {
+    font-style: italic; color: var(--amber-soft);
+    position: relative; white-space: nowrap;
+  }
+  .kog-hero h1 em::after {
+    content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 12px;
+    background: rgba(245,197,106,0.18); z-index: -1;
+    border-radius: 4px; transform: skew(-8deg);
+  }
+  .kog-hero .lead {
+    font-size: 18px; line-height: 1.7;
+    color: rgba(251,248,243,0.7);
+    max-width: 620px;
+    margin-bottom: 24px;
+  }
+  .privacy-notice {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    background: rgba(13,158,120,0.1);
+    border: 1px solid rgba(13,158,120,0.25);
+    border-radius: 999px;
+    font-size: 13px;
+    color: #5DCAA5;
+  }
+
+  /* ---------- Demo stage ---------- */
+  .demo-stage {
+    padding: 40px 0 100px;
+  }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+
+  /* Left: Camera panel */
+  .camera-panel {
+    background: linear-gradient(180deg, #0D2A4D 0%, #0A2540 100%);
+    border: 1px solid rgba(251,248,243,0.1);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+  }
+  .camera-panel::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 50%);
+    pointer-events: none;
+  }
+  .cam-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cam-title {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--cream);
+  }
+  .cam-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--coral);
+    animation: pulse 2s ease-out infinite;
+  }
+  .cam-dot.off { background: rgba(251,248,243,0.3); animation: none; }
+  .cam-status {
+    font-family: var(--mono); font-size: 12px;
+    color: rgba(251,248,243,0.5);
+  }
+
+  .cam-view {
+    aspect-ratio: 4/3;
+    background: #000;
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .cam-view video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); /* mirror */
+  }
+  .cam-view .placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: rgba(251,248,243,0.4);
+    text-align: center;
+    padding: 24px;
+    gap: 12px;
+    background:
+      linear-gradient(135deg, rgba(13,158,120,0.05), rgba(232,149,10,0.05)),
+      var(--navy-ink);
+  }
+  .cam-view .placeholder svg { color: rgba(251,248,243,0.3); }
+  .cam-view .placeholder .title { font-family: var(--serif); font-size: 18px; font-style: italic; color: rgba(251,248,243,0.6); }
+  .cam-view .placeholder .sub { font-size: 13px; max-width: 280px; line-height: 1.55; }
+
+  /* Camera overlay face detection indicator */
+  .cam-overlay {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    display: none;
+  }
+  .cam-overlay.active { display: block; }
+  .face-box {
+    position: absolute;
+    top: 20%; left: 25%; width: 50%; height: 55%;
+    border: 2px solid var(--teal);
+    border-radius: 14px;
+    box-shadow: 0 0 0 2px rgba(13,158,120,0.3);
+    animation: gentlePulse 2.5s ease-in-out infinite;
+  }
+  .face-box::before {
+    content: '';
+    position: absolute; top: -1px; left: -1px; width: 14px; height: 14px;
+    border-top: 2px solid var(--amber); border-left: 2px solid var(--amber);
+    border-radius: 4px 0 0 0;
+  }
+  .face-box::after {
+    content: '';
+    position: absolute; bottom: -1px; right: -1px; width: 14px; height: 14px;
+    border-bottom: 2px solid var(--amber); border-right: 2px solid var(--amber);
+    border-radius: 0 0 4px 0;
+  }
+  .face-label {
+    position: absolute;
+    top: calc(20% - 24px); left: 25%;
+    padding: 3px 10px;
+    background: var(--teal); color: #fff;
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border-radius: 6px;
+    font-family: var(--sans);
+  }
+  @keyframes gentlePulse { 0%,100% { opacity: 0.9; } 50% { opacity: 0.5; } }
+
+  .cam-controls {
+    display: flex; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .cam-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(251,248,243,0.08);
+    border: 1px solid rgba(251,248,243,0.12);
+    color: var(--cream);
+    font-size: 13.5px; font-weight: 500;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: var(--sans);
+  }
+  .cam-btn:hover { background: rgba(251,248,243,0.14); border-color: rgba(251,248,243,0.22); }
+  .cam-btn.primary {
+    background: var(--teal); border-color: var(--teal);
+  }
+  .cam-btn.primary:hover { background: var(--teal-deep); }
+  .cam-btn.danger {
+    background: rgba(201,79,63,0.15); border-color: rgba(201,79,63,0.3);
+    color: #E9927F;
+  }
+
+  /* Metrics grid */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: auto;
+  }
+  .metric-box {
+    padding: 10px 14px;
+    background: rgba(251,248,243,0.04);
+    border: 1px solid rgba(251,248,243,0.08);
+    border-radius: 12px;
+  }
+  .metric-label {
+    font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(251,248,243,0.45);
+    margin-bottom: 4px;
+  }
+  .metric-value {
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    color: var(--cream);
+  }
+  .metric-value .ok { color: var(--teal); }
+  .metric-value .warn { color: var(--amber); }
+  .metric-value .alert { color: var(--coral); }
+
+  /* Right panel: avatar + bars + actions */
+  .state-panel {
+    background: linear-gradient(180deg, #0D2A4D 0%, #0A2540 100%);
+    border: 1px solid rgba(251,248,243,0.1);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5);
+  }
+  .state-panel::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Avatar stage */
+  .avatar-stage {
+    position: relative;
+    margin: 0 auto 28px;
+    width: 220px; height: 220px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(13,158,120,0.3);
+    animation: rotate 40s linear infinite;
+    transition: border-color .6s;
+  }
+  .avatar-ring::before {
+    content: '';
+    position: absolute; top: -4px; left: 50%;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+    transform: translateX(-50%);
+    transition: background .6s;
+  }
+  .avatar-ring.tired { border-color: rgba(232,149,10,0.35); }
+  .avatar-ring.tired::before { background: var(--amber); }
+  .avatar-ring.critical { border-color: rgba(201,79,63,0.4); }
+  .avatar-ring.critical::before { background: var(--coral); }
+
+  .avatar-svg {
+    width: 160px; height: 160px;
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  }
+  .avatar-svg.tired { transform: scale(0.95) translateY(4px); }
+  .avatar-svg.critical { transform: scale(0.88) translateY(8px) rotate(-3deg); }
+
+  /* State badge */
+  .state-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13.5px; font-weight: 500;
+    margin: 0 auto 28px;
+    background: rgba(13,158,120,0.15);
+    border: 1px solid rgba(13,158,120,0.35);
+    color: #5DCAA5;
+    transition: all .6s;
+  }
+  .state-badge .dot-st {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s ease-out infinite;
+  }
+  .state-badge.tired {
+    background: rgba(232,149,10,0.12);
+    border-color: rgba(232,149,10,0.3);
+    color: var(--amber-soft);
+  }
+  .state-badge.tired .dot-st { background: var(--amber); }
+  .state-badge.critical {
+    background: rgba(201,79,63,0.12);
+    border-color: rgba(201,79,63,0.3);
+    color: #E9927F;
+  }
+  .state-badge.critical .dot-st { background: var(--coral); }
+
+  /* Bars */
+  .signals-bars {
+    padding: 20px;
+    background: rgba(251,248,243,0.04);
+    border: 1px solid rgba(251,248,243,0.08);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+  }
+  .bar-row {
+    display: grid; grid-template-columns: 90px 1fr 48px;
+    align-items: center; gap: 12px;
+    padding: 6px 0;
+  }
+  .bar-row .lbl {
+    font-size: 12.5px;
+    color: rgba(251,248,243,0.7);
+    font-weight: 500;
+  }
+  .bar-track {
+    height: 6px; background: rgba(251,248,243,0.08);
+    border-radius: 3px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 3px;
+    transition: width .8s cubic-bezier(.2,.8,.2,1), background .6s;
+  }
+  .bar-val {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+    color: rgba(251,248,243,0.9);
+    text-align: right;
+  }
+
+  /* Action buttons */
+  .actions-title {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(251,248,243,0.45);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .actions-title::before { content: ''; width: 24px; height: 1px; background: rgba(251,248,243,0.3); }
+  .quick-actions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .quick-action {
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(251,248,243,0.06);
+    border: 1px solid rgba(251,248,243,0.1);
+    color: var(--cream);
+    text-align: left;
+    transition: all .2s;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .quick-action:hover { background: rgba(251,248,243,0.12); transform: translateY(-1px); }
+  .quick-action .q-ico {
+    font-size: 18px; margin-bottom: 6px;
+    display: block;
+  }
+  .quick-action .q-title {
+    font-size: 13.5px; font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 2px;
+  }
+  .quick-action .q-sub {
+    font-size: 11.5px;
+    color: rgba(251,248,243,0.5);
+    font-family: var(--serif); font-style: italic;
+  }
+
+  /* State demo controls */
+  .state-sim {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    padding: 6px;
+    background: rgba(251,248,243,0.04);
+    border: 1px solid rgba(251,248,243,0.08);
+    border-radius: 14px;
+  }
+  .sim-btn {
+    padding: 10px;
+    border-radius: 10px;
+    background: transparent;
+    color: rgba(251,248,243,0.6);
+    font-size: 12.5px; font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    font-family: var(--sans);
+  }
+  .sim-btn .ico { font-size: 13px; }
+  .sim-btn:hover { background: rgba(251,248,243,0.06); color: var(--cream); }
+  .sim-btn.active {
+    background: rgba(13,158,120,0.2);
+    color: #5DCAA5;
+  }
+  .sim-btn[data-state="tired"].active { background: rgba(232,149,10,0.18); color: var(--amber-soft); }
+  .sim-btn[data-state="critical"].active { background: rgba(201,79,63,0.18); color: #E9927F; }
+
+  /* ---------- Session log ---------- */
+  .log-section {
+    padding: 80px 0;
+    border-top: 1px solid rgba(251,248,243,0.08);
+  }
+  .log-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 32px; gap: 20px; flex-wrap: wrap;
+  }
+  .log-head h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    letter-spacing: -0.02em;
+    color: var(--cream);
+  }
+  .log-head h2 em { font-style: italic; color: var(--amber-soft); }
+  .log-head-right { text-align: right; }
+  .session-dur {
+    font-family: var(--mono); font-size: 24px; font-weight: 500;
+    color: var(--cream); letter-spacing: 0.02em;
+  }
+  .session-dur-lbl {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(251,248,243,0.5);
+    margin-top: 2px;
+  }
+
+  .log-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .log-card {
+    background: rgba(251,248,243,0.04);
+    border: 1px solid rgba(251,248,243,0.08);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .log-card h4 {
+    font-size: 17px;
+    color: var(--cream);
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Event log */
+  .event-list {
+    display: flex; flex-direction: column;
+    gap: 2px;
+  }
+  .event-item {
+    display: grid;
+    grid-template-columns: 60px 20px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(251,248,243,0.06);
+    align-items: flex-start;
+  }
+  .event-item:last-child { border-bottom: none; }
+  .event-time {
+    font-family: var(--mono); font-size: 11.5px;
+    color: rgba(251,248,243,0.45);
+    padding-top: 2px;
+  }
+  .event-icon {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(13,158,120,0.2);
+    color: #5DCAA5;
+    display: grid; place-items: center;
+    font-size: 10px; font-weight: 600;
+    margin-top: 1px;
+  }
+  .event-icon.warn { background: rgba(232,149,10,0.2); color: var(--amber-soft); }
+  .event-icon.alert { background: rgba(201,79,63,0.2); color: #E9927F; }
+  .event-icon.info { background: rgba(251,248,243,0.1); color: rgba(251,248,243,0.7); }
+  .event-text {
+    font-size: 13.5px;
+    color: rgba(251,248,243,0.8);
+    line-height: 1.5;
+  }
+  .event-text strong { color: var(--cream); font-weight: 500; }
+  .event-text em { font-style: italic; color: var(--amber-soft); font-family: var(--serif); }
+
+  /* Timeline chart */
+  .timeline-chart {
+    height: 140px;
+    display: flex; align-items: flex-end;
+    gap: 4px;
+    padding: 12px 0;
+    margin-bottom: 12px;
+  }
+  .tc-bar {
+    flex: 1;
+    background: var(--teal);
+    border-radius: 3px 3px 0 0;
+    min-height: 4px;
+    transition: background .4s;
+  }
+  .tc-bar.tired { background: var(--amber); }
+  .tc-bar.critical { background: var(--coral); }
+  .tc-bar.current {
+    box-shadow: 0 0 0 2px rgba(251,248,243,0.2);
+  }
+  .tc-axis {
+    display: flex; justify-content: space-between;
+    font-size: 10.5px;
+    color: rgba(251,248,243,0.4);
+    font-family: var(--mono);
+  }
+
+  /* ---------- Exercise overlay ---------- */
+  .exercise-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(8,27,49,0.9);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .exercise-overlay.show { display: flex; }
+  .exercise-card {
+    background: linear-gradient(180deg, #12335A 0%, #0A2540 100%);
+    border: 1px solid rgba(251,248,243,0.15);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 440px; width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .exercise-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(251,248,243,0.06);
+    border: 1px solid rgba(251,248,243,0.12);
+    color: var(--cream);
+    font-size: 16px;
+    transition: all .2s;
+  }
+  .exercise-close:hover { background: rgba(251,248,243,0.12); }
+  .ex-ico {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(13,158,120,0.15);
+    border: 1px solid rgba(13,158,120,0.3);
+    display: grid; place-items: center;
+    margin: 0 auto 20px;
+    font-size: 36px;
+    animation: breathe 4s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100% { transform: scale(1); background: rgba(13,158,120,0.15); }
+    50% { transform: scale(1.12); background: rgba(13,158,120,0.22); }
+  }
+  .exercise-card h3 {
+    font-size: 26px;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .exercise-card h3 em { font-style: italic; color: var(--amber-soft); }
+  .exercise-card p {
+    font-family: var(--serif); font-style: italic;
+    color: rgba(251,248,243,0.7);
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+  .breath-phase {
+    font-family: var(--serif); font-size: 32px; font-weight: 600;
+    color: var(--cream); margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    min-height: 42px;
+    transition: color .4s;
+  }
+  .breath-phase.inhale { color: var(--teal); }
+  .breath-phase.hold { color: var(--amber-soft); }
+  .breath-phase.exhale { color: #E9927F; }
+  .breath-count {
+    font-family: var(--mono); font-size: 48px; font-weight: 500;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  /* ---------- Features at bottom ---------- */
+  .features-bottom {
+    padding: 100px 0;
+    border-top: 1px solid rgba(251,248,243,0.08);
+  }
+  .features-bottom h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    max-width: 680px;
+  }
+  .features-bottom h2 em { font-style: italic; color: var(--teal); }
+  .features-bottom .intro {
+    color: rgba(251,248,243,0.65);
+    font-size: 16px;
+    max-width: 560px;
+    margin-bottom: 56px;
+    line-height: 1.7;
+  }
+  .features-bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .feat-item {
+    background: rgba(251,248,243,0.03);
+    border: 1px solid rgba(251,248,243,0.08);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    transition: all .25s;
+  }
+  .feat-item:hover {
+    border-color: rgba(13,158,120,0.3);
+    background: rgba(13,158,120,0.04);
+  }
+  .feat-item .num {
+    font-family: var(--serif); font-style: italic;
+    color: var(--amber-soft); font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .feat-item h4 {
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .feat-item p {
+    color: rgba(251,248,243,0.65);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  /* ---------- Footer override (dark page) ---------- */
+  footer { margin-top: 0; border-top: 1px solid rgba(251,248,243,0.08); }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .demo-grid { grid-template-columns: 1fr; }
+    .log-grid { grid-template-columns: 1fr; }
+    .features-bottom-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .quick-actions, .metrics-row { grid-template-columns: 1fr; }
+    .features-bottom-grid { grid-template-columns: 1fr; }
+    .avatar-stage { width: 180px; height: 180px; }
+    .avatar-svg { width: 130px; height: 130px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="GITA_Landing.html" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <a href="kurslar.html">Kurslar</a>
+        <a href="GITA_Landing.html#mentorlar">Mentorlar</a>
+        <a href="kognitiv.html" class="active">Kognitiv AI</a>
+        <a href="GITA_Landing.html#texnologiya">Texnologiya</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="auth.html" class="btn-primary"><span class="lbl">Ro'yxatdan o'tish</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="kog-hero">
+    <div class="container">
+      <div class="breadcrumb reveal">
+        <a href="GITA_Landing.html">Bosh sahifa</a>
+        <span class="sep">/</span>
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <span class="sep">/</span>
+        <span class="current">Kognitiv Yordamchi</span>
+      </div>
+
+      <div class="eyebrow reveal">
+        <span class="pulse" aria-hidden="true"></span>
+        Modul 04 · Jonli demo
+      </div>
+
+      <h1 class="reveal" data-delay="1">
+        Charchoqni <em>sezadi,</em><br>tanaffusni <em>taklif qiladi.</em>
+      </h1>
+
+      <p class="lead reveal" data-delay="2">
+        Webcam orqali mimika, ko'z harakati va diqqat holatini kuzatadi. Barcha tahlil <strong style="color:var(--cream)">qurilmada, real-vaqtda</strong> — hech qanday video serverga chiqmaydi.
+      </p>
+
+      <div class="privacy-notice reveal" data-delay="3">
+        <span aria-hidden="true">🔒</span>
+        <span>Video sizning qurilmangizdan hech qayerga yuborilmaydi. Faqat raqam metrikalar — shunda ham sizning roziligingiz bilan.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO STAGE ============ -->
+  <section class="demo-stage">
+    <div class="container">
+      <div class="demo-grid">
+
+        <!-- LEFT: Camera panel -->
+        <div class="camera-panel reveal">
+          <div class="cam-head">
+            <div class="cam-title">
+              <span class="cam-dot off" id="camDot"></span>
+              <span>Kamera tahlili</span>
+            </div>
+            <div class="cam-status" id="camStatus">Kutish rejimida</div>
+          </div>
+
+          <div class="cam-view" id="camView">
+            <div class="placeholder" id="camPlaceholder">
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="6" y="14" width="40" height="28" rx="4"/>
+                <circle cx="26" cy="28" r="7"/>
+                <path d="M18 14 l4 -6 h8 l4 6"/>
+                <circle cx="38" cy="21" r="1" fill="currentColor"/>
+              </svg>
+              <div class="title">Kamera o'chirilgan</div>
+              <div class="sub">Yoqish uchun pastdagi tugmani bosing. Istalgan vaqtda o'chirib qo'yish mumkin.</div>
+            </div>
+            <video id="camVideo" autoplay muted playsinline style="display:none"></video>
+            <div class="cam-overlay" id="camOverlay">
+              <div class="face-label">Yuz aniqlandi</div>
+              <div class="face-box"></div>
+            </div>
+          </div>
+
+          <div class="cam-controls">
+            <button class="cam-btn primary" id="camToggle" onclick="toggleCamera()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><circle cx="7" cy="7" r="3"/></svg>
+              <span id="camToggleLabel">Kamerani yoqish</span>
+            </button>
+            <button class="cam-btn" onclick="document.getElementById('simActive').click()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7l4 4 6-8"/></svg>
+              <span>Demo rejim</span>
+            </button>
+          </div>
+
+          <div class="metrics-row">
+            <div class="metric-box">
+              <div class="metric-label">FPS</div>
+              <div class="metric-value"><span class="ok" id="mFps">—</span></div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Protsessor</div>
+              <div class="metric-value"><span id="mCpu">—</span></div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Aniqlik</div>
+              <div class="metric-value"><span id="mAcc">—</span></div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Model</div>
+              <div class="metric-value" style="font-size:12px">MediaPipe</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: State panel -->
+        <div class="state-panel reveal" data-delay="1">
+
+          <!-- Avatar -->
+          <div class="avatar-stage">
+            <div class="avatar-ring" id="avatarRing" aria-hidden="true"></div>
+            <svg class="avatar-svg" id="avatarSvg" viewBox="0 0 100 100" aria-hidden="true">
+              <!-- head -->
+              <circle id="avHead" cx="50" cy="38" r="18" fill="#0D9E78" style="transition:fill .6s"/>
+              <!-- eyes -->
+              <circle id="avEyeL" cx="44" cy="36" r="2" fill="#0A2540"/>
+              <circle id="avEyeR" cx="56" cy="36" r="2" fill="#0A2540"/>
+              <!-- brows -->
+              <path id="avBrowL" d="M 40 31 L 48 31" stroke="#0A2540" stroke-width="1.5" stroke-linecap="round"/>
+              <path id="avBrowR" d="M 52 31 L 60 31" stroke="#0A2540" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- mouth -->
+              <path id="avMouth" d="M 44 46 Q 50 50 56 46" stroke="#0A2540" stroke-width="1.8" fill="none" stroke-linecap="round" style="transition:d .6s"/>
+              <!-- shoulders -->
+              <path d="M 22 92 Q 50 66 78 92 Z" fill="#0D9E78" opacity="0.9" id="avBody" style="transition:fill .6s"/>
+            </svg>
+          </div>
+
+          <!-- Badge -->
+          <div class="state-badge" id="stateBadge" style="align-self:center">
+            <span class="dot-st" aria-hidden="true"></span>
+            <span id="stateLabel">Faol va diqqatli</span>
+          </div>
+
+          <!-- Bars -->
+          <div class="signals-bars">
+            <div class="bar-row">
+              <span class="lbl">Fokus</span>
+              <div class="bar-track"><div class="bar-fill" id="bar1" style="width:82%; background:var(--teal);"></div></div>
+              <span class="bar-val" id="val1">82%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">Charchoq</span>
+              <div class="bar-track"><div class="bar-fill" id="bar2" style="width:18%; background:var(--amber);"></div></div>
+              <span class="bar-val" id="val2">18%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">Stress</span>
+              <div class="bar-track"><div class="bar-fill" id="bar3" style="width:12%; background:#C94F3F;"></div></div>
+              <span class="bar-val" id="val3">12%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">Nigoh</span>
+              <div class="bar-track"><div class="bar-fill" id="bar4" style="width:94%; background:var(--teal);"></div></div>
+              <span class="bar-val" id="val4">94%</span>
+            </div>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="actions-title">Tavsiyalar</div>
+          <div class="quick-actions">
+            <button class="quick-action" onclick="startExercise('rest')">
+              <span class="q-ico" aria-hidden="true">☕</span>
+              <div class="q-title">5 daqiqa tanaffus</div>
+              <div class="q-sub">ko'z dam oladi</div>
+            </button>
+            <button class="quick-action" onclick="startExercise('breath')">
+              <span class="q-ico" aria-hidden="true">◐</span>
+              <div class="q-title">Nafas mashqi</div>
+              <div class="q-sub">4-7-8 texnikasi</div>
+            </button>
+            <button class="quick-action" onclick="startExercise('focus')">
+              <span class="q-ico" aria-hidden="true">◉</span>
+              <div class="q-title">Fokus mashqi</div>
+              <div class="q-sub">20-20-20 qoidasi</div>
+            </button>
+            <button class="quick-action" onclick="startExercise('stretch')">
+              <span class="q-ico" aria-hidden="true">✦</span>
+              <div class="q-title">Tana cho'zish</div>
+              <div class="q-sub">3 daqiqa</div>
+            </button>
+          </div>
+
+          <!-- State simulation -->
+          <div class="actions-title">Demo · holatni sinab ko'ring</div>
+          <div class="state-sim">
+            <button class="sim-btn active" id="simActive" data-state="active" onclick="setState('active', true)">
+              <span class="ico" aria-hidden="true">◉</span>Faol
+            </button>
+            <button class="sim-btn" data-state="tired" onclick="setState('tired', true)">
+              <span class="ico" aria-hidden="true">◐</span>Charchagan
+            </button>
+            <button class="sim-btn" data-state="critical" onclick="setState('critical', true)">
+              <span class="ico" aria-hidden="true">◎</span>Kritik
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SESSION LOG ============ -->
+  <section class="log-section">
+    <div class="container">
+      <div class="log-head">
+        <div>
+          <span class="sec-eyebrow" style="color:rgba(251,248,243,0.5)">Sessiya ma'lumotlari</span>
+          <h2 style="margin-top:12px">Bu <em>sessiya</em>da nimalar<br>sodir bo'ldi.</h2>
+        </div>
+        <div class="log-head-right">
+          <div class="session-dur" id="sessionDur">00:04:32</div>
+          <div class="session-dur-lbl">Davomiylik</div>
+        </div>
+      </div>
+
+      <div class="log-grid">
+        <!-- Event log -->
+        <div class="log-card">
+          <h4>Voqealar jurnali</h4>
+          <div class="event-list" id="eventList">
+            <div class="event-item">
+              <span class="event-time">00:04:12</span>
+              <span class="event-icon" aria-hidden="true">✓</span>
+              <span class="event-text"><strong>Faol holat tiklandi.</strong> Fokus 82%, charchoq 18%.</span>
+            </div>
+            <div class="event-item">
+              <span class="event-time">00:03:45</span>
+              <span class="event-icon info" aria-hidden="true">◆</span>
+              <span class="event-text">Nafas mashqi bajarildi — <em>"4-7-8 texnikasi"</em>.</span>
+            </div>
+            <div class="event-item">
+              <span class="event-time">00:03:10</span>
+              <span class="event-icon warn" aria-hidden="true">!</span>
+              <span class="event-text"><strong>Yengil charchoq sezildi.</strong> Esnash va ko'z uqalash tezlashdi.</span>
+            </div>
+            <div class="event-item">
+              <span class="event-time">00:01:42</span>
+              <span class="event-icon" aria-hidden="true">✓</span>
+              <span class="event-text">Yuz aniqlandi, tahlil boshlandi. <em>Yaxshi yoritish.</em></span>
+            </div>
+            <div class="event-item">
+              <span class="event-time">00:00:00</span>
+              <span class="event-icon info" aria-hidden="true">◆</span>
+              <span class="event-text">Sessiya boshlandi. MediaPipe modeli yuklandi (48ms).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline chart -->
+        <div class="log-card">
+          <h4>Fokus darajasi — so'nggi 5 daqiqa</h4>
+          <div class="timeline-chart" id="timelineChart" role="img" aria-label="Fokus darajasi grafigi">
+            <!-- Filled by JS -->
+          </div>
+          <div class="tc-axis">
+            <span>5m oldin</span>
+            <span>4m</span>
+            <span>3m</span>
+            <span>2m</span>
+            <span>1m</span>
+            <span>hozir</span>
+          </div>
+
+          <div style="margin-top:22px; padding-top:22px; border-top:1px solid rgba(251,248,243,0.08)">
+            <div style="display:flex;gap:20px;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(251,248,243,0.7)">
+                <span style="width:10px;height:10px;border-radius:2px;background:var(--teal)"></span>
+                Faol
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(251,248,243,0.7)">
+                <span style="width:10px;height:10px;border-radius:2px;background:var(--amber)"></span>
+                Charchoq
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(251,248,243,0.7)">
+                <span style="width:10px;height:10px;border-radius:2px;background:var(--coral)"></span>
+                Kritik
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features-bottom">
+    <div class="container">
+      <span class="sec-eyebrow reveal" style="color:rgba(251,248,243,0.5)">Asosiy tamoyillar</span>
+      <h2 class="reveal" style="margin-top:12px">Kuchli <em>model,</em><br>yengil <em>qo'llanish.</em></h2>
+      <p class="intro reveal" data-delay="1">
+        Kognitiv Yordamchi — bu AI tomonidan sizni boshqarish emas. Aksincha, u sizga o'z tanangizni yaxshiroq eshitishga yordam beradi. Va istalgan vaqtda o'chirib qo'ysa bo'ladi.
+      </p>
+
+      <div class="features-bottom-grid">
+        <div class="feat-item reveal" data-delay="1">
+          <div class="num">01</div>
+          <h4>Qurilmada ishlaydi</h4>
+          <p>MediaPipe va TensorFlow.js bilan brauzerda. Video oqim hech qanday serverga chiqmaydi — faqat tahlil natijasidagi sonlar (sizning tasdig'ingizda).</p>
+        </div>
+        <div class="feat-item reveal" data-delay="2">
+          <div class="num">02</div>
+          <h4>Yumshoq signallar</h4>
+          <p>Qo'rqitadigan ogohlantirishlar yo'q. Rang sekin o'zgaradi, matn iltifot ohangida, tovush jim. Autizm spektridagi talabalar uchun maxsus rejim.</p>
+        </div>
+        <div class="feat-item reveal" data-delay="3">
+          <div class="num">03</div>
+          <h4>Talaba boshqaradi</h4>
+          <p>Hech qanday majburiyat yo'q. Har doim "Hozir ko'r emas" tugmasi bor. Barcha ma'lumotlar — sizniki va siz ularni istalgan vaqt o'chirib tashlashingiz mumkin.</p>
+        </div>
+        <div class="feat-item reveal" data-delay="1">
+          <div class="num">04</div>
+          <h4>Adaptive pacing</h4>
+          <p>Charchagan vaqt ma'ruza sekinlashadi. Diqqat yaxshi bo'lsa — chuqur mavzular. Platforma siz bilan birga nafas oladi.</p>
+        </div>
+        <div class="feat-item reveal" data-delay="2">
+          <div class="num">05</div>
+          <h4>Inklyuzivlik markazida</h4>
+          <p>Ko'zi ojizlar uchun audio signallar. Harakatlanish qiyinchilik uchun ovoz orqali boshqarish. Avtizm uchun oldindan aytish.</p>
+        </div>
+        <div class="feat-item reveal" data-delay="3">
+          <div class="num">06</div>
+          <h4>Ochiq tadqiqot</h4>
+          <p>Algoritm kodi ochiq. Model fayli ochiq. Tahlil usuli ochiq. Siz nima ko'rilganini va nima qanday hisoblanganini aniq bilasiz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ EXERCISE OVERLAY ============ -->
+<div class="exercise-overlay" id="exerciseOverlay" role="dialog" aria-modal="true" aria-labelledby="exTitle">
+  <div class="exercise-card">
+    <button class="exercise-close" onclick="closeExercise()" aria-label="Yopish">×</button>
+    <div class="ex-ico" aria-hidden="true" id="exIco">◐</div>
+    <h3 id="exTitle"><em>Nafas</em> mashqi</h3>
+    <p id="exSub">4 soniya ichga · 7 soniya ushlab · 8 soniya tashqariga</p>
+
+    <div class="breath-phase" id="breathPhase">Tayyorlaning…</div>
+    <div class="breath-count" id="breathCount">3</div>
+
+    <button class="btn-ghost" onclick="closeExercise()" style="color:var(--cream);border-color:rgba(251,248,243,0.2)">
+      Tugatish
+    </button>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="GITA_Landing.html" class="brand">
+          <span class="brand-mark">G</span>
+          <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+        </a>
+        <p>Ta'limdagi to'siqlarni olib tashlash — bu imkoniyatni ko'paytirishdir.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="GitHub">GH</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Modullar</h5>
+        <ul>
+          <li><a href="modul.html">Aqlli Ma'ruza</a></li>
+          <li><a href="mentor.html">Virtual Mentor</a></li>
+          <li><a href="#">Hamkorlik Lab</a></li>
+          <li><a href="kognitiv.html">Kognitiv AI</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Texnologiya</h5>
+        <ul><li><a href="#">MediaPipe</a></li><li><a href="#">TensorFlow.js</a></li><li><a href="#">Ochiq model</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Maxfiylik</h5>
+        <ul><li><a href="#">Siyosat</a></li><li><a href="#">Ma'lumotlar</a></li><li><a href="#">GDPR</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Yordam</h5>
+        <ul><li><a href="#">FAQ</a></li><li><a href="#">Hujjatlar</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 GITA — Global Inklyuziv Ta'lim Kampusi</span>
+      <span class="wcag">Muvofiqlik: <span class="badge-w">WCAG 2.1 AA</span> <span class="badge-w">GDPR</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== SHARED INTERACTIONS (from gita-shared.js) ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+<script>
+/* ============ State machine ============ */
+const STATES = {
+  active:   { focus:82, fatigue:18, stress:12, gaze:94, ringColor:'teal',   head:'#0D9E78', body:'#0D9E78', mouth: 'M 44 46 Q 50 50 56 46', browY: 31, label: 'Faol va diqqatli' },
+  tired:    { focus:48, fatigue:72, stress:34, gaze:58, ringColor:'tired',   head:'#E8950A', body:'#C58500', mouth: 'M 44 48 Q 50 46 56 48', browY: 32, label: 'Charchoq sezildi' },
+  critical: { focus:22, fatigue:88, stress:78, gaze:24, ringColor:'critical',head:'#C94F3F', body:'#A33C2C', mouth: 'M 44 50 Q 50 44 56 50', browY: 33, label: 'Tanaffus zarur' }
+};
+
+let currentState = 'active';
+let userOverride = false;
+
+function setState(state, fromUser){
+  if (fromUser) userOverride = true;
+  const s = STATES[state];
+  currentState = state;
+
+  // Bars
+  document.getElementById('bar1').style.width = s.focus + '%';
+  document.getElementById('val1').textContent = s.focus + '%';
+  document.getElementById('bar2').style.width = s.fatigue + '%';
+  document.getElementById('val2').textContent = s.fatigue + '%';
+  document.getElementById('bar3').style.width = s.stress + '%';
+  document.getElementById('val3').textContent = s.stress + '%';
+  document.getElementById('bar4').style.width = s.gaze + '%';
+  document.getElementById('val4').textContent = s.gaze + '%';
+
+  // Bar colors
+  const bar2 = document.getElementById('bar2');
+  bar2.style.background = s.fatigue > 60 ? 'var(--coral)' : s.fatigue > 40 ? 'var(--amber)' : '#5DCAA5';
+  const bar3 = document.getElementById('bar3');
+  bar3.style.background = s.stress > 60 ? 'var(--coral)' : s.stress > 40 ? 'var(--amber)' : '#5DCAA5';
+  const bar1 = document.getElementById('bar1');
+  bar1.style.background = s.focus > 60 ? 'var(--teal)' : s.focus > 40 ? 'var(--amber)' : 'var(--coral)';
+  const bar4 = document.getElementById('bar4');
+  bar4.style.background = s.gaze > 60 ? 'var(--teal)' : s.gaze > 40 ? 'var(--amber)' : 'var(--coral)';
+
+  // Avatar
+  document.getElementById('avHead').setAttribute('fill', s.head);
+  document.getElementById('avBody').setAttribute('fill', s.body);
+  document.getElementById('avMouth').setAttribute('d', s.mouth);
+  document.getElementById('avBrowL').setAttribute('d', `M 40 ${s.browY} L 48 ${s.browY}`);
+  document.getElementById('avBrowR').setAttribute('d', `M 52 ${s.browY} L 60 ${s.browY}`);
+
+  const svg = document.getElementById('avatarSvg');
+  svg.classList.remove('tired', 'critical');
+  if (state !== 'active') svg.classList.add(state);
+
+  // Ring
+  const ring = document.getElementById('avatarRing');
+  ring.classList.remove('tired','critical');
+  if (state !== 'active') ring.classList.add(state);
+
+  // Badge
+  const badge = document.getElementById('stateBadge');
+  badge.classList.remove('tired','critical');
+  if (state !== 'active') badge.classList.add(state);
+  document.getElementById('stateLabel').textContent = s.label;
+
+  // Sim buttons
+  document.querySelectorAll('.sim-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.state === state);
+  });
+}
+
+/* Initial state */
+setState('active', false);
+
+/* Auto-cycle if no user override */
+let autoStates = ['active', 'active', 'tired', 'active', 'tired', 'critical', 'tired', 'active'];
+let autoIdx = 0;
+setInterval(() => {
+  if (userOverride) return;
+  autoIdx = (autoIdx + 1) % autoStates.length;
+  setState(autoStates[autoIdx], false);
+}, 6500);
+
+/* ============ Camera ============ */
+let stream = null;
+async function toggleCamera() {
+  const video = document.getElementById('camVideo');
+  const placeholder = document.getElementById('camPlaceholder');
+  const overlay = document.getElementById('camOverlay');
+  const camDot = document.getElementById('camDot');
+  const camStatus = document.getElementById('camStatus');
+  const toggleLabel = document.getElementById('camToggleLabel');
+  const toggleBtn = document.getElementById('camToggle');
+
+  if (stream) {
+    // Turn off
+    stream.getTracks().forEach(t => t.stop());
+    stream = null;
+    video.style.display = 'none';
+    placeholder.style.display = '';
+    overlay.classList.remove('active');
+    camDot.classList.add('off');
+    camStatus.textContent = 'Kutish rejimida';
+    toggleLabel.textContent = 'Kamerani yoqish';
+    toggleBtn.classList.add('primary');
+    toggleBtn.classList.remove('danger');
+    // Clear metrics
+    document.getElementById('mFps').textContent = '—';
+    document.getElementById('mCpu').textContent = '—';
+    document.getElementById('mAcc').textContent = '—';
+    return;
+  }
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { width: 480, height: 360, facingMode: 'user' }, audio: false });
+    video.srcObject = stream;
+    video.style.display = '';
+    placeholder.style.display = 'none';
+    camDot.classList.remove('off');
+    camStatus.textContent = 'Yuz aniqlanmoqda…';
+    toggleLabel.textContent = 'Kamerani o\'chirish';
+    toggleBtn.classList.remove('primary');
+    toggleBtn.classList.add('danger');
+
+    setTimeout(() => {
+      overlay.classList.add('active');
+      camStatus.textContent = 'Faol · yuz aniqlandi';
+      document.getElementById('mFps').innerHTML = '<span class="ok">30</span> · fps';
+      document.getElementById('mCpu').textContent = '12%';
+      document.getElementById('mAcc').innerHTML = '<span class="ok">98.4%</span>';
+    }, 900);
+  } catch (err) {
+    alert('Kamera ruxsati berilmadi yoki qurilma topilmadi.\n\nDemo rejimini ishlatib ko\'ring — pastdagi "Demo rejim" tugmasini bosing.');
+  }
+}
+
+/* ============ Exercise overlay ============ */
+const EXERCISES = {
+  rest:    { ico: '☕', title: '5 daqiqa <em>dam olish</em>', sub: 'Ko\'zlarni yumib, qo\'llarni yelkalarga qo\'ying. 5 daqiqa o\'tgandan keyin davom eting.', sequence: [{label:'Yumshoq nafas oling', dur: 300, cls:'inhale'}] },
+  breath:  { ico: '◐', title: '<em>Nafas</em> mashqi', sub: '4 soniya ichga · 7 soniya ushlab · 8 soniya tashqariga · 4 marta takrorlang', cycle: true, sequence: [
+    { label: 'Nafas oling', dur: 4, cls: 'inhale' },
+    { label: 'Ushlab turing', dur: 7, cls: 'hold' },
+    { label: 'Tashqari chiqaring', dur: 8, cls: 'exhale' }
+  ], repeat: 4 },
+  focus:   { ico: '◉', title: '<em>Fokus</em> mashqi', sub: '20 soniya uzoqqa qarang · 20 soniya yumib oching · 20 soniya yana uzoqqa', sequence: [
+    { label: 'Uzoqqa qarang', dur: 20, cls: 'inhale' },
+    { label: "Yumib oching", dur: 20, cls: 'hold' },
+    { label: 'Yana uzoqqa', dur: 20, cls: 'exhale' }
+  ]},
+  stretch: { ico: '✦', title: 'Tana <em>cho\'zish</em>', sub: 'O\'rningizdan turing, yelkalarni aylantiring, bo\'ynni sekin cho\'zing.', sequence: [
+    { label: 'Boshni o\'ngga', dur: 10, cls: 'inhale' },
+    { label: 'Boshni chapga', dur: 10, cls: 'hold' },
+    { label: 'Yelkalarni aylantiring', dur: 30, cls: 'exhale' }
+  ]}
+};
+
+let exTimer = null;
+function startExercise(type){
+  const ex = EXERCISES[type];
+  const overlay = document.getElementById('exerciseOverlay');
+  document.getElementById('exIco').textContent = ex.ico;
+  document.getElementById('exTitle').innerHTML = ex.title;
+  document.getElementById('exSub').textContent = ex.sub;
+  overlay.classList.add('show');
+
+  let seqIdx = 0;
+  let count = ex.sequence[0].dur;
+  let repeatCount = 0;
+
+  const updatePhase = () => {
+    const phase = ex.sequence[seqIdx];
+    const phaseEl = document.getElementById('breathPhase');
+    phaseEl.textContent = phase.label;
+    phaseEl.classList.remove('inhale','hold','exhale');
+    phaseEl.classList.add(phase.cls);
+  };
+  updatePhase();
+
+  const tick = () => {
+    document.getElementById('breathCount').textContent = count;
+    count--;
+    if (count < 0) {
+      seqIdx++;
+      if (seqIdx >= ex.sequence.length) {
+        if (ex.cycle && ++repeatCount < ex.repeat) {
+          seqIdx = 0;
+        } else {
+          document.getElementById('breathPhase').textContent = 'Ajoyib ish!';
+          document.getElementById('breathCount').textContent = '✓';
+          clearInterval(exTimer);
+          return;
+        }
+      }
+      count = ex.sequence[seqIdx].dur;
+      updatePhase();
+    }
+  };
+  tick();
+  exTimer = setInterval(tick, 1000);
+}
+
+function closeExercise(){
+  if (exTimer) clearInterval(exTimer);
+  exTimer = null;
+  document.getElementById('exerciseOverlay').classList.remove('show');
+}
+
+/* ============ Session duration ============ */
+let sessionStart = Date.now();
+setInterval(() => {
+  const diff = Math.floor((Date.now() - sessionStart) / 1000);
+  const pad = n => String(n).padStart(2,'0');
+  const h = Math.floor(diff / 3600);
+  const m = Math.floor((diff % 3600) / 60);
+  const s = diff % 60;
+  document.getElementById('sessionDur').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+}, 1000);
+
+/* ============ Timeline chart ============ */
+(function() {
+  const chart = document.getElementById('timelineChart');
+  const bars = 40;
+  const states = [];
+  for (let i = 0; i < bars; i++) {
+    const r = Math.random();
+    if (i < 5 || (i > 10 && i < 16)) states.push({ type: 'active', h: 70 + Math.random() * 25 });
+    else if (i < 8 || (i > 23 && i < 28)) states.push({ type: 'tired', h: 35 + Math.random() * 20 });
+    else if (i > 17 && i < 22) states.push({ type: 'critical', h: 10 + Math.random() * 15 });
+    else states.push({ type: 'active', h: 55 + Math.random() * 30 });
+  }
+  chart.innerHTML = '';
+  states.forEach((s, i) => {
+    const b = document.createElement('div');
+    b.className = `tc-bar ${s.type}${i === bars - 1 ? ' current' : ''}`;
+    b.style.height = s.h + '%';
+    b.setAttribute('aria-hidden', 'true');
+    chart.appendChild(b);
+  });
+})();
+
+/* Eye blinking */
+(function(){
+  const eyeL = document.getElementById('avEyeL');
+  const eyeR = document.getElementById('avEyeR');
+  setInterval(() => {
+    const duration = currentState === 'active' ? 150 : currentState === 'tired' ? 300 : 500;
+    eyeL.setAttribute('r', 0.5); eyeR.setAttribute('r', 0.5);
+    setTimeout(() => { eyeL.setAttribute('r', 2); eyeR.setAttribute('r', 2); }, duration);
+  }, currentState === 'active' ? 4000 : currentState === 'tired' ? 2500 : 1800);
+})();
+</script>
+</body>
+</html>

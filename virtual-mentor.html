@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Virtual Mentor · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="Virtual Mentor — sun'iy intellekt asosidagi shaxsiy o'qituvchi. Har kim uchun, har vaqt, har usulda." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ VIRTUAL MENTOR PAGE ============ */
+
+  /* ---------- Hero ---------- */
+  .vm-hero {
+    padding: 50px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .vm-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(232,149,10,0.1), transparent 45%),
+      radial-gradient(circle at 10% 80%, rgba(13,158,120,0.08), transparent 40%);
+    pointer-events: none;
+  }
+  .vm-hero .container { position: relative; }
+
+  .vm-hero-meta-row {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 22px;
+  }
+  .vm-module-num {
+    font-family: var(--serif); font-weight: 600; font-style: italic;
+    color: var(--muted); font-size: 14px;
+  }
+  .vm-module-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(232,149,10,0.1);
+    border: 1px solid rgba(232,149,10,0.28);
+    font-size: 12px; font-weight: 500;
+    color: #B26E00;
+    letter-spacing: 0.04em;
+  }
+
+  .vm-hero h1 {
+    font-size: clamp(44px, 5.5vw, 72px);
+    letter-spacing: -0.025em;
+    line-height: 1.06;
+    margin-bottom: 16px;
+    max-width: 900px;
+  }
+  .vm-hero h1 em {
+    font-style: italic; color: var(--teal-deep);
+    position: relative; white-space: nowrap;
+  }
+  .vm-hero h1 em::after {
+    content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 12px;
+    background: var(--amber-soft); opacity: 0.5; z-index: -1;
+    border-radius: 4px; transform: skew(-8deg);
+  }
+  .vm-hero .subtitle {
+    font-family: var(--serif); font-style: italic;
+    font-size: 20px; color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .vm-hero .lead {
+    font-size: 17px; line-height: 1.65;
+    color: var(--navy-ink);
+    max-width: 680px;
+    margin-bottom: 20px;
+  }
+
+  /* ---------- Chat layout ---------- */
+  .chat-section {
+    padding: 20px 0 100px;
+  }
+  .chat-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 280px;
+    gap: 24px;
+    min-height: 680px;
+  }
+
+  /* Left: Persona sidebar */
+  .personas {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .personas-head {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 14px;
+  }
+  .personas-head h4 {
+    font-size: 15px; letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .personas-head h4 em { font-style: italic; color: var(--teal-deep); }
+  .personas-head p {
+    font-size: 12px; color: var(--muted);
+    font-family: var(--serif); font-style: italic;
+  }
+  .persona-list {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0 -6px;
+    padding: 0 6px;
+    display: flex; flex-direction: column;
+    gap: 6px;
+  }
+  .persona-item {
+    padding: 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex; gap: 12px; align-items: flex-start;
+    border: 1px solid transparent;
+  }
+  .persona-item:hover { background: var(--cream-2); }
+  .persona-item.active {
+    background: rgba(13,158,120,0.06);
+    border-color: rgba(13,158,120,0.25);
+  }
+  .persona-av {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 14px;
+    color: #fff;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .persona-av::after {
+    content: ''; position: absolute;
+    right: -2px; bottom: -2px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid #fff;
+  }
+  .persona-item:nth-child(1) .persona-av { background: var(--teal); }
+  .persona-item:nth-child(2) .persona-av { background: #2D6E8C; }
+  .persona-item:nth-child(3) .persona-av { background: var(--amber); color: var(--navy); }
+  .persona-item:nth-child(4) .persona-av { background: #7B4B94; }
+  .persona-item:nth-child(5) .persona-av { background: var(--coral); }
+  .persona-item:nth-child(6) .persona-av { background: #1D4E6F; }
+  .persona-body { flex: 1; min-width: 0; }
+  .persona-name {
+    font-size: 14px; font-weight: 500;
+    color: var(--navy-ink);
+    margin-bottom: 2px;
+  }
+  .persona-role {
+    font-size: 12px; color: var(--muted);
+    font-family: var(--serif); font-style: italic;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .persona-item.active .persona-name { color: var(--teal-deep); }
+
+  .persona-plus {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .persona-plus-btn {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: transparent;
+    border: 1px dashed var(--line-strong);
+    font-size: 13px; color: var(--muted);
+    transition: all .2s;
+    cursor: pointer;
+  }
+  .persona-plus-btn:hover { border-color: var(--teal); color: var(--teal-deep); }
+
+  /* Center: Chat window */
+  .chat-window {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .chat-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 14px;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+  }
+  .chat-header-av {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--teal); color: #fff;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 16px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .chat-header-av::after {
+    content: '';
+    position: absolute; inset: -3px; border-radius: 14px;
+    border: 1.5px dashed rgba(13,158,120,0.4);
+    animation: rotate 12s linear infinite;
+  }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+  .chat-header-info { flex: 1; min-width: 0; }
+  .chat-header-name {
+    font-family: var(--serif); font-size: 17px; font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .chat-header-name em { font-style: italic; color: var(--teal-deep); }
+  .chat-header-role {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12.5px; color: var(--muted);
+  }
+  .chat-status-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+    animation: pulse 2s ease-out infinite;
+  }
+  .chat-header-actions {
+    display: flex; gap: 6px;
+  }
+  .chat-action-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .chat-action-btn:hover { border-color: var(--navy); color: var(--navy-ink); background: #fff; }
+
+  /* Messages area */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px 24px;
+    display: flex; flex-direction: column;
+    gap: 22px;
+    min-height: 400px;
+  }
+
+  .msg {
+    display: flex; gap: 12px;
+    max-width: 80%;
+    animation: msgIn .35s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+  .msg-av {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 12px; color: #fff;
+    flex-shrink: 0;
+  }
+  .msg.bot .msg-av { background: var(--teal); }
+  .msg.user .msg-av { background: var(--navy); }
+
+  .msg-body { min-width: 0; }
+  .msg-bubble {
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14.5px; line-height: 1.6;
+    color: var(--navy-ink);
+  }
+  .msg.bot .msg-bubble {
+    background: var(--cream-2);
+    border-bottom-left-radius: 4px;
+  }
+  .msg.user .msg-bubble {
+    background: var(--navy);
+    color: var(--cream);
+    border-bottom-right-radius: 4px;
+  }
+  .msg-bubble strong { font-weight: 600; }
+  .msg-bubble em {
+    font-family: var(--serif); font-style: italic;
+    color: var(--teal-deep);
+  }
+  .msg.user .msg-bubble em { color: var(--amber-soft); }
+
+  .msg-bubble code {
+    font-family: var(--mono); font-size: 12.5px;
+    background: rgba(10,37,64,0.06);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .msg.user .msg-bubble code {
+    background: rgba(251,248,243,0.15);
+    color: var(--cream);
+  }
+
+  .msg-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    padding: 0 4px;
+    display: flex; gap: 8px;
+  }
+  .msg.user .msg-meta { justify-content: flex-end; }
+  .msg-meta .read { color: var(--teal); }
+
+  /* Actions inside bot messages */
+  .msg-actions {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .msg-action {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(10,37,64,0.05);
+    border: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--navy-ink);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .msg-action:hover { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+
+  /* Media blocks in messages */
+  .msg-media {
+    margin-top: 10px;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .msg-media-label {
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .msg-media-label::before { content: ''; width: 16px; height: 1px; background: currentColor; opacity: 0.5; }
+  .msg-media-braille {
+    font-family: var(--mono); font-size: 20px;
+    letter-spacing: 0.12em;
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* Typing indicator */
+  .msg-typing {
+    display: flex; gap: 3px; padding: 4px 0;
+  }
+  .msg-typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--muted);
+    animation: typing 1.4s infinite ease-in-out;
+  }
+  .msg-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .msg-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  /* Input area */
+  .chat-input-wrap {
+    padding: 18px 20px 20px;
+    border-top: 1px solid var(--line);
+    background: var(--cream);
+  }
+  .chat-quick-chips {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .quick-chip {
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12.5px;
+    color: var(--navy-ink);
+    cursor: pointer;
+    transition: all .15s;
+    font-family: var(--sans);
+  }
+  .quick-chip:hover { border-color: var(--teal); color: var(--teal-deep); }
+
+  .chat-input-row {
+    display: flex; gap: 10px; align-items: flex-end;
+    background: #fff;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 18px;
+    padding: 8px 8px 8px 16px;
+    transition: border-color .2s;
+  }
+  .chat-input-row:focus-within {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(13,158,120,0.1);
+  }
+  .chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    background: transparent;
+    font: inherit;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--navy-ink);
+    padding: 10px 0;
+    max-height: 120px;
+    min-height: 24px;
+    font-family: var(--sans);
+  }
+  .chat-input::placeholder { color: rgba(10,37,64,0.4); }
+
+  .chat-input-tools {
+    display: flex; gap: 4px;
+  }
+  .tool-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .tool-btn:hover { background: var(--cream-2); color: var(--navy-ink); }
+  .tool-btn.active { color: var(--teal-deep); background: rgba(13,158,120,0.1); }
+
+  .send-btn {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--teal);
+    color: #fff;
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .send-btn:hover { background: var(--teal-deep); }
+  .send-btn:disabled { background: var(--cream-3); color: var(--muted); cursor: not-allowed; }
+
+  /* Right: Info sidebar */
+  .chat-info {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .info-card h4 {
+    font-size: 14px; letter-spacing: -0.005em;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .info-card h4 em { font-style: italic; color: var(--teal-deep); font-weight: 400; }
+
+  /* Memory card */
+  .memory-list {
+    display: flex; flex-direction: column;
+    gap: 4px;
+    margin: 0 -4px;
+  }
+  .memory-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--navy-ink);
+    background: var(--cream-2);
+    line-height: 1.45;
+  }
+  .memory-item em { font-family: var(--serif); font-style: italic; color: var(--teal-deep); }
+  .memory-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* Multi-modal options */
+  .mode-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  }
+  .mode-opt {
+    padding: 10px 8px;
+    border-radius: 10px;
+    background: var(--cream-2);
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+    border: 1px solid transparent;
+  }
+  .mode-opt:hover { background: var(--cream-3); }
+  .mode-opt.active {
+    background: rgba(13,158,120,0.1);
+    border-color: rgba(13,158,120,0.25);
+    color: var(--teal-deep);
+  }
+  .mode-opt .ico { display: block; font-size: 16px; margin-bottom: 3px; }
+  .mode-opt .lbl { font-size: 11px; font-weight: 500; }
+
+  /* Session stats */
+  .session-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .stat-m {
+    text-align: left;
+  }
+  .stat-m .n {
+    font-family: var(--serif); font-weight: 700; font-size: 20px;
+    line-height: 1;
+    color: var(--navy); letter-spacing: -0.02em;
+  }
+  .stat-m .l {
+    font-size: 10.5px; color: var(--muted);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* ---------- Features section ---------- */
+  .vm-features {
+    padding: 100px 0;
+    background: var(--cream-2);
+  }
+  .vm-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .vm-feature {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .vm-feature::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 0%, var(--glow, rgba(13,158,120,0.12)), transparent 55%);
+    opacity: 0; transition: opacity .4s;
+  }
+  .vm-feature:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: transparent; }
+  .vm-feature:hover::before { opacity: 1; }
+  .vm-feature:nth-child(1) { --glow: rgba(13,158,120,0.14); }
+  .vm-feature:nth-child(2) { --glow: rgba(232,149,10,0.16); }
+  .vm-feature:nth-child(3) { --glow: rgba(123,75,148,0.14); }
+  .vm-feature:nth-child(4) { --glow: rgba(45,110,140,0.14); }
+  .vm-feature:nth-child(5) { --glow: rgba(201,79,63,0.14); }
+  .vm-feature:nth-child(6) { --glow: rgba(13,158,120,0.14); }
+
+  .vm-feature .num {
+    font-family: var(--serif); font-style: italic;
+    color: var(--muted); font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .vm-feature h3 {
+    font-size: 22px; letter-spacing: -0.015em;
+    margin-bottom: 12px;
+  }
+  .vm-feature h3 em { font-style: italic; color: var(--teal-deep); }
+  .vm-feature p {
+    font-size: 14.5px; line-height: 1.6; color: var(--muted);
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-band {
+    background: var(--navy);
+    padding: 100px 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(13,158,120,0.15), transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(232,149,10,0.12), transparent 50%);
+  }
+  .cta-band .container { position: relative; text-align: center; }
+  .cta-band h2 {
+    color: var(--cream);
+    font-size: clamp(34px, 4.5vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cta-band h2 em { font-style: italic; color: var(--amber-soft); }
+  .cta-band p {
+    color: rgba(251,248,243,0.7);
+    font-size: 17px;
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1200px) {
+    .chat-layout { grid-template-columns: 260px 1fr; }
+    .chat-info { display: none; }
+  }
+  @media (max-width: 1024px) {
+    .chat-layout { grid-template-columns: 1fr; }
+    .personas { display: none; }
+    .vm-features-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .vm-features-grid { grid-template-columns: 1fr; }
+    .chat-messages { padding: 20px 16px; }
+    .msg { max-width: 90%; }
+    .chat-input-wrap { padding: 14px 14px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="GITA_Landing.html" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small>Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="GITA_Landing.html#modullar" class="active">Modullar</a>
+        <a href="kurslar.html">Kurslar</a>
+        <a href="GITA_Landing.html#mentorlar">Mentorlar</a>
+        <a href="kognitiv.html">Kognitiv AI</a>
+        <a href="haqimizda.html">Haqimizda</a>
+        <a href="aloqa.html">Aloqa</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="auth.html" class="btn-primary"><span class="lbl">Ro'yxatdan o'tish</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="vm-hero">
+    <div class="container">
+      <div class="breadcrumb reveal">
+        <a href="GITA_Landing.html">Bosh sahifa</a>
+        <span class="sep">/</span>
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <span class="sep">/</span>
+        <span class="current">Virtual Mentor</span>
+      </div>
+
+      <div class="vm-hero-meta-row reveal">
+        <span class="vm-module-num">02 / 04</span>
+        <span class="vm-module-pill">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="4"/></svg>
+          AI mentor vositasi
+        </span>
+      </div>
+
+      <h1 class="reveal" data-delay="1">
+        Shaxsiy <em>mentor,</em><br>
+        har <em>lahza</em> yoningizda.
+      </h1>
+
+      <div class="subtitle reveal" data-delay="2">Chat · audio · Braille · vizual metafora</div>
+
+      <p class="lead reveal" data-delay="3">
+        <strong>Virtual Mentor</strong> — sizning shaxsiy o'qituvchingiz. Grammatik tahlil, shaxsiy lug'at, uzoq muddatli xotira bilan. 
+        Siz so'ragan usulda javob beradi — matn, ovoz yoki vizual bilan. Pastda o'zingiz sinab ko'ring.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CHAT INTERFACE ============ -->
+  <section class="chat-section">
+    <div class="container">
+      <div class="chat-layout">
+
+        <!-- LEFT: Personas -->
+        <aside class="personas reveal">
+          <div class="personas-head">
+            <h4>Mentor <em>tanlang</em></h4>
+            <p>Har biri maxsus mutaxassislikka ega</p>
+          </div>
+
+          <div class="persona-list">
+            <div class="persona-item active" onclick="selectPersona(this, 'Anora', 'Ingliz tili mentori')">
+              <div class="persona-av">A</div>
+              <div class="persona-body">
+                <div class="persona-name">Anora</div>
+                <div class="persona-role">Ingliz tili · universal</div>
+              </div>
+            </div>
+
+            <div class="persona-item" onclick="selectPersona(this, 'Behruz', 'Fizika va matematika')">
+              <div class="persona-av">B</div>
+              <div class="persona-body">
+                <div class="persona-name">Behruz</div>
+                <div class="persona-role">Fizika · matematika</div>
+              </div>
+            </div>
+
+            <div class="persona-item" onclick="selectPersona(this, 'Sevinch', 'Arab tili')">
+              <div class="persona-av">S</div>
+              <div class="persona-body">
+                <div class="persona-name">Sevinch</div>
+                <div class="persona-role">Arab tili · madaniyat</div>
+              </div>
+            </div>
+
+            <div class="persona-item" onclick="selectPersona(this, 'Donier', 'Dasturlash')">
+              <div class="persona-av">D</div>
+              <div class="persona-body">
+                <div class="persona-name">Donier</div>
+                <div class="persona-role">Python · screen reader</div>
+              </div>
+            </div>
+
+            <div class="persona-item" onclick="selectPersona(this, 'Nargiza', 'Kimyo va biologiya')">
+              <div class="persona-av">N</div>
+              <div class="persona-body">
+                <div class="persona-name">Nargiza</div>
+                <div class="persona-role">Kimyo · biologiya</div>
+              </div>
+            </div>
+
+            <div class="persona-item" onclick="selectPersona(this, 'Alisher', 'Ijtimoiy ko\'nikmalar')">
+              <div class="persona-av">Al</div>
+              <div class="persona-body">
+                <div class="persona-name">Alisher</div>
+                <div class="persona-role">Autizm · muloqot</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona-plus">
+            <button class="persona-plus-btn">+ O'z mentoringizni sozlash</button>
+          </div>
+        </aside>
+
+        <!-- CENTER: Chat window -->
+        <div class="chat-window reveal" data-delay="1">
+          <div class="chat-header">
+            <div class="chat-header-av" id="chatAv">A</div>
+            <div class="chat-header-info">
+              <div class="chat-header-name" id="chatName"><em>Anora</em> · Virtual Mentor</div>
+              <div class="chat-header-role">
+                <span class="chat-status-dot" aria-hidden="true"></span>
+                <span id="chatRole">Ingliz tili · universal · hozir faol</span>
+              </div>
+            </div>
+            <div class="chat-header-actions">
+              <button class="chat-action-btn" aria-label="Ovoz">🔊</button>
+              <button class="chat-action-btn" aria-label="Sozlamalar">⚙</button>
+              <button class="chat-action-btn" aria-label="Ko'proq">⋯</button>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="messages">
+
+            <!-- Welcome bot message -->
+            <div class="msg bot">
+              <div class="msg-av">A</div>
+              <div class="msg-body">
+                <div class="msg-bubble">
+                  Salom, Mahliyo! 👋 Men <em>Anora</em> — sizning ingliz tili mentoringizman.
+                  Siz Dr. Malika'ning <em>"Inklyuziv ingliz tili"</em> kursida <strong>67%</strong> progressga ega ekansiz — ajoyib!
+                  Bugun nima ustida ishlamoqchisiz?
+                </div>
+                <div class="msg-actions">
+                  <button class="msg-action" onclick="sendQuick('Past tenses tushuntirib bering')">Past tenses</button>
+                  <button class="msg-action" onclick="sendQuick('Kecha dars tushuna olmadim')">Yordam kerak</button>
+                  <button class="msg-action" onclick="sendQuick('Test topshirishni xohlayman')">Test</button>
+                </div>
+                <div class="msg-meta"><span>14:23</span></div>
+              </div>
+            </div>
+
+            <!-- User message -->
+            <div class="msg user">
+              <div class="msg-av">M</div>
+              <div class="msg-body">
+                <div class="msg-bubble">
+                  "I <em>was walking</em>" bilan "I <em>walked</em>" orasida nima farq bor?
+                </div>
+                <div class="msg-meta"><span>14:24</span><span class="read">✓✓</span></div>
+              </div>
+            </div>
+
+            <!-- Bot explanation -->
+            <div class="msg bot">
+              <div class="msg-av">A</div>
+              <div class="msg-body">
+                <div class="msg-bubble">
+                  Zo'r savol! Bu ikkisi <em>o'tgan zamon</em> bo'lsa ham, muhim farq bor:<br><br>
+
+                  <strong>"I walked"</strong> (Past Simple) — harakat <em>tugadi.</em> Masalan: "Kecha men uyga yurib bordim."<br><br>
+
+                  <strong>"I was walking"</strong> (Past Continuous) — harakat <em>davomli edi,</em> boshqa bir narsa sodir bo'lganda. Masalan: "Men uyga yurib ketayotganda, yomg'ir yog'a boshladi."<br><br>
+
+                  Xohlasangiz, buni Braille matn ham ko'rsataman — sizning displeyingiz uchun:
+                </div>
+
+                <div class="msg-media">
+                  <div class="msg-media-label">Braille · Past tenses</div>
+                  <div class="msg-media-braille">⠊ ⠺⠁⠇⠅⠑⠙ · ⠎⠊⠍⠏⠇⠑<br>⠊ ⠺⠁⠎ ⠺⠁⠇⠅⠊⠝⠛ · ⠉⠕⠝⠞</div>
+                </div>
+
+                <div class="msg-actions">
+                  <button class="msg-action" onclick="sendQuick('Misollar ko\'proq bering')">Misollar</button>
+                  <button class="msg-action" onclick="sendQuick('Mashq qilay')">Mashq</button>
+                  <button class="msg-action" onclick="sendQuick('Audio eshitsam bo\'ladimi')">🔊 Audio</button>
+                </div>
+                <div class="msg-meta"><span>14:25</span></div>
+              </div>
+            </div>
+
+            <!-- User message -->
+            <div class="msg user">
+              <div class="msg-av">M</div>
+              <div class="msg-body">
+                <div class="msg-bubble">
+                  Tushundim! Endi mashq qilay.
+                </div>
+                <div class="msg-meta"><span>14:26</span><span class="read">✓✓</span></div>
+              </div>
+            </div>
+
+            <!-- Bot quiz -->
+            <div class="msg bot">
+              <div class="msg-av">A</div>
+              <div class="msg-body">
+                <div class="msg-bubble">
+                  Ajoyib! Quyidagi gapda qaysi fe'l to'g'ri?<br><br>
+
+                  "When I <code>___</code> home, my mother was cooking dinner."<br><br>
+
+                  Qaysi birini tanlaysiz?
+                </div>
+                <div class="msg-actions">
+                  <button class="msg-action" onclick="quizAnswer('came', true)">A · came</button>
+                  <button class="msg-action" onclick="quizAnswer('was coming', false)">B · was coming</button>
+                  <button class="msg-action" onclick="quizAnswer('come', false)">C · come</button>
+                </div>
+                <div class="msg-meta"><span>14:27</span></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Input -->
+          <div class="chat-input-wrap">
+            <div class="chat-quick-chips" id="quickChips">
+              <button class="quick-chip" onclick="sendQuick('Bu so\'zni tushuntiring')">💡 Tushuntirish</button>
+              <button class="quick-chip" onclick="sendQuick('Misollar bering')">📝 Misol</button>
+              <button class="quick-chip" onclick="sendQuick('Test yuboring')">✍️ Test</button>
+              <button class="quick-chip" onclick="sendQuick('Audio bilan eshitmoqchiman')">🔊 Audio</button>
+              <button class="quick-chip" onclick="sendQuick('Braille matn kerak')">⠃ Braille</button>
+            </div>
+
+            <div class="chat-input-row">
+              <button class="tool-btn" aria-label="Mikrofon" onclick="toggleTool(this)">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v7M6 6a3 3 0 1 0 6 0V5a3 3 0 1 0-6 0v1zM4 9a5 5 0 0 0 10 0M9 14v2"/></svg>
+              </button>
+              <button class="tool-btn" aria-label="Fayl qo'shish" onclick="toggleTool(this)">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v12M3 9h12"/></svg>
+              </button>
+              <textarea class="chat-input" id="chatInput" placeholder="Xabaringizni yozing… yoki tepadagi tez tugmalardan foydalaning" rows="1" oninput="autoResize(this)" onkeydown="handleKey(event)"></textarea>
+              <button class="send-btn" aria-label="Yuborish" onclick="sendMessage()" id="sendBtn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Info panel -->
+        <aside class="chat-info reveal" data-delay="2">
+
+          <!-- Mode selector -->
+          <div class="info-card">
+            <h4>Javob <em>formati</em></h4>
+            <div class="mode-grid">
+              <div class="mode-opt active"><span class="ico">💬</span><span class="lbl">Matn</span></div>
+              <div class="mode-opt"><span class="ico">🔊</span><span class="lbl">Audio</span></div>
+              <div class="mode-opt active"><span class="ico">⠃</span><span class="lbl">Braille</span></div>
+              <div class="mode-opt"><span class="ico">◬</span><span class="lbl">Vizual</span></div>
+            </div>
+          </div>
+
+          <!-- Memory / context -->
+          <div class="info-card">
+            <h4>Mentor <em>xotirasi</em></h4>
+            <div class="memory-list">
+              <div class="memory-item">
+                Kurs: <em>Inklyuziv ingliz tili · 67%</em>
+                <div class="memory-time">hozir</div>
+              </div>
+              <div class="memory-item">
+                Qiyin mavzu: <em>past continuous</em>
+                <div class="memory-time">10 daqiqa oldin</div>
+              </div>
+              <div class="memory-item">
+                O'rganilgan: <em>irregular verbs (42 ta)</em>
+                <div class="memory-time">2 kun oldin</div>
+              </div>
+              <div class="memory-item">
+                Tendensiya: <em>o'zbekcha kontekst tushuntirish</em>
+                <div class="memory-time">1 hafta</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Session stats -->
+          <div class="info-card">
+            <h4>Bugungi <em>seans</em></h4>
+            <div class="session-stats">
+              <div class="stat-m">
+                <div class="n">12</div>
+                <div class="l">Xabar</div>
+              </div>
+              <div class="stat-m">
+                <div class="n">3</div>
+                <div class="l">Yangi so'z</div>
+              </div>
+              <div class="stat-m">
+                <div class="n">18<span style="font-size:13px;color:var(--muted);font-weight:400">m</span></div>
+                <div class="l">Vaqt</div>
+              </div>
+              <div class="stat-m">
+                <div class="n">+45</div>
+                <div class="l">XP</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="vm-features">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Oltita xususiyat</span>
+          <h2>Oddiy chat <em>emas</em> —<br>haqiqiy <em>mentor.</em></h2>
+          <p>Virtual Mentor faqat savollarga javob bermaydi. U siz bilan birga o'sadi, qiyinchiliklaringizni eslab qoladi va sizga mos keladigan usulni topadi.</p>
+        </div>
+        <div class="sec-head-right">
+          Har bir javob — matn, audio, Braille yoki vizual metafora orqali.
+        </div>
+      </div>
+
+      <div class="vm-features-grid">
+        <article class="vm-feature reveal">
+          <div class="num">Xususiyat 01</div>
+          <h3>Uzoq muddatli <em>xotira</em></h3>
+          <p>Mentor sizni eslab qoladi — qaysi mavzular qiyin, qaysi usul sizga mos, qaysi so'zlar allaqachon o'rganilgan. Har suhbat avvalgilari ustiga quriladi.</p>
+        </article>
+
+        <article class="vm-feature reveal" data-delay="1">
+          <div class="num">Xususiyat 02</div>
+          <h3>Shaxsiy <em>lug'at</em></h3>
+          <p>O'rganilgan har bir so'z avtomatik shaxsiy lug'atga qo'shiladi. Kontekst bilan, talaffuz bilan, siz uchun maxsus misollar bilan. Kerak bo'lsa Braille eksport.</p>
+        </article>
+
+        <article class="vm-feature reveal" data-delay="2">
+          <div class="num">Xususiyat 03</div>
+          <h3>Multimodal <em>javob</em></h3>
+          <p>Bitta savolga — 4 xil javob. Matn o'qigingiz kelsa matn, eshitgingiz kelsa audio, Braille displey ishlatsangiz — to'g'ridan-to'g'ri yuboradi.</p>
+        </article>
+
+        <article class="vm-feature reveal">
+          <div class="num">Xususiyat 04</div>
+          <h3>Grammatik <em>tahlil</em></h3>
+          <p>Gapingizni yozasiz — mentor xato joylarni belgilaydi, <em>nega</em> xato ekanligini tushuntiradi. Faqat "to'g'ri yo noto'g'ri" emas, balki sabab bilan.</p>
+        </article>
+
+        <article class="vm-feature reveal" data-delay="1">
+          <div class="num">Xususiyat 05</div>
+          <h3>Sur'atga <em>moslashuv</em></h3>
+          <p>Kognitiv Yordamchi modul bilan birga ishlaydi. Charchagan bo'lsangiz — sekinroq, oddiyroq. Energiyada bo'lsangiz — chuqurroq, chaqiriqliroq.</p>
+        </article>
+
+        <article class="vm-feature reveal" data-delay="2">
+          <div class="num">Xususiyat 06</div>
+          <h3>Maxfiy <em>va xavfsiz</em></h3>
+          <p>Suhbatlaringiz shifrlangan. Mentor xotirasi faqat sizda. Istalgan vaqt eksport qilib olib, o'chirib tashlash mumkin. GDPR muvofiq.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-band">
+    <div class="container">
+      <h2 class="reveal">Birinchi <em>savolingizni</em><br>hoziroq so'rang.</h2>
+      <p class="reveal" data-delay="1">
+        Ro'yxatdan o'ting, mentor tanlang, savol bering. Hammasi bepul — karta kerak emas.
+      </p>
+      <div class="reveal" data-delay="2" style="display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center">
+        <a href="auth.html" class="btn-teal"><span>Bepul boshlash</span><span aria-hidden="true">→</span></a>
+        <a href="modul.html" class="btn-ghost" style="color:var(--cream);border-color:rgba(251,248,243,0.3)"><span>Boshqa modullar</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="GITA_Landing.html" class="brand">
+          <span class="brand-mark">G</span>
+          <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+        </a>
+        <p>Ta'limdagi to'siqlarni olib tashlash — bu imkoniyatni ko'paytirishdir.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="GitHub">GH</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Modullar</h5>
+        <ul>
+          <li><a href="modul.html">Aqlli Ma'ruza</a></li>
+          <li><a href="mentor.html">Virtual Mentor</a></li>
+          <li><a href="hamkorlik.html">Hamkorlik Lab</a></li>
+          <li><a href="kognitiv.html">Kognitiv AI</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Biz</h5>
+        <ul>
+          <li><a href="haqimizda.html">Haqimizda</a></li>
+          <li><a href="aloqa.html">Aloqa</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Platforma</h5>
+        <ul>
+          <li><a href="kurslar.html">Kurslar</a></li>
+          <li><a href="profil.html">Profilim</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Yordam</h5>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Maxfiylik</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 GITA — Global Inklyuziv Ta'lim Kampusi</span>
+      <span class="wcag">Muvofiqlik: <span class="badge-w">WCAG 2.1 AA</span> <span class="badge-w">GDPR</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== SHARED INTERACTIONS ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+<script>
+/* Persona switching */
+function selectPersona(el, name, role){
+  document.querySelectorAll('.persona-item').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const av = el.querySelector('.persona-av').textContent;
+  document.getElementById('chatAv').textContent = av;
+  document.getElementById('chatAv').style.background = getComputedStyle(el.querySelector('.persona-av')).background;
+  document.getElementById('chatName').innerHTML = '<em>' + name + '</em> · Virtual Mentor';
+  document.getElementById('chatRole').textContent = role + ' · hozir faol';
+
+  // Add a system message
+  addBotMessage(`Salom! Men <em>${name}</em>. Bugun sizga nimada yordam bera olaman?`);
+}
+
+/* Message handling */
+function addBotMessage(html){
+  const container = document.getElementById('messages');
+  const time = new Date().toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' });
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.innerHTML = `
+    <div class="msg-av">${document.getElementById('chatAv').textContent}</div>
+    <div class="msg-body">
+      <div class="msg-bubble">${html}</div>
+      <div class="msg-meta"><span>${time}</span></div>
+    </div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function addUserMessage(text){
+  const container = document.getElementById('messages');
+  const time = new Date().toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' });
+  const div = document.createElement('div');
+  div.className = 'msg user';
+  div.innerHTML = `
+    <div class="msg-av">M</div>
+    <div class="msg-body">
+      <div class="msg-bubble">${escapeHtml(text)}</div>
+      <div class="msg-meta"><span>${time}</span><span class="read">✓✓</span></div>
+    </div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping(){
+  const container = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot typing-indicator';
+  div.id = 'typingInd';
+  div.innerHTML = `
+    <div class="msg-av">${document.getElementById('chatAv').textContent}</div>
+    <div class="msg-body">
+      <div class="msg-bubble">
+        <div class="msg-typing"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideTyping(){
+  const t = document.getElementById('typingInd');
+  if (t) t.remove();
+}
+
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* Demo responses */
+const DEMO_RESPONSES = {
+  'past tenses': 'Past tenses — bu o\'tgan zamon. <em>Past Simple</em> (walked), <em>Past Continuous</em> (was walking) va <em>Past Perfect</em> (had walked) mavjud. Qaysi birini chuqurroq o\'rganmoqchisiz?',
+  'misol': 'Mana 3 ta misol:<br><br>1. "Men kecha o\'qidim" → <em>I studied yesterday</em><br>2. "Men kitob o\'qiyotgan edim" → <em>I was reading a book</em><br>3. "Men darsdan oldin tayyorlangan edim" → <em>I had prepared before class</em>',
+  'test': 'Yaxshi! Mana sizga test:<br><br>"By the time I arrived, they ___ dinner."<br>A) were eating  B) had eaten  C) ate<br><br>Javobingizni yozing.',
+  'audio': 'Audio versiyasini tayyorlayapman… 🔊<br><br>[Audio 00:12 · "Past tense explanation"]<br><br>Ovoz tezligini oshirish yoki pasaytirish uchun ⚙ tugmani bosing.',
+  'braille': 'Braille formatda yuboraman:<br><br>⠏⠁⠎⠞ ⠞⠑⠝⠎⠑⠎<br>⠊ ⠺⠁⠇⠅⠑⠙ · ⠎⠊⠍⠏⠇⠑<br><br>Braille displeyingiz ulangan bo\'lsa, matn to\'g\'ridan-to\'g\'ri yuboriladi.',
+  'salom': 'Vaalaykum assalom! 👋 Ingliz tili bo\'yicha qanday savol bor?',
+  'default': 'Qiziq savol! Men bu mavzuda sizga yordam bera olaman. Qaysi tomoniga chuqurroq qarashni istaysiz — grammatika, leksika, yoki muloqot?'
+};
+
+function respondTo(text){
+  const lower = text.toLowerCase();
+  for (const [key, resp] of Object.entries(DEMO_RESPONSES)) {
+    if (key !== 'default' && lower.includes(key)) return resp;
+  }
+  return DEMO_RESPONSES.default;
+}
+
+function sendMessage(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  addUserMessage(text);
+  input.value = '';
+  autoResize(input);
+
+  showTyping();
+  setTimeout(() => {
+    hideTyping();
+    addBotMessage(respondTo(text));
+  }, 900 + Math.random() * 600);
+}
+
+function sendQuick(text){
+  addUserMessage(text);
+  showTyping();
+  setTimeout(() => {
+    hideTyping();
+    addBotMessage(respondTo(text));
+  }, 800);
+}
+
+function quizAnswer(answer, correct){
+  addUserMessage(answer);
+  showTyping();
+  setTimeout(() => {
+    hideTyping();
+    if (correct) {
+      addBotMessage('✓ <em>To\'g\'ri!</em> <strong>"came"</strong> (Past Simple) ishlatiladi, chunki "arrived" ham tugagan harakat. Ikkalasi Past Simple bilan bog\'liq. <br><br>Yana bitta sinaysizmi?');
+    } else {
+      addBotMessage('Yaxshi urinish, lekin <em>to\'g\'ri javob: "came"</em> edi. "When" bilan boshlangan gapda odatda Past Simple ishlatiladi. Yana bir marta sinab ko\'rasizmi?');
+    }
+  }, 800);
+}
+
+/* Input handling */
+function autoResize(el){
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function handleKey(e){
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function toggleTool(btn){ btn.classList.toggle('active'); }
+
+/* Mode selector */
+document.querySelectorAll('.mode-opt').forEach(opt => {
+  opt.addEventListener('click', () => opt.classList.toggle('active'));
+});
+</script>
+</body>
+</html>

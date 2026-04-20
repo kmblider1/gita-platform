@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Biz haqimizda · GITA — Inklyuziv Kampus</title>
+<meta name="description" content="GITA — Global Inklyuziv Ta'lim Kampusi. Bizning missiyamiz, jamoamiz va hikoyamiz." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    /* ========== SHARED TOKENS + CHROME ========== */
+/* ================================================================
+   GITA — Inklyuziv Kampus · Shared design tokens & chrome
+   Barcha sahifalar ishlatadigan: tokens, nav, footer, buttons,
+   typography, reveal animatsiya. Landing'dan olingan, identik.
+================================================================ */
+
+/* ---------- Google Fonts ---------- */
+/* ---------- Tokens ---------- */
+:root {
+  --navy: #0A2540;
+  --navy-2: #12335A;
+  --navy-ink: #081B31;
+  --cream: #FBF8F3;
+  --cream-2: #F3EDE1;
+  --cream-3: #EDE4D2;
+  --teal: #0D9E78;
+  --teal-deep: #0A7C5E;
+  --amber: #E8950A;
+  --amber-soft: #F5C56A;
+  --coral: #C94F3F;
+  --line: rgba(10,37,64,0.12);
+  --line-strong: rgba(10,37,64,0.22);
+  --muted: rgba(10,37,64,0.64);
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.06), 0 2px 8px rgba(10,37,64,0.04);
+  --shadow-md: 0 6px 20px -8px rgba(10,37,64,0.18), 0 2px 6px rgba(10,37,64,0.06);
+  --shadow-lg: 0 30px 60px -30px rgba(10,37,64,0.35), 0 10px 30px -15px rgba(10,37,64,0.12);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1240px;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--navy-ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 2.5px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- Skip link ---------- */
+.skip {
+  position: absolute; left: 16px; top: -60px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 16px; border-radius: 8px; z-index: 200;
+  transition: top .2s;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Navbar ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 18px 0;
+}
+.nav-wrap.scrolled {
+  background: rgba(251,248,243,0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 40px -24px rgba(10,37,64,0.25);
+  padding: 12px 0;
+}
+.nav { display: flex; align-items: center; gap: 36px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--navy); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--navy); color: var(--cream);
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 18px; font-style: italic;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px -6px rgba(10,37,64,0.5);
+  position: relative;
+}
+.brand-mark::after {
+  content:''; position:absolute; right:-3px; bottom:-3px; width:10px; height:10px;
+  background: var(--amber); border-radius: 50%; border: 2px solid var(--cream);
+}
+.brand small { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; line-height: 1; margin-top: 4px; }
+.nav-links { display: flex; gap: 28px; margin-left: 12px; }
+.nav-links a {
+  position: relative; font-size: 14.5px; color: var(--navy-ink);
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--teal); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--teal-deep); }
+.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border: 1px solid var(--line-strong);
+  border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: transparent; color: var(--navy-ink);
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.lang-btn:hover { background: rgba(10,37,64,0.05); border-color: var(--navy-ink); }
+.lang-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(13,158,120,0.18); }
+
+/* ---------- Buttons (shared) ---------- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: var(--cream);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(10,37,64,0.7);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(10,37,64,0.8); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { transition: transform .2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-teal {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--teal); color: #fff;
+  padding: 14px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500;
+  box-shadow: 0 12px 30px -12px rgba(13,158,120,0.6);
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn-teal:hover { background: var(--teal-deep); transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(13,158,120,0.7); }
+.btn-teal:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid var(--line-strong); color: var(--navy-ink);
+  font-size: 15px; font-weight: 500;
+  transition: background .2s, border-color .2s;
+  background: transparent;
+}
+.btn-ghost:hover { background: rgba(10,37,64,0.04); border-color: var(--navy); }
+
+.burger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0; align-items: center; justify-content: center; }
+.burger span { display: block; width: 18px; height: 2px; background: var(--navy); position: relative; }
+.burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 18px; height: 2px; background: var(--navy); }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Section header ---------- */
+.pad { padding: 120px 0; }
+.sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 40px; align-items: end;
+  margin-bottom: 56px;
+}
+.sec-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--navy); }
+.sec-head h2 { font-size: clamp(32px, 4.2vw, 54px); margin-top: 18px; letter-spacing: -0.02em; }
+.sec-head h2 em { font-style: italic; color: var(--teal-deep); }
+.sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+.sec-head-right {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 15px; max-width: 280px; text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ---------- Page header (for inner pages) ---------- */
+.page-hero {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal-deep); padding: 7px 14px; border: 1px solid rgba(13,158,120,0.28);
+  background: rgba(13,158,120,0.08); border-radius: 999px;
+}
+.page-hero .eyebrow .pulse { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.page-hero .eyebrow .pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--teal); animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+.page-hero h1 {
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-top: 20px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.page-hero h1 em { font-style: italic; color: var(--teal-deep); position: relative; white-space: nowrap; }
+.page-hero h1 em::after {
+  content: ''; position: absolute; left: 2%; right: 2%; bottom: 4px; height: 10px;
+  background: var(--amber-soft); opacity: 0.55; z-index: -1;
+  border-radius: 4px; transform: skew(-8deg);
+}
+.page-hero .lead { margin-top: 24px; max-width: 620px; font-size: 17.5px; line-height: 1.6; color: var(--muted); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--sans);
+  margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy-ink); }
+
+/* ---------- Tag & badge (shared) ---------- */
+.tag {
+  font-size: 12px; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-2); color: var(--navy-ink);
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.tag.teal { background: rgba(13,158,120,0.1); color: var(--teal-deep); }
+.tag.amber { background: rgba(232,149,10,0.12); color: #B26E00; }
+.tag.coral { background: rgba(201,79,63,0.1); color: var(--coral); }
+.tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 100px 0 40px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(232,149,10,0.08), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(13,158,120,0.08), transparent 40%);
+}
+footer .container { position: relative; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(251,248,243,0.1);
+}
+.foot-brand .brand { color: var(--cream); }
+.foot-brand .brand-mark { background: var(--cream); color: var(--navy); }
+.foot-brand p { color: rgba(251,248,243,0.65); margin-top: 18px; font-size: 14.5px; line-height: 1.6; max-width: 320px; }
+.foot-social { display: flex; gap: 10px; margin-top: 22px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(251,248,243,0.08); border: 1px solid rgba(251,248,243,0.12);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--cream);
+  transition: background .2s, transform .2s;
+}
+.foot-social a:hover { background: var(--amber); color: var(--navy); transform: translateY(-2px); }
+.foot-col h5 {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(251,248,243,0.6); font-weight: 500;
+  margin: 0 0 18px 0;
+}
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.foot-col a {
+  color: rgba(251,248,243,0.85); font-size: 14.5px;
+  transition: color .2s, padding-left .2s;
+  display: inline-block;
+}
+.foot-col a:hover { color: var(--amber-soft); padding-left: 4px; }
+.foot-bot {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  color: rgba(251,248,243,0.5); font-size: 13px; flex-wrap: wrap;
+}
+.foot-bot .wcag { display: inline-flex; align-items: center; gap: 8px; }
+.foot-bot .wcag .badge-w { padding: 4px 10px; background: rgba(251,248,243,0.08); border-radius: 6px; font-family: var(--mono); font-size: 11px; color: var(--amber-soft); }
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+.reveal[data-delay="5"] { transition-delay: .40s; }
+.reveal[data-delay="6"] { transition-delay: .48s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .burger { display: inline-flex; }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-head-right { text-align: left; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; row-gap: 40px; }
+}
+@media (max-width: 768px) {
+  .pad { padding: 80px 0; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-actions .btn-primary span.lbl { display: none; }
+  .sec-head { margin-bottom: 40px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .lang-btn .lbl { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  /* ========== PAGE-SPECIFIC STYLES ========== */
+/* ============ HAQIMIZDA ============ */
+
+  /* ---------- Hero ---------- */
+  .about-hero {
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 15% 30%, rgba(13,158,120,0.08), transparent 40%),
+      radial-gradient(circle at 85% 60%, rgba(232,149,10,0.06), transparent 40%);
+    pointer-events: none;
+  }
+  .about-hero .container { position: relative; }
+  .about-hero h1 {
+    font-size: clamp(44px, 6vw, 82px);
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin-top: 22px;
+    margin-bottom: 28px;
+    max-width: 960px;
+  }
+  .about-hero h1 em {
+    font-style: italic; color: var(--teal-deep);
+    position: relative; white-space: nowrap;
+  }
+  .about-hero h1 em::after {
+    content: ''; position: absolute; left: 2%; right: 2%; bottom: 6px; height: 14px;
+    background: var(--amber-soft); opacity: 0.5; z-index: -1;
+    border-radius: 4px; transform: skew(-8deg);
+  }
+  .about-hero .lead {
+    font-size: 20px; line-height: 1.6;
+    color: var(--muted);
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+  .about-hero .lead strong { color: var(--navy-ink); font-weight: 600; }
+
+  /* Impact stats */
+  .impact-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 40px;
+  }
+  .impact-item {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .impact-item .label {
+    font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .impact-item .label::before { content: ''; width: 24px; height: 1px; background: var(--navy); opacity: 0.5; }
+  .impact-item .n {
+    font-family: var(--serif); font-size: 48px; font-weight: 700;
+    line-height: 1; letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .impact-item .n .unit {
+    font-size: 18px; color: var(--muted); font-weight: 400;
+    margin-left: 4px;
+  }
+  .impact-item .sub {
+    font-size: 13px; color: var(--muted);
+    font-family: var(--serif); font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ---------- Mission split ---------- */
+  .mission-section {
+    padding: 120px 0;
+    background: var(--cream-2);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .mission-text h2 {
+    font-size: clamp(32px, 4.5vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .mission-text h2 em { font-style: italic; color: var(--teal-deep); }
+  .mission-text p {
+    font-size: 17px; line-height: 1.75;
+    color: var(--navy-ink);
+    margin-bottom: 18px;
+  }
+  .mission-text p.muted { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 18px; }
+
+  .mission-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-lg);
+    background: var(--navy);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .mission-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(13,158,120,0.3), transparent 55%),
+      radial-gradient(circle at 70% 80%, rgba(232,149,10,0.25), transparent 55%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 14px);
+  }
+  .mission-visual-content {
+    position: absolute; inset: 0;
+    padding: 44px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    color: var(--cream);
+  }
+  .mission-visual-quote-mark {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 180px; line-height: 0.5;
+    color: var(--amber-soft); opacity: 0.5;
+    margin-bottom: 20px;
+  }
+  .mission-visual-text {
+    font-family: var(--serif); font-size: 26px;
+    font-style: italic; line-height: 1.35;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+  .mission-visual-attr {
+    font-size: 13px; color: rgba(251,248,243,0.6);
+    font-family: var(--serif); font-style: italic;
+  }
+  .mission-visual-attr strong {
+    display: block; color: var(--cream); font-weight: 500; font-style: normal;
+    font-family: var(--sans); font-size: 14.5px; margin-bottom: 2px;
+  }
+  .mission-principles {
+    padding-top: 28px;
+    border-top: 1px solid rgba(251,248,243,0.15);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .mp-item .n { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--amber-soft); }
+  .mp-item .l { font-size: 11.5px; color: rgba(251,248,243,0.7); margin-top: 4px; }
+
+  /* ---------- Timeline story ---------- */
+  .story-section {
+    padding: 120px 0;
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .story-header {
+    position: sticky;
+    top: 100px;
+  }
+  .story-header h2 {
+    font-size: clamp(32px, 4.5vw, 52px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .story-header h2 em { font-style: italic; color: var(--teal-deep); }
+  .story-header p {
+    font-size: 17px; line-height: 1.7; color: var(--muted);
+  }
+
+  .story-timeline {
+    position: relative;
+    padding-left: 38px;
+  }
+  .story-timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 14px; bottom: 14px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--teal), var(--amber), var(--coral));
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+  .story-item {
+    position: relative;
+    padding-bottom: 48px;
+  }
+  .story-item:last-child { padding-bottom: 0; }
+  .story-item::before {
+    content: '';
+    position: absolute;
+    left: -34px; top: 6px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 3px solid var(--teal);
+    box-shadow: 0 0 0 4px var(--cream);
+  }
+  .story-item:nth-child(2)::before { border-color: var(--amber); }
+  .story-item:nth-child(3)::before { border-color: #7B4B94; }
+  .story-item:nth-child(4)::before { border-color: var(--coral); }
+  .story-item:nth-child(5)::before {
+    border-color: var(--teal);
+    background: var(--teal);
+    box-shadow: 0 0 0 4px var(--cream), 0 0 0 8px rgba(13,158,120,0.2);
+  }
+  .story-year {
+    font-family: var(--mono);
+    font-size: 13px; font-weight: 500;
+    color: var(--teal-deep);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .story-item:nth-child(2) .story-year { color: #B26E00; }
+  .story-item:nth-child(3) .story-year { color: #623874; }
+  .story-item:nth-child(4) .story-year { color: var(--coral); }
+  .story-title {
+    font-family: var(--serif);
+    font-size: 26px; font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .story-title em { font-style: italic; color: var(--teal-deep); }
+  .story-desc {
+    font-size: 15.5px; line-height: 1.7; color: var(--navy-ink);
+    margin-bottom: 12px;
+  }
+  .story-stats {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .story-stat {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--muted);
+  }
+  .story-stat strong {
+    font-family: var(--serif); font-weight: 700; font-size: 16px;
+    color: var(--navy);
+  }
+
+  /* ---------- Values grid ---------- */
+  .values-section {
+    padding: 120px 0;
+    background: var(--cream-2);
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .value-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    transition: all .35s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 0%, var(--glow, rgba(13,158,120,0.12)), transparent 55%);
+    opacity: 0; transition: opacity .4s;
+    pointer-events: none;
+  }
+  .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+  .value-card:hover::before { opacity: 1; }
+  .value-card:nth-child(1) { --glow: rgba(13,158,120,0.15); }
+  .value-card:nth-child(2) { --glow: rgba(232,149,10,0.15); }
+  .value-card:nth-child(3) { --glow: rgba(123,75,148,0.15); }
+  .value-card:nth-child(4) { --glow: rgba(201,79,63,0.15); }
+  .value-card:nth-child(5) { --glow: rgba(45,110,140,0.15); }
+  .value-card:nth-child(6) { --glow: rgba(13,158,120,0.15); }
+
+  .value-num {
+    font-family: var(--serif); font-style: italic;
+    color: var(--muted); font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .value-ico {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: grid; place-items: center;
+    font-size: 24px;
+    background: var(--ico-bg, rgba(13,158,120,0.1));
+    color: var(--ico-fg, var(--teal-deep));
+    border: 1px solid var(--ico-bd, rgba(13,158,120,0.22));
+    margin-bottom: 20px;
+  }
+  .value-card:nth-child(2) .value-ico { --ico-bg: rgba(232,149,10,0.12); --ico-fg: #B26E00; --ico-bd: rgba(232,149,10,0.28); }
+  .value-card:nth-child(3) .value-ico { --ico-bg: rgba(123,75,148,0.1); --ico-fg: #623874; --ico-bd: rgba(123,75,148,0.22); }
+  .value-card:nth-child(4) .value-ico { --ico-bg: rgba(201,79,63,0.1); --ico-fg: var(--coral); --ico-bd: rgba(201,79,63,0.22); }
+  .value-card:nth-child(5) .value-ico { --ico-bg: rgba(45,110,140,0.1); --ico-fg: #1D4E6F; --ico-bd: rgba(45,110,140,0.22); }
+
+  .value-card h3 {
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+  }
+  .value-card h3 em { font-style: italic; color: var(--teal-deep); display: block; font-size: 15px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+  .value-card p {
+    font-size: 15px; line-height: 1.65; color: var(--muted);
+  }
+
+  /* ---------- Team section ---------- */
+  .team-section {
+    padding: 120px 0;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .team-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    text-align: center;
+    transition: all .3s;
+  }
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+  }
+  .team-av {
+    width: 88px; height: 88px; border-radius: 50%;
+    margin: 0 auto 18px;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 32px;
+    color: #fff;
+    box-shadow: inset 0 0 0 4px rgba(255,255,255,0.8), 0 8px 20px -8px rgba(10,37,64,0.3);
+    position: relative;
+  }
+  .team-av::after {
+    content: ''; position: absolute; right: 2px; bottom: 4px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--teal);
+    border: 3px solid var(--cream);
+  }
+  .team-card:nth-child(1) .team-av { background: #2D6E8C; }
+  .team-card:nth-child(2) .team-av { background: var(--amber); color: var(--navy); }
+  .team-card:nth-child(3) .team-av { background: var(--teal); }
+  .team-card:nth-child(4) .team-av { background: #7B4B94; }
+  .team-card:nth-child(5) .team-av { background: var(--coral); }
+  .team-card:nth-child(6) .team-av { background: #1D4E6F; }
+  .team-card:nth-child(7) .team-av { background: var(--navy); }
+  .team-card:nth-child(8) .team-av { background: #C96E42; }
+
+  .team-card h4 {
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .team-role {
+    font-family: var(--serif); font-style: italic;
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-bottom: 14px;
+  }
+  .team-bio {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.55;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .team-links {
+    display: flex; justify-content: center; gap: 8px;
+    margin-top: 14px;
+  }
+  .team-links a {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--cream-2);
+    display: grid; place-items: center;
+    font-size: 12px; color: var(--navy);
+    transition: all .2s;
+  }
+  .team-links a:hover { background: var(--navy); color: var(--cream); }
+
+  /* ---------- Partners ---------- */
+  .partners-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--line);
+  }
+  .partners-title {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 32px;
+    align-items: center;
+  }
+  .partner-logo {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: var(--cream-2);
+    text-align: center;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    transition: all .2s;
+  }
+  .partner-logo:hover {
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+  }
+  .partner-logo small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta-band {
+    background: var(--navy);
+    padding: 100px 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(13,158,120,0.15), transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(232,149,10,0.12), transparent 50%);
+  }
+  .cta-band .container { position: relative; text-align: center; }
+  .cta-band h2 {
+    color: var(--cream);
+    font-size: clamp(34px, 4.5vw, 60px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cta-band h2 em { font-style: italic; color: var(--amber-soft); }
+  .cta-band p {
+    color: rgba(251,248,243,0.7);
+    font-size: 18px;
+    max-width: 580px;
+    margin: 0 auto 44px;
+    line-height: 1.6;
+  }
+  .cta-row {
+    display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .impact-row { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .mission-grid { grid-template-columns: 1fr; gap: 56px; }
+    .mission-visual { max-width: 520px; margin: 0 auto; aspect-ratio: 4/4; }
+    .story-grid { grid-template-columns: 1fr; gap: 56px; }
+    .story-header { position: static; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .partners-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .impact-row { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .partners-grid { grid-template-columns: 1fr 1fr; }
+    .mission-visual-text { font-size: 20px; }
+    .mission-principles { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Asosiy mazmunga o'tish</a>
+
+<!-- ============ NAVBAR ============ -->
+<div class="nav-wrap" id="navwrap">
+  <div class="container">
+    <nav class="nav" aria-label="Asosiy navigatsiya">
+      <a href="GITA_Landing.html" class="brand" aria-label="GITA bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GITA<small>Inklyuziv Kampus</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="GITA_Landing.html#modullar">Modullar</a>
+        <a href="kurslar.html">Kurslar</a>
+        <a href="GITA_Landing.html#mentorlar">Mentorlar</a>
+        <a href="kognitiv.html">Kognitiv AI</a>
+        <a href="haqimizda.html" class="active">Haqimizda</a>
+        <a href="aloqa.html">Aloqa</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Til tanlash">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="lbl" id="langLabel">O'zbek</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <button class="burger" aria-label="Menyuni ochish"><span></span></button>
+        <a href="auth.html" class="btn-primary"><span class="lbl">Ro'yxatdan o'tish</span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ ABOUT HERO ============ -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="breadcrumb reveal">
+        <a href="GITA_Landing.html">Bosh sahifa</a>
+        <span class="sep">/</span>
+        <span class="current">Haqimizda</span>
+      </div>
+
+      <span class="sec-eyebrow reveal" data-delay="1" style="margin-top:20px;display:inline-flex">
+        Bizning <em style="font-style:italic;color:var(--teal-deep)">hikoyamiz</em>
+      </span>
+
+      <h1 class="reveal" data-delay="2">
+        Ta'lim — bu <em>imtiyoz</em> emas,<br>
+        u <em>huquq.</em>
+      </h1>
+
+      <p class="lead reveal" data-delay="3">
+        GITA — <strong>Global Inklyuziv Ta'lim Kampusi.</strong> Biz sun'iy intellekt, Braille, imo-ishora tili va ovoz texnologiyalarini birlashtirib, 
+        har bir talabaga o'z usulida o'qish imkoniyatini beradigan platforma qurmoqdamiz. <strong>Hamma uchun bepul — har doim va har qayerda.</strong>
+      </p>
+
+      <!-- Impact stats -->
+      <div class="impact-row reveal" data-delay="4">
+        <div class="impact-item">
+          <span class="label">Talabalar</span>
+          <span class="n"><span data-counter="1250">0</span>+</span>
+          <span class="sub">42 shahardan</span>
+        </div>
+        <div class="impact-item">
+          <span class="label">Kurslar</span>
+          <span class="n" data-counter="42">0</span>
+          <span class="sub">4 kategoriyada</span>
+        </div>
+        <div class="impact-item">
+          <span class="label">Tillar</span>
+          <span class="n"><span data-counter="10">0</span>+</span>
+          <span class="sub">Interfeys + 50 tarjima</span>
+        </div>
+        <div class="impact-item">
+          <span class="label">Inklyuzivlik</span>
+          <span class="n"><span data-counter="92">0</span>%</span>
+          <span class="sub">WCAG 2.1 AA auditi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MISSION ============ -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-text reveal">
+          <span class="sec-eyebrow" style="margin-bottom:20px;display:inline-flex">Missiyamiz</span>
+          <h2>Ta'limni <em>barchaga</em><br>ochiq qilish.</h2>
+          <p>
+            Dunyoda 1.3 milliard kishi qandaydir nogironlik bilan yashaydi. Ularning ko'pchiligi uchun oliy ta'lim va professional bilim — yo'qolgan huquq.
+          </p>
+          <p>
+            Biz bu muammoni texnologiya bilan hal qilamiz. Whisper AI, MediaPipe, WebGL va TensorFlow.js — barchasi bir joyda, bitta platformada.
+            Har bir talaba — ko'zi ojiz, kar, autizm spektrida yoki harakatlanish qiyinchiligi bilan — o'z sur'atida, o'z usulida o'qiy oladi.
+          </p>
+          <p class="muted">
+            "Ta'limdagi to'siqni olib tashlash — bu imkoniyatni ko'paytirishdir."
+          </p>
+        </div>
+
+        <div class="mission-visual reveal" data-delay="1">
+          <div class="mission-visual-content">
+            <div>
+              <div class="mission-visual-quote-mark" aria-hidden="true">"</div>
+              <div class="mission-visual-text">
+                GITA'ga qo'shilganimda birinchi marta hech kimdan kechroq o'qimayotganimni his qildim. Braille displeydan ingliz tili darsi — bu mening hayotimdagi eng katta imkoniyat.
+              </div>
+              <div class="mission-visual-attr">
+                <strong>Doniyor Abdullaev</strong>
+                Tibbiyot talabasi · Samarqand
+              </div>
+            </div>
+            <div class="mission-principles">
+              <div class="mp-item">
+                <div class="n">100%</div>
+                <div class="l">Bepul har doim</div>
+              </div>
+              <div class="mp-item">
+                <div class="n">∞</div>
+                <div class="l">Ochiq manba</div>
+              </div>
+              <div class="mp-item">
+                <div class="n">0</div>
+                <div class="l">Chegaralar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORY / TIMELINE ============ -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-header reveal">
+          <span class="sec-eyebrow" style="margin-bottom:20px;display:inline-flex">Hikoyamiz</span>
+          <h2>Kichik <em>g'oyadan</em><br>global <em>harakatgacha.</em></h2>
+          <p>
+            GITA 2022-yilda bir talabaning hikoyasi bilan boshlandi. Bugun 42 shahardagi 1250+ talabaga xizmat qilyapmiz.
+          </p>
+        </div>
+
+        <div class="story-timeline">
+
+          <div class="story-item reveal">
+            <div class="story-year">2022 · Avgust</div>
+            <h3 class="story-title">Bir <em>kichik g'oya</em></h3>
+            <p class="story-desc">
+              Toshkent Davlat Pedagogika Universitetida doktoranturada o'qiyotgan Dr. Malika Karimova 
+              ko'zi ojiz talabasiga ingliz tili darslarini Braille'da tayyorlab berishni boshladi. 
+              Bir kechada — bir nafar talaba uchun.
+            </p>
+            <div class="story-stats">
+              <span class="story-stat"><strong>1</strong> talaba</span>
+              <span class="story-stat"><strong>4</strong> dars</span>
+            </div>
+          </div>
+
+          <div class="story-item reveal">
+            <div class="story-year">2023 · Mart</div>
+            <h3 class="story-title"><em>Kichik jamoa</em> yig'iladi</h3>
+            <p class="story-desc">
+              Loyiha 5 kishilik jamoaga kengaydi. IT muhandis Bobur Xoliqov Braille eksport 
+              algoritmini yozdi. Dizayner Diyora Ahmedova UOD (Universal O'rganish Dizayni) printsiplarini 
+              interfeysga joriy qildi. Birinchi prototip — oddiy Chrome kengaytmasi.
+            </p>
+            <div class="story-stats">
+              <span class="story-stat"><strong>5</strong> jamoa a'zosi</span>
+              <span class="story-stat"><strong>24</strong> talaba</span>
+              <span class="story-stat"><strong>1</strong> modul</span>
+            </div>
+          </div>
+
+          <div class="story-item reveal">
+            <div class="story-year">2024 · Yanvar</div>
+            <h3 class="story-title">UNICEF <em>grant dasturi</em></h3>
+            <p class="story-desc">
+              UNICEF O'zbekistan Inklyuziv Ta'lim tashabbusi doirasida 18 oylik grant olindi. 
+              Whisper v3 integratsiyasi, imo-ishora avatar SVG va 50+ tilli tarjima moduli 
+              ishlab chiqildi. Platformaga o'zbek imo-ishora tili (UzSL) qo'shildi.
+            </p>
+            <div class="story-stats">
+              <span class="story-stat"><strong>12</strong> jamoa</span>
+              <span class="story-stat"><strong>340</strong> talaba</span>
+              <span class="story-stat"><strong>4</strong> modul</span>
+            </div>
+          </div>
+
+          <div class="story-item reveal">
+            <div class="story-year">2025 · Iyun</div>
+            <h3 class="story-title"><em>Ochiq manba</em> sifatida chiqariladi</h3>
+            <p class="story-desc">
+              Barcha modullar GitHub'da ochiq manba sifatida chiqarildi. Toshkent Axborot Texnologiyalari 
+              Universiteti, Inha Universiteti va AloqaBank Fondi hamkor bo'ldi. Kognitiv Yordamchi 
+              (4-modul) MediaPipe bilan qo'shildi. Platforma 10 tilda ishlay boshladi.
+            </p>
+            <div class="story-stats">
+              <span class="story-stat"><strong>28</strong> jamoa</span>
+              <span class="story-stat"><strong>890</strong> talaba</span>
+              <span class="story-stat"><strong>32</strong> shahar</span>
+            </div>
+          </div>
+
+          <div class="story-item reveal">
+            <div class="story-year">2026 · Hozir</div>
+            <h3 class="story-title"><em>Global</em> harakat</h3>
+            <p class="story-desc">
+              42 shaharda 1250+ talaba. 12 mentor. 42 kurs. O'rta Osiyo va Qozog'iston, Qirg'iziston, 
+              Turkiya universitetlari bilan hamkorlik. 2027-yilda 5000 talabaga yetishni rejalashtirmoqdamiz. 
+              <strong>Va barchasi hamon bepul.</strong>
+            </p>
+            <div class="story-stats">
+              <span class="story-stat"><strong>1250+</strong> talaba</span>
+              <span class="story-stat"><strong>42</strong> shahar</span>
+              <span class="story-stat"><strong>10+</strong> til</span>
+              <span class="story-stat"><strong>92%</strong> a11y indeks</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUES ============ -->
+  <section class="values-section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Oltita qadriyat</span>
+          <h2>Bizni <em>yo'naltiradigan</em><br>tamoyillar.</h2>
+          <p>Har bir qaror shu oltita prinsipga asoslanadi. Ular bizga nimalardan voz kechishni va nimalarni saqlab qolishni aytadi.</p>
+        </div>
+        <div class="sec-head-right">
+          Ular manifest emas — kundalik ish qoidalari.
+        </div>
+      </div>
+
+      <div class="values-grid">
+        <article class="value-card reveal">
+          <span class="value-num">01 / 06</span>
+          <div class="value-ico" aria-hidden="true">♿</div>
+          <h3>Inklyuzivlik <em>birinchi navbatda</em></h3>
+          <p>
+            Har bir xususiyat avval "eng qiyin foydalanuvchi uchun qanday ishlaydi?" degan savol bilan boshlanadi. 
+            Bu yondashuv barcha uchun yaxshi natija beradi.
+          </p>
+        </article>
+
+        <article class="value-card reveal" data-delay="1">
+          <span class="value-num">02 / 06</span>
+          <div class="value-ico" aria-hidden="true">∞</div>
+          <h3>Bepul — <em>har doim</em></h3>
+          <p>
+            Ta'limdan pul ishlashni istamaymiz. Barcha kurs va modullar bepul qoladi — hatto 1 million foydalanuvchi bo'lgandan keyin ham. 
+            Grant va homiy moliyalashtirishiga tayanamiz.
+          </p>
+        </article>
+
+        <article class="value-card reveal" data-delay="2">
+          <span class="value-num">03 / 06</span>
+          <div class="value-ico" aria-hidden="true">⟨⟩</div>
+          <h3>Ochiq <em>manba</em></h3>
+          <p>
+            Kod — GitHub'da. Hujjatlar — ochiq. Ma'lumotlar modellari — kuzatilishi mumkin. 
+            Xavfsizlik auditiga ochiq. Foydalanuvchi nima sodir bo'layotganini bilishga haqli.
+          </p>
+        </article>
+
+        <article class="value-card reveal" data-delay="3">
+          <span class="value-num">04 / 06</span>
+          <div class="value-ico" aria-hidden="true">🔒</div>
+          <h3>Maxfiylik — <em>majburiyat</em></h3>
+          <p>
+            Kognitiv tahlil qurilmada qiladi. Video hech qachon serverga chiqmaydi. 
+            GDPR, FERPA va ISO 27001 muvofiqligi — marketing gap emas, texnik talab.
+          </p>
+        </article>
+
+        <article class="value-card reveal" data-delay="1">
+          <span class="value-num">05 / 06</span>
+          <div class="value-ico" aria-hidden="true">◎</div>
+          <h3>Talaba <em>boshqaradi</em></h3>
+          <p>
+            AI taklif qiladi, lekin hech qachon majburlamaydi. Har xususiyatni o'chirish mumkin. 
+            Ma'lumotlarni istalgan vaqt yuklab olib, o'chirib tashlash mumkin.
+          </p>
+        </article>
+
+        <article class="value-card reveal" data-delay="2">
+          <span class="value-num">06 / 06</span>
+          <div class="value-ico" aria-hidden="true">◉</div>
+          <h3>Mahalliy <em>va</em> global</h3>
+          <p>
+            O'zbekistonda tug'ildi, O'zbek imo-ishora tili (UzSL) birinchi bo'ldi. Lekin dunyo bilan ochiq — 
+            Amerika, Britaniya, Xalqaro imo-ishoralar ham mavjud. Madaniyat chegara emas.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="team-section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head-left">
+          <span class="sec-eyebrow">Jamoamiz</span>
+          <h2>28 nafar <em>ishqibozlar</em><br>bitta maqsad bilan.</h2>
+          <p>Biz pedagog, muhandis, dizayner, tadqiqotchi va mutaxassislar jamoasimiz — 4 mamlakatdan.</p>
+        </div>
+        <div class="sec-head-right">
+          Bu yerda faqat kor jamoa ko'rsatilgan. Biz mentorlar sahifasida har bir mentorni alohida ko'rsatamiz.
+        </div>
+      </div>
+
+      <div class="team-grid">
+        <article class="team-card reveal">
+          <div class="team-av" aria-hidden="true">M</div>
+          <h4>Dr. Malika Karimova</h4>
+          <div class="team-role">Asoschi · Bosh mentor</div>
+          <div class="team-bio">Toshkent DPU dotsenti. Ingliz tili metodikasi PhD. 8 yil tajriba.</div>
+          <div class="team-links">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Email">✉</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal" data-delay="1">
+          <div class="team-av" aria-hidden="true">B</div>
+          <h4>Bobur Xoliqov</h4>
+          <div class="team-role">Bosh texnik direktor</div>
+          <div class="team-bio">Braille API, Whisper integratsiyasi, MediaPipe muhandisi. Inha Univ.</div>
+          <div class="team-links">
+            <a href="#" aria-label="GitHub">GH</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal" data-delay="2">
+          <div class="team-av" aria-hidden="true">D</div>
+          <h4>Diyora Ahmedova</h4>
+          <div class="team-role">Bosh dizayner · UOD expert</div>
+          <div class="team-bio">UOD (Universal O'rganish Dizayni) ishqibozi. WCAG 2.1 auditor.</div>
+          <div class="team-links">
+            <a href="#" aria-label="Dribbble">Dr</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal" data-delay="3">
+          <div class="team-av" aria-hidden="true">A</div>
+          <h4>Alisher Nazarov</h4>
+          <div class="team-role">Psixolog · Autizm maslahatchisi</div>
+          <div class="team-bio">Republika Nevrologiya Markazi. Autizm spektri mutaxassisi.</div>
+          <div class="team-links">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Email">✉</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal">
+          <div class="team-av" aria-hidden="true">J</div>
+          <h4>Jasur Mirzaev</h4>
+          <div class="team-role">Fizika mentori · 3D viz</div>
+          <div class="team-bio">Fizika-matematika fani nomzodi. 3D formulalarga ihtisos.</div>
+          <div class="team-links">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="YouTube">YT</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal" data-delay="1">
+          <div class="team-av" aria-hidden="true">K</div>
+          <h4>Kamola Tosheva</h4>
+          <div class="team-role">Arab tili mentori</div>
+          <div class="team-bio">Bolaligida arab tilida tarbiyalangan. Braille-arab mutaxassisi.</div>
+          <div class="team-links">
+            <a href="#" aria-label="LinkedIn">in</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal" data-delay="2">
+          <div class="team-av" aria-hidden="true">Z</div>
+          <h4>Zulfiya Rahimova</h4>
+          <div class="team-role">Koreys/Yapon tili mentori</div>
+          <div class="team-bio">K-pop va anime orqali til o'rgatish metodikasi. Tandem bo'limi rahbari.</div>
+          <div class="team-links">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Instagram">ig</a>
+          </div>
+        </article>
+
+        <article class="team-card reveal" data-delay="3">
+          <div class="team-av" aria-hidden="true">+</div>
+          <h4>21 nafar ko'proq</h4>
+          <div class="team-role">Mentorlar, muhandislar, volonterlar</div>
+          <div class="team-bio">Biz har kuni kattalashamiz. Jamoamizga qo'shilmoqchimisiz?</div>
+          <div class="team-links">
+            <a href="#" style="background:var(--teal);color:#fff;width:auto;padding:4px 14px;border-radius:999px;font-size:11px">Karyera →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARTNERS ============ -->
+  <section class="partners-section">
+    <div class="container">
+      <div class="partners-title reveal">
+        Bizning <em style="font-style:italic;color:var(--teal-deep);text-transform:none;letter-spacing:normal;font-family:var(--serif)">hamkorlarimiz</em>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-logo reveal">UNICEF<small>O'zbekistan</small></div>
+        <div class="partner-logo reveal" data-delay="1">ToshDPU<small>Pedagogika</small></div>
+        <div class="partner-logo reveal" data-delay="2">Inha<small>Universiteti</small></div>
+        <div class="partner-logo reveal" data-delay="3">TATU<small>Axborot tex.</small></div>
+        <div class="partner-logo reveal" data-delay="4">AloqaBank<small>Fondi</small></div>
+        <div class="partner-logo reveal" data-delay="5">ITPark<small>Uzbekistan</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-band">
+    <div class="container">
+      <h2 class="reveal">Bizga <em>qo'shiling</em> —<br>ta'limni <em>ochiq</em> qilishda.</h2>
+      <p class="reveal" data-delay="1">
+        Talaba, mentor, dasturchi, dizayner yoki shunchaki g'oyadorsiz. Barchasi biz uchun muhim. 
+        Birga ishlaylik.
+      </p>
+      <div class="cta-row reveal" data-delay="2">
+        <a href="auth.html" class="btn-teal"><span>Talaba sifatida qo'shilish</span><span aria-hidden="true">→</span></a>
+        <a href="aloqa.html" class="btn-ghost" style="color:var(--cream);border-color:rgba(251,248,243,0.3)"><span>Hamkor bo'lish</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="GITA_Landing.html" class="brand">
+          <span class="brand-mark">G</span>
+          <span>GITA<small style="color:rgba(251,248,243,0.5)">Inklyuziv Kampus</small></span>
+        </a>
+        <p>Ta'limdagi to'siqlarni olib tashlash — bu imkoniyatni ko'paytirishdir. Bepul, ochiq, xalqaro.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="GitHub">GH</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Platforma</h5>
+        <ul>
+          <li><a href="GITA_Landing.html#modullar">Modullar</a></li>
+          <li><a href="kurslar.html">Kurslar</a></li>
+          <li><a href="GITA_Landing.html#mentorlar">Mentorlar</a></li>
+          <li><a href="kognitiv.html">Kognitiv AI</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Biz</h5>
+        <ul>
+          <li><a href="haqimizda.html">Haqimizda</a></li>
+          <li><a href="#">Karyera</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="aloqa.html">Aloqa</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Hamkorlik</h5>
+        <ul>
+          <li><a href="aloqa.html">Muassasalar</a></li>
+          <li><a href="#">Ochiq API</a></li>
+          <li><a href="#">Grant</a></li>
+          <li><a href="#">Matbuot</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Yordam</h5>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Maxfiylik</a></li>
+          <li><a href="#">Shartlar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 GITA — Global Inklyuziv Ta'lim Kampusi</span>
+      <span class="wcag">Muvofiqlik: <span class="badge-w">WCAG 2.1 AA</span> <span class="badge-w">GDPR</span> <span class="badge-w">ISO 27001</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== SHARED INTERACTIONS ========== */
+/* ================================================================
+   GITA — Shared interactions: sticky nav, reveal, lang, counters
+================================================================ */
+
+/* ---------- Sticky nav on scroll ---------- */
+(function(){
+  const nav = document.getElementById('navwrap');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------- Count-up animation ---------- */
+(function(){
+  const format = (n) => n.toLocaleString('uz-UZ');
+  const animate = (el) => {
+    const target = parseInt(el.dataset.counter, 10);
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = format(target);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => io.observe(el));
+})();
+
+/* ---------- Language cycler ---------- */
+(function(){
+  const langs = [
+    { code: 'uz', label: "O'zbek" },
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'kz', label: 'Қазақша' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'tr', label: 'Türkçe' },
+    { code: 'kg', label: 'Кыргызча' }
+  ];
+  let i = 0;
+  const btn = document.getElementById('langBtn');
+  const lbl = document.getElementById('langLabel');
+  if (!btn || !lbl) return;
+  btn.addEventListener('click', () => {
+    i = (i + 1) % langs.length;
+    lbl.textContent = langs[i].label;
+    btn.animate([
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.96)' },
+      { transform: 'scale(1)' }
+    ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+})();
+
+/* ---------- Button active feedback ---------- */
+(function(){
+  const sel = '.btn-primary, .btn-teal, .btn-ghost, .btn-course, .mentor-cta, .btn-submit, .quick-action';
+  document.querySelectorAll(sel).forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href === '#' || !href) e.preventDefault();
+      btn.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
