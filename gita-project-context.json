@@ -1,0 +1,594 @@
+{
+  "_meta": {
+    "project_name": "GITA — Global Inklyuziv Ta'lim Kampusi",
+    "project_code": "gita-platform",
+    "handoff_date": "2026-04-20",
+    "handoff_note": "Yangi chat uchun to'liq kontekst. Bu faylni yangi chat'ga yopishtirib, 'Men bu loyihani davom ettiryapman' deb yozsangiz — Claude avvalgi holatdan boshlaydi.",
+    "language": "uz",
+    "timezone": "Asia/Tashkent"
+  },
+
+  "owner": {
+    "name": "Murodjon Kamoliddinov",
+    "email": "kamoliddinovmurodjon@gmail.com",
+    "country": "Uzbekistan",
+    "github_username": "kmblider1",
+    "github_repo_url": "https://github.com/kmblider1/gita-platform",
+    "technical_background": {
+      "known": [
+        "Android Studio (Java/Kotlin)",
+        "Firebase (Auth, Firestore, Realtime DB)",
+        "HTML/CSS/JS asoslari",
+        "SQL (MySQL cPanel orqali)",
+        "Git va GitHub (6 ta repo bor)",
+        "Terminal (Android Studio orqali tajriba)"
+      ],
+      "not_known": [
+        "React/Next.js (hech qachon ishlatmagan)",
+        "TypeScript",
+        "Tailwind CSS",
+        "Cloud Functions (Firebase)"
+      ],
+      "learning_style": "Men kod yozmayman — Claude Code yozadi, men tushunaman va natijani tekshiraman. Xatolarni men ko'rsataman, Claude tuzatadi."
+    },
+    "subscriptions_and_resources": {
+      "claude_pro_max": true,
+      "claude_code": "v2.1.114 o'rnatilgan, Opus 4.7 (1M context)",
+      "visa_mastercard": "Xalqaro to'lovlar ishlaydi",
+      "cpanel_hosting": "40GB (backup uchun mavjud)",
+      "computer": "Windows 11, VS Code o'rnatilgan"
+    },
+    "project_location": "F:\\loyiha inkulif talim\\gita-platform"
+  },
+
+  "project_goal": {
+    "primary": "Grant/investor demo uchun 15 kun ichida to'liq ishlaydigan mahsulot",
+    "success_criteria": "Investor sahifani ochgach 'Vay, haqiqatan ishlayapti' deyishi kerak",
+    "target_users": "Ko'zi ojiz, kar, autizm spektridagi, harakat qiyinchiligi bor talabalar",
+    "business_model": "Bepul platforma (grant va UNICEF/AloqaBank homiyligi bilan)",
+    "deadline": "2026-05-05 (15 kun dan boshlab)"
+  },
+
+  "tech_stack": {
+    "frontend": {
+      "framework": "Next.js 15 (App Router)",
+      "language": "TypeScript",
+      "styling": "Tailwind CSS",
+      "animations": "Framer Motion",
+      "charts": "Recharts (profil sahifasi uchun)",
+      "i18n": "next-intl (o'zbek, rus, ingliz)"
+    },
+    "backend": {
+      "service": "Firebase",
+      "modules": [
+        "Authentication (Email + Google OAuth)",
+        "Firestore (kurslar, users, messages)",
+        "Cloud Functions (Claude API proxy)",
+        "Storage (agar kerak bo'lsa)"
+      ],
+      "project_id": "gita-platform",
+      "plan": "Spark (bepul)"
+    },
+    "ai": {
+      "provider": "Anthropic",
+      "model": "claude-sonnet-4-5 (tavsiya) yoki claude-opus-4-7",
+      "api_key_location": ".env.local (hali olinmagan)",
+      "use_cases": [
+        "Virtual Mentor chat (asosiy)",
+        "Mentor personalari (4 xil)",
+        "Multimodal javoblar (matn + Braille + audio)"
+      ]
+    },
+    "deployment": {
+      "frontend": "Vercel (GitHub integration)",
+      "backend": "Firebase (avtomatik)",
+      "domain": "hali olinmagan — .vercel.app yetarli MVP uchun"
+    }
+  },
+
+  "design_system": {
+    "name": "Warm Editorial",
+    "extracted_from": "GITA_Landing.html (1588 qator)",
+    "colors": {
+      "navy": "#0A2540 (asosiy matn, dark UI)",
+      "navy_2": "#12335A (ikkinchi darajali)",
+      "cream": "#FBF8F3 (asosiy fon)",
+      "cream_2": "#F3EDE1 (yumshoq fon)",
+      "teal": "#0D9E78 (CTA, asosiy action)",
+      "teal_deep": "#0A7C5E (hover)",
+      "amber": "#E8950A (ogohlantirish)",
+      "coral": "#C94F3F (kritik holat)"
+    },
+    "fonts": {
+      "serif": "Playfair Display (h1, h2, kursiv em so'zlar)",
+      "sans": "DM Sans (asosiy matn)",
+      "mono": "JetBrains Mono (raqamlar, kod)"
+    },
+    "layout": {
+      "container_max_width": "1240px",
+      "radius_sm": "10px",
+      "radius_md": "18px",
+      "radius_lg": "28px"
+    },
+    "signature_patterns": {
+      "em_highlight": "em ichidagi so'z italic + teal-deep + amber-soft underline (skew -8deg)",
+      "reveal_animation": "data-delay='1..6' + IntersectionObserver (0.08s * n)",
+      "sticky_navbar": "scroll'da rgba(251,248,243,0.82) + backdrop-filter blur"
+    }
+  },
+
+  "html_prototypes_complete": {
+    "location": "F:\\loyiha inkulif talim\\gita-platform",
+    "github_location": "https://github.com/kmblider1/gita-platform",
+    "status": "11 ta HTML sahifa tayyor va GitHub'da saqlangan",
+    "pages": [
+      {
+        "file": "GITA_Landing.html",
+        "size": "70 KB",
+        "purpose": "Bosh sahifa — hero, 4 modul, bento tech, kurslar, mentorlar",
+        "backend_needed": "Firestore (ixtiyoriy) — MVP uchun statik"
+      },
+      {
+        "file": "auth.html",
+        "size": "43 KB",
+        "purpose": "Login/Register split screen, OAuth, accessibility selector",
+        "backend_needed": "✅ Firebase Auth"
+      },
+      {
+        "file": "kurslar.html",
+        "size": "66 KB",
+        "purpose": "Kurs katalogi — filter, sort, qidiruv",
+        "backend_needed": "✅ Firestore (courses collection)"
+      },
+      {
+        "file": "modul.html",
+        "size": "60 KB",
+        "purpose": "Aqlli Ma'ruza modul detali (video, transcript, braille)",
+        "backend_needed": "✅ Firestore + Storage"
+      },
+      {
+        "file": "mentor.html",
+        "size": "54 KB",
+        "purpose": "Dr. Malika Karimova — mentor profili",
+        "backend_needed": "✅ Firestore (mentors collection)"
+      },
+      {
+        "file": "profil.html",
+        "size": "53 KB",
+        "purpose": "Talaba dashboard — progress, XP, yutuqlar",
+        "backend_needed": "✅ Firestore (users + enrollments)"
+      },
+      {
+        "file": "virtual-mentor.html",
+        "size": "60 KB",
+        "purpose": "AI chat — 6 persona, memory, multimodal javoblar",
+        "backend_needed": "✅ Claude API + Firestore (messages)"
+      },
+      {
+        "file": "kognitiv.html",
+        "size": "67 KB",
+        "purpose": "Kognitiv AI demo (dark mode, kamera, yuz aniqlash)",
+        "backend_needed": "Statik — MediaPipe browser-side"
+      },
+      {
+        "file": "hamkorlik.html",
+        "size": "62 KB",
+        "purpose": "Hamkorlik Lab — jamoa doska, 50+ til tarjima, 42 senariy",
+        "backend_needed": "Statik UI MVP uchun (keyin Realtime DB)"
+      },
+      {
+        "file": "haqimizda.html",
+        "size": "54 KB",
+        "purpose": "Missiya, 5-bosqich timeline 2022-2026, 6 qadriyat, 8 jamoa",
+        "backend_needed": "Statik"
+      },
+      {
+        "file": "aloqa.html",
+        "size": "58 KB",
+        "purpose": "3 tabli forma (Umumiy/Muassasa/Mentor), ofis xaritasi",
+        "backend_needed": "✅ Firestore (contact_submissions)"
+      }
+    ],
+    "extra_files": [
+      {
+        "file": "GITA_Landing_OLD.html",
+        "note": "Dublikat — Windows 0x80070570 xatosi bilan o'chira olmadi, rename qilindi. Ishga ta'sir qilmaydi."
+      }
+    ]
+  },
+
+  "firestore_schema_planned": {
+    "users": {
+      "fields": ["uid", "email", "name", "avatar_url", "accessibility_prefs", "created_at", "xp", "level"]
+    },
+    "courses": {
+      "fields": ["id", "title_uz", "title_en", "title_ru", "category", "level", "language", "duration_hours", "mentor_id", "modules", "price (bepul)"]
+    },
+    "enrollments": {
+      "fields": ["user_id", "course_id", "enrolled_at", "progress_percent", "completed_modules"]
+    },
+    "mentors": {
+      "fields": ["id", "name", "specialty", "photo", "rating", "bio", "booking_slots"]
+    },
+    "messages": {
+      "fields": ["user_id", "persona_id", "role (user/assistant)", "content", "timestamp", "session_id"]
+    },
+    "contact_submissions": {
+      "fields": ["name", "email", "type (general/institution/mentor)", "subject", "message", "submitted_at"]
+    }
+  },
+
+  "completed_day_1": {
+    "date": "2026-04-20",
+    "duration_hours": 3,
+    "tasks_done": [
+      {
+        "task": "Git for Windows o'rnatildi",
+        "verified": "git --version ishlaydi"
+      },
+      {
+        "task": "Node.js LTS o'rnatildi",
+        "verified": "npm ishlaydi"
+      },
+      {
+        "task": "VS Code Claude Code extension o'rnatildi",
+        "verified": "VS Code'da ikona ko'rinadi"
+      },
+      {
+        "task": "Claude Code CLI o'rnatildi",
+        "method": "PowerShell'da: irm https://claude.ai/install.ps1 | iex",
+        "version": "2.1.114",
+        "location": "C:\\Users\\user\\.local\\bin\\claude.exe",
+        "verified": "claude --version -> 2.1.114 (Claude Code)"
+      },
+      {
+        "task": "PATH doimiy qo'shildi",
+        "command": "[Environment]::SetEnvironmentVariable('PATH', \"$env:PATH;$env:USERPROFILE\\.local\\bin\", [EnvironmentVariableTarget]::User)"
+      },
+      {
+        "task": "Claude Code sozlandi",
+        "theme": "Dark mode (ANSI colors only) - terminal uchun mos",
+        "terminal_setup": "Yes, recommended (Shift+Enter for newlines)",
+        "folder_trust": "Yes",
+        "effort_mode": "xhigh"
+      },
+      {
+        "task": "Loyiha papka tayyorlandi",
+        "location": "F:\\loyiha inkulif talim\\gita-platform",
+        "contents": "12 HTML fayl (11 asosiy + 1 OLD nusxasi)"
+      },
+      {
+        "task": "Claude Code birinchi suhbat",
+        "result": "12 HTML faylni topdi, GITA_Landing.html o'qib tushuntirdi",
+        "memory_saved": [
+          "user_profile.md — Android/Kotlin + Firebase tajriba",
+          "project_gita.md — 15 kunlik MVP, Next.js+Firebase+Claude API",
+          "feedback_collaboration_style.md — to'liq fayllar kodi, o'zbekcha, amaliy"
+        ]
+      },
+      {
+        "task": "15 kunlik strategik reja yaratildi",
+        "result": "Claude Code xotiraga saqladi",
+        "storage_path": "C:\\Users\\user\\.claude\\projects\\F--loyiha-inkulif-talim-gita-platform\\MEMORY.md"
+      },
+      {
+        "task": "Git sozlandi",
+        "config": {
+          "user.name": "Murodjon Kamoliddinov",
+          "user.email": "kamoliddinovmurodjon@gmail.com"
+        }
+      },
+      {
+        "task": "GitHub repository yaratildi",
+        "url": "https://github.com/kmblider1/gita-platform",
+        "visibility": "Public",
+        "branch": "main"
+      },
+      {
+        "task": "Loyiha GitHub'ga push qilindi",
+        "commit_message": "Initial commit: 11 HTML prototype pages with Warm Editorial design",
+        "files_pushed": 13,
+        "auth_note": "Git Credential Manager avtomatik ishlagan (Personal Access Token kerak bo'lmadi)"
+      },
+      {
+        "task": "Firebase loyihasi yaratildi",
+        "project_id": "gita-platform",
+        "plan": "Spark (bepul)",
+        "region": "United States (default)",
+        "status": "Dashboard ochilgan, hali servislar yoqilmagan"
+      }
+    ],
+    "pending_items": [
+      {
+        "task": "Anthropic API key olish",
+        "url": "https://console.anthropic.com/",
+        "required": ["VISA/Mastercard qo'shish", "$5 kredit", "API key yaratish", "gita-keys.txt ga saqlash"]
+      },
+      {
+        "task": "Vercel akkaunt yaratish",
+        "url": "https://vercel.com/signup",
+        "method": "GitHub orqali kirish",
+        "duration_min": 3
+      }
+    ]
+  },
+
+  "15_day_plan": {
+    "week_1_foundation": {
+      "day_1": {
+        "title": "Asboblar o'rnatish",
+        "status": "✅ TUGATILDI (95%) — Anthropic API + Vercel qoldi",
+        "tasks": ["Node.js", "VS Code", "Git", "Claude Code", "Firebase", "Anthropic", "GitHub", "Vercel"]
+      },
+      "day_2": {
+        "title": "Next.js loyiha + landing HERO",
+        "status": "⏳ Keyingi",
+        "tasks": [
+          "npx create-next-app@latest (TS + Tailwind + App Router + Turbopack)",
+          "tailwind.config.ts — dizayn tokenlar (navy, cream, teal, amber, coral)",
+          "app/layout.tsx — Playfair Display + DM Sans shriftlar",
+          "Papka struktura: components/, lib/, types/",
+          "components/Navbar.tsx — sticky, scroll bilan backdrop-blur",
+          "components/Hero.tsx — 'Hamma uchun ta'lim' + CTA + social proof"
+        ],
+        "learning": "App Router (app/page.tsx=/), TSX (className not class), Tailwind (bg-teal text-cream), Komponent asoslari",
+        "result_expected": "npm run dev → localhost:3000 da landing hero ko'rinadi"
+      },
+      "day_3": {
+        "title": "Landing to'liq ko'chiriladi",
+        "tasks": [
+          "components/Modules.tsx (4 modul)",
+          "components/BentoTech.tsx (texnologiya grid)",
+          "components/CoursesCarousel.tsx (3 kurs)",
+          "components/MentorsGrid.tsx (4 mentor)",
+          "components/Footer.tsx",
+          "Framer Motion bilan reveal animatsiyalar"
+        ],
+        "result_expected": "To'liq landing ishlaydi"
+      },
+      "day_4": {
+        "title": "Firebase Auth + auth sahifasi",
+        "tasks": [
+          "lib/firebase.ts — config + init",
+          ".env.local — Firebase API keylar",
+          "app/(auth)/login/page.tsx",
+          "app/(auth)/register/page.tsx",
+          "Email/password + Google OAuth",
+          "context/AuthContext.tsx",
+          "Accessibility selector (checkbox guruhi)"
+        ],
+        "user_task": "Firebase Console → Authentication → Sign-in providers yoqish (Email, Google)",
+        "learning": "React Context — auth state global",
+        "result_expected": "Register → Firebase'da user yaratiladi, /profil ga redirect"
+      },
+      "day_5": {
+        "title": "Firestore + kurslar katalogi",
+        "tasks": [
+          "Firestore'ga 9 ta test kurs qo'lda kiritish",
+          "types/course.ts interface",
+          "app/kurslar/page.tsx + CourseCard + Filters",
+          "Kategoriya/daraja/til filtrlari",
+          "Qidiruv input"
+        ],
+        "learning": "getDocs(), collection(), where() sintaksisi",
+        "result_expected": "/kurslar database'dan real kurslarni ko'rsatadi"
+      }
+    },
+    "week_2_product_and_ai": {
+      "day_6": {
+        "title": "Kurs detal + modul sahifasi",
+        "tasks": [
+          "app/kurslar/[courseId]/page.tsx (dinamik route)",
+          "app/kurslar/[courseId]/modul/[moduleId]/page.tsx",
+          "YouTube iframe embed",
+          "Transcript tabs (matn/braille/imo-ishora)",
+          "Sidebar: darslar ro'yxati"
+        ]
+      },
+      "day_7": {
+        "title": "Talaba profili",
+        "tasks": [
+          "app/profil/page.tsx (auth guard)",
+          "Joriy kurslar + progress bar",
+          "Activity feed",
+          "6 badge yutuqlar",
+          "Recharts bilan haftalik chart"
+        ],
+        "learning": "Recharts asoslari"
+      },
+      "day_8": {
+        "title": "Virtual Mentor (Claude API) — EN MUHIM KUN",
+        "tasks": [
+          "app/virtual-mentor/page.tsx",
+          "app/api/chat/route.ts — Claude API proxy",
+          "Streaming response",
+          "4-6 persona (Anora, Behruz, Sevinch, Donier, Nargiza, Alisher)",
+          "Message history Firestore'da",
+          "Typing indicator"
+        ],
+        "user_task": "Anthropic Console → API key → .env.local ga qo'yish",
+        "learning": "Claude API streaming (stream: true)",
+        "result_expected": "Haqiqiy AI mentor — o'zbek tilida javob beradi",
+        "importance": "INVESTOR HAYRAT QILADIGAN QISM"
+      },
+      "day_9": {
+        "title": "Kognitiv demo",
+        "tasks": [
+          "app/kognitiv/page.tsx",
+          "MediaPipe Face Detection (browser-side)",
+          "State machine (active/tired/critical)",
+          "SVG avatar rang o'zgarishi",
+          "Nafas mashqi modal (4-7-8 texnika)"
+        ],
+        "note": "Haqiqiy ML emas — simulyatsiya + yuz aniqlash"
+      },
+      "day_10": {
+        "title": "Haqimizda + Aloqa",
+        "tasks": [
+          "app/haqimizda/page.tsx (statik kontent)",
+          "app/aloqa/page.tsx (forma → Firestore)",
+          "FAQ accordion"
+        ]
+      }
+    },
+    "week_3_polish_and_deploy": {
+      "day_11": {
+        "title": "Mentor sahifasi + Hamkorlik UI",
+        "tasks": [
+          "app/mentor/[mentorId]/page.tsx",
+          "app/hamkorlik/page.tsx (statik UI)",
+          "Senariy UI"
+        ]
+      },
+      "day_12": {
+        "title": "i18n (3 til)",
+        "tasks": [
+          "next-intl kutubxonasi",
+          "messages/uz.json, en.json, ru.json",
+          "Navbar'da til tanlash"
+        ]
+      },
+      "day_13": {
+        "title": "Accessibility + Responsive",
+        "tasks": [
+          "Mobile tekshirish",
+          "ARIA atributlari",
+          "Axe DevTools audit",
+          "Keyboard navigation",
+          "Kontrast tuzatish"
+        ]
+      },
+      "day_14": {
+        "title": "Testing + bug fix",
+        "tasks": [
+          "Butun user flow qo'lda sinash",
+          "Lighthouse 90+ maqsad",
+          "Kritik xatolar tuzatish"
+        ]
+      },
+      "day_15": {
+        "title": "Deployment + demo tayyorgarlik",
+        "tasks": [
+          "Vercel'ga deploy (auto GitHub)",
+          "Firebase security rules production",
+          "Custom domain (ixtiyoriy)",
+          "Demo akkaunt investor uchun",
+          "10 ta screenshot",
+          "2 daqiqalik demo video"
+        ],
+        "result": "🎉 Live URL, investor uchun tayyor"
+      }
+    }
+  },
+
+  "day_2_detailed_instructions": {
+    "prerequisite": "Claude Code chat xotirasida saqlangan — yangi chat'da 'Kun 2ni boshlaymiz' deb yozsangiz, davom etadi",
+    "steps": [
+      {
+        "step": 1,
+        "duration_min": 10,
+        "task": "Next.js loyiha yaratish",
+        "commands": [
+          "cd 'F:\\loyiha inkulif talim'",
+          "npx create-next-app@latest gita-app"
+        ],
+        "prompts_answers": {
+          "TypeScript": "Yes",
+          "ESLint": "Yes",
+          "Tailwind CSS": "Yes",
+          "src/ directory": "No",
+          "App Router": "Yes",
+          "Turbopack": "Yes",
+          "Import alias @/*": "Yes"
+        },
+        "verify": "cd gita-app && npm run dev → http://localhost:3000 ochilsa tayyor"
+      },
+      {
+        "step": 2,
+        "duration_min": 5,
+        "task": "Shriftlar app/layout.tsx ga ulash",
+        "fonts": ["Playfair Display", "DM Sans", "JetBrains Mono"],
+        "note": "Claude Code kod beradi"
+      },
+      {
+        "step": 3,
+        "duration_min": 5,
+        "task": "tailwind.config.ts'ga dizayn tokenlar",
+        "tokens": "navy, navy-2, cream, cream-2, teal, teal-deep, amber, amber-soft, coral",
+        "note": "Claude Code kod beradi"
+      },
+      {
+        "step": 4,
+        "duration_min": 2,
+        "task": "Papka strukturasi",
+        "folders": ["components/", "lib/", "types/"]
+      },
+      {
+        "step": 5,
+        "duration_min": 20,
+        "task": "components/Navbar.tsx",
+        "features": ["Logo GITA mark", "Menu (Modullar, Kurslar, Mentorlar, Kognitiv AI)", "Til tanlash", "Kirish + Bepul boshlash tugmalar", "Scroll bilan backdrop-blur"]
+      },
+      {
+        "step": 6,
+        "duration_min": 30,
+        "task": "components/Hero.tsx",
+        "features": ["H1 sarlavha", "Lead matn", "CTA tugmalar", "Social proof (1250+ talaba, 4.9★)", "Course card visual"]
+      },
+      {
+        "step": 7,
+        "duration_min": 2,
+        "task": "app/page.tsx ga ulash",
+        "code": "import Navbar from '@/components/Navbar'; import Hero from '@/components/Hero'; export default function Home() { return (<><Navbar /><Hero /></>) }"
+      },
+      {
+        "step": 8,
+        "duration_min": 5,
+        "task": "localhost:3000 tekshirish",
+        "expected": "GITA landing hero ko'rinadi, navbar ishlaydi, mobile responsive, konsol xato yo'q"
+      }
+    ]
+  },
+
+  "learning_concepts_for_day_2": {
+    "next_js_app_router": "app/ papkada har page.tsx = URL. app/page.tsx=/, app/kurslar/page.tsx=/kurslar. Android'dagi Activity'ga o'xshash.",
+    "tsx_vs_html": "HTML: <div class='bg-red'>. TSX: <div className='bg-red'>. Faqat class→className, for→htmlFor. Qolgani bir xil.",
+    "tailwind": "CSS yozmaysan — klasslardan foydalanasan. Misol: <button className='bg-teal text-cream px-6 py-3 rounded-lg hover:bg-teal-deep'>",
+    "component": "Qayta ishlatiladigan UI bloki. Java class'ga o'xshash. function Button({text}: {text: string}) { return <button>{text}</button> }"
+  },
+
+  "collaboration_rules": {
+    "language": "O'zbek tili (barcha javoblar)",
+    "code_format": "To'liq fayl kodi berish (nusxalash uchun)",
+    "explanation_style": "Amaliy 'bugun shuni qilaman' format, nazariya kam",
+    "error_handling": "Foydalanuvchi xato matnini yuboradi, Claude tuzatadi",
+    "claude_code_usage": "Claude Code kod yozadi, foydalanuvchi tushunadi va tekshiradi",
+    "permission_strategy": "Har session'da 'Yes, don't ask again' tanlash (tezroq ishlash uchun)",
+    "git_strategy": "Har kun oxirida: git add . && git commit -m '...' && git push"
+  },
+
+  "known_issues_and_workarounds": {
+    "windows_0x80070570": {
+      "description": "GITA_Landing_OLD.html (probelli nusxasi) o'chira olmadi",
+      "workaround": "Rename qilindi, ishga ta'sir qilmaydi"
+    },
+    "powershell_path_lost": {
+      "description": "Yangi terminal sessiyasida PATH esdan chiqadi",
+      "workaround": "Doimiy qo'shildi — [Environment]::SetEnvironmentVariable buyrug'i bilan. Yangi terminalda ishlaydi."
+    },
+    "uzbekistan_cards": {
+      "description": "Humo/Uzcard Anthropic'da ishlamaydi",
+      "workaround": "VISA/Mastercard ishlatish kerak. Agar ishlamasa: OpenRouter yoki Groq alternativa."
+    },
+    "vscode_claude_extension_vs_cli": {
+      "description": "VS Code extension va CLI — alohida mahsulot",
+      "workaround": "CLI versiyasini PowerShell orqali o'rnatish kerak. Faqat extension yetarli emas."
+    }
+  },
+
+  "next_chat_instructions": {
+    "how_to_continue": "Yangi chat ochganda bu JSON faylni yopishtiring yoki KEYINGI_CHAT_UCHUN.md faylidagi qisqa kontekstni ishlating.",
+    "first_message_template": "Salom! Men GITA loyihasini davom ettiryapman. Bu yerda loyiha konteksti — [JSON yoki MD fayl]. Hozirda 1-kun tugadi (95%), Anthropic API key va Vercel akkaunt qoldi. Davom etamizmi yoki 2-kunga o'tamizmi?",
+    "claude_code_restart": "VS Code'da terminal ochib: cd 'F:\\loyiha inkulif talim\\gita-platform' keyin 'claude' yozing. Xotira MEMORY.md da saqlangan, davom etadi."
+  }
+}

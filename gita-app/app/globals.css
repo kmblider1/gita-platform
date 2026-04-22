@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/*
+  GITA — Warm Editorial dizayn tokenlari (Tailwind v4 @theme)
+  Ranglar → bg-navy, text-cream, border-teal va h.k. utility'lariga aylanadi.
+*/
+@theme {
+  --color-navy: #0A2540;
+  --color-navy-2: #12335A;
+  --color-navy-ink: #0B1D36;
+  --color-cream: #FBF8F3;
+  --color-cream-2: #F3EDE1;
+  --color-teal: #0D9E78;
+  --color-teal-deep: #0A7C5E;
+  --color-amber: #E8950A;
+  --color-amber-soft: #F4C06A;
+  --color-coral: #C94F3F;
+  --color-muted: #5B6577;
+  --color-line: #E6DDC9;
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  --container-screen: 1240px;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/*
+  Signature: em ichidagi so'z — italic Playfair + teal-deep rang + amber pastki chiziq
+  HTML prototipdan aynan ko'chirildi.
+*/
+h1 em,
+h2 em,
+h3 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-teal-deep);
+  background-image: linear-gradient(transparent 68%, rgba(244, 192, 106, 0.55) 68%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0 .08em;
+  display: inline-block;
+  transform: skew(-8deg);
+}
+
+/* Skip link — accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-navy);
+  color: var(--color-cream);
+  padding: 10px 16px;
+  border-radius: 0 0 8px 0;
+  z-index: 1000;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Nozik reveal animatsiya (Framer Motion o'rniga toza CSS) */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal-up {
+  animation: reveal-up .7s cubic-bezier(.2,.7,.2,1) both;
+}
